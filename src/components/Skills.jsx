@@ -28,11 +28,12 @@ const techLogos = [
   { name: 'Databricks', slug: 'databricks', color: '#FF3621' },
   { name: 'Jupyter', slug: 'jupyter', color: '#F37626' },
   { name: 'Matplotlib', slug: 'matplotlib', color: '#11557C' },
+  { name: 'Qiskit', slug: 'qiskit', color: '#6929C4' },
 ]
 
 const groupColors = {
   Languages: '#0D9488', 'AI / ML': '#6366F1', 'Data Engineering': '#10B981',
-  Cloud: '#3B82F6', Visualization: '#F59E0B', 'DevOps & App Dev': '#EC4899',
+  Cloud: '#3B82F6', 'Visualization & Apps': '#F59E0B', 'DevOps & App Dev': '#EC4899',
 }
 
 export default function Skills() {

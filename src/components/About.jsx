@@ -52,7 +52,7 @@ export default function About() {
         <FadeIn delay={0.2}>
           <p style={{ color: '#9ca3af', fontSize: '1.05rem', lineHeight: 1.85, textAlign: 'center', maxWidth: '620px', margin: '0 auto 4.5rem' }}>
             I started in the oil fields of Colombia as a Petroleum Engineer. That domain expertise
-            became my edge when I pivoted into data science — I bring physical intuition and
+            became my edge when I pivoted into data science. I bring physical intuition and
             operational context that pure data scientists rarely have. Today I work at the
             intersection of ML, generative AI, and modern data engineering.
           </p>

@@ -30,7 +30,7 @@ export default function Contact() {
         <FadeIn delay={0.2}>
           <p style={{ color: '#6b7280', fontSize: '1rem', lineHeight: 1.75, textAlign: 'center', marginBottom: '3rem' }}>
             Open to data science, AI engineering, and data engineering roles in Sydney and remote.
-            Always happy to talk about interesting problems.
+            Always happy to connect and talk about exciting challenges.
           </p>
         </FadeIn>
 

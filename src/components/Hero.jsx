@@ -100,7 +100,7 @@ export default function Hero() {
             variants={fadeUp}
             style={{ color: '#9ca3af', fontSize: '1rem', lineHeight: 1.9, marginBottom: '2.5rem', maxWidth: '520px', textAlign: 'center' }}
           >
-            Petroleum engineer turned data scientist — bringing rare domain depth
+            Petroleum engineer turned data scientist, bringing rare domain depth
             to every pipeline, model, and AI system I build across energy,
             sustainability, and enterprise software.
           </motion.p>

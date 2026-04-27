@@ -4,16 +4,17 @@ import FadeIn from './FadeIn'
 const wrap = { maxWidth: '1100px', margin: '0 auto', padding: '0 clamp(32px, 5vw, 80px)' }
 
 const projects = [
+  { title: 'Pentana Dealership Analytics Platform', category: 'Data Engineering · AI', description: 'Snowflake medallion architecture (Bronze → Silver → Gold) over 8.7M rows of Australian dealership DMS data. AI enrichment layer: dealer group taxonomy (329 groups, 74.1% VIN coverage), land size, VIN decoding, and 68-variable benchmarking framework.', tech: ['Snowflake', 'Python', 'SQL', 'Tavily API', 'Star Schema', 'Medallion Architecture'], image: null, accent: '#005293', wide: true, link: '/professional-porfolio/pentana.html', linkLabel: 'View Case Study ↗' },
   { title: 'Airflow + dbt Medallion Pipeline', category: 'Data Engineering', description: 'End-to-end pipeline with bronze/silver/gold layers, SCD Type 2 snapshots, star schema models and business marts for Airbnb and Census revenue + demographic analysis.', tech: ['Apache Airflow', 'dbt', 'Snowflake', 'PostgreSQL', 'Python'], image: '/professional-porfolio/assets/medallion.png', accent: '#0D9488', wide: true },
   { title: 'RAG Resume Ranking & Supplier Evaluation', category: 'AI / NLP', description: 'AWS Bedrock retrieval workflow using MongoDB Atlas as vector store. Resume ranking and supplier evaluation with LLM context injection.', tech: ['AWS Bedrock', 'MongoDB Atlas', 'LlamaIndex', 'Python'], image: '/professional-porfolio/assets/rag-workflow.png', accent: '#6366F1', wide: false },
-  { title: 'RL GHG Compliance Consultant', category: 'AI / Sustainability', description: 'Reinforcement learning assistant for Australian GHG compliance. Led delivery and business analysis. Improved groundedness and user satisfaction.', tech: ['Python', 'Reinforcement Learning', 'LLM'], image: null, accent: '#10B981', wide: false },
-  { title: 'LLM Prompt Injection Security Framework', category: 'AI Security', description: 'Modular framework to test prompt injection attacks, benchmark attack success rates and evaluate mitigation strategies across LLM and lightweight agent workflows.', tech: ['Python', 'LLMs', 'Agent Frameworks'], image: null, accent: '#F59E0B', wide: false },
+  { title: 'GHG Digital Consultant', category: 'AI / Sustainability', description: 'RAG-powered assistant for Australian GHG compliance that answers regulatory questions using retrieved context from official standards. Led delivery, business analysis, and implementation roadmap. Live on Hugging Face.', tech: ['Python', 'RAG', 'LLM', 'Reinforcement Learning'], image: null, accent: '#10B981', wide: false, link: 'https://huggingface.co/spaces/camilouribeg/ghg-digital-consultant', linkLabel: 'Try it on HF ↗', secondLink: 'https://github.com/camilouribeg/RL-GHG-Consultant', secondLinkLabel: 'GitHub ↗' },
+  { title: 'LLM Prompt Injection Eval Framework', category: 'AI Security', description: 'Modular capstone framework to test prompt injection attacks, benchmark attack success rates and evaluate mitigation strategies across LLM and lightweight agent workflows. Live demo on Hugging Face.', tech: ['Python', 'LLMs', 'Agent Frameworks'], image: null, accent: '#F59E0B', wide: false, link: 'https://huggingface.co/spaces/camilouribeg/prompt-injection-eval', linkLabel: 'Try it on HF ↗' },
   { title: 'Automation of GHG Estimates — SPE Publication', category: 'Research / Publication', description: 'Authored and published SPE paper on automating Greenhouse Gas Emissions estimates for natural gas production in the Appalachian Basin, applying EPA 40 CFR Part 98. Presented at SPE Energy Transition Symposium, Houston 2024. DOI: 10.2118/221400-MS.', tech: ['Python', 'GHG Protocols', 'EPA 40 CFR Part 98', 'PostgreSQL'], image: null, accent: '#EC4899', wide: true, link: 'https://onepetro.org/speets/proceedings-abstract/24ETS/24ETS/D012S005R002/548349', linkLabel: 'View on OnePetro ↗' },
 ]
 
 const categoryIcon = { 'AI Security': '🔐', 'Research / Publication': '📄', 'AI / Sustainability': '🌿' }
 
-function ProjectCard({ title, category, description, tech, image, accent, wide, link, linkLabel }) {
+function ProjectCard({ title, category, description, tech, image, accent, wide, link, linkLabel, secondLink, secondLinkLabel }) {
   return (
     <FadeIn>
       <motion.div
@@ -37,14 +38,22 @@ function ProjectCard({ title, category, description, tech, image, accent, wide, 
         <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
             <span style={{ fontSize: '0.72rem', padding: '0.3rem 0.85rem', borderRadius: '999px', background: `${accent}12`, color: accent, border: `1px solid ${accent}22` }}>{category}</span>
-            {link ? (
-              <a href={link} target="_blank" rel="noreferrer" style={{ color: accent, fontSize: '0.75rem', textDecoration: 'none', fontWeight: 500, opacity: 0.8, transition: 'opacity 0.2s' }}
-                onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-                onMouseLeave={e => e.currentTarget.style.opacity = '0.8'}
-              >{linkLabel || '↗'}</a>
-            ) : (
-              <span style={{ color: '#374151', fontSize: '1rem' }}>↗</span>
-            )}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              {secondLink && (
+                <a href={secondLink} target="_blank" rel="noreferrer" style={{ color: '#6b7280', fontSize: '0.72rem', textDecoration: 'none', fontWeight: 500, opacity: 0.7, transition: 'opacity 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '0.7'}
+                >{secondLinkLabel}</a>
+              )}
+              {link ? (
+                <a href={link} target="_blank" rel="noreferrer" style={{ color: accent, fontSize: '0.75rem', textDecoration: 'none', fontWeight: 500, opacity: 0.8, transition: 'opacity 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '0.8'}
+                >{linkLabel || '↗'}</a>
+              ) : (
+                <span style={{ color: '#374151', fontSize: '1rem' }}>↗</span>
+              )}
+            </div>
           </div>
           <p className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '1.15rem', lineHeight: 1.3, marginBottom: '0.875rem' }}>{title}</p>
           <p style={{ color: '#6b7280', fontSize: '0.9rem', lineHeight: 1.8, flex: 1, marginBottom: '1.5rem' }}>{description}</p>

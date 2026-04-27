@@ -72,11 +72,9 @@ export const experience = [
     location: 'Sydney, AU',
     period: 'Nov 2024 – Jan 2025',
     bullets: [
-      'Scrum Master leading a team of 3 interns',
-      'Built RAG-based resume ranking system using LlamaIndex, HuggingFace embeddings, Ollama (Llama 3.2) and Streamlit UI',
-      'Designed production architecture: AWS Bedrock, Amazon Textract, MongoDB Atlas Vector Search',
-      'Built AI agent workflow for tender document automation using Amazon Lex, AWS Lambda, Amazon Comprehend',
-      'Contributed to 30% improvement in operational efficiency',
+      'Led a team of 3 interns as Scrum Master, delivering AI pilot projects across resume ranking and tender document automation',
+      'Designed production architecture using AWS Bedrock, MongoDB Atlas Vector Search and Amazon Textract; built implementation roadmap for full-scale rollout',
+      'Contributed to an estimated 30% improvement in operational efficiency',
     ],
     tech: ['Python', 'AWS Bedrock', 'MongoDB', 'LlamaIndex', 'Streamlit', 'Amazon Lex', 'AWS Lambda'],
   },
@@ -171,11 +169,11 @@ export const projects = [
 
 export const skills = {
   Languages: ['Python (Advanced)', 'SQL (Advanced)', 'R (Intermediate)', 'C++ (Intermediate)'],
-  'AI / ML': ['Machine Learning', 'Statistics', 'Generative AI', 'RAG', 'Prompt Engineering', 'LangChain', 'LlamaIndex'],
+  'AI / ML': ['Machine Learning', 'Statistics', 'Generative AI', 'RAG', 'Reinforcement Learning', 'RLHF', 'Prompt Engineering', 'LangChain', 'LlamaIndex', 'Quantum Computing (QASM · Qiskit)'],
   'Data Engineering': ['Pandas', 'PySpark', 'PyArrow', 'ETL/ELT Pipelines', 'Apache Airflow', 'dbt', 'Snowflake', 'PostgreSQL', 'MongoDB', 'Data Quality Automation'],
   Cloud: ['AWS Bedrock', 'AWS Lambda', 'Amazon Lex', 'Amazon Textract', 'GCP BigQuery', 'Azure IoT Hub', 'Azure Stream Analytics'],
-  Visualization: ['Power BI', 'Tableau', 'Plotly Dash', 'Matplotlib'],
-  'DevOps & App Dev': ['Git', 'Docker', 'FastAPI', 'Streamlit'],
+  'Visualization & Apps': ['Power BI', 'Tableau', 'Plotly Dash', 'Streamlit', 'Matplotlib'],
+  'DevOps & App Dev': ['Git', 'Docker', 'FastAPI'],
 }
 
 export const publication = {
