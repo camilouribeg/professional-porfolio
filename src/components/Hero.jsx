@@ -13,7 +13,7 @@ const fadeUp = {
 
 const stats = [
   { value: '~10', label: 'Clients Served' },
-  { value: '4+', label: 'Years in Data & AI' },
+  { value: '3+', label: 'Years in Data & AI' },
   { value: '1', label: 'SPE Publication' },
   { value: '6.7 / 7', label: 'Master GPA' },
 ]
