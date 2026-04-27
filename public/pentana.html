@@ -302,8 +302,8 @@
     </h1>
 
     <p class="hero-desc fi fi-d2">
-      Transforming raw Australian dealership DMS data — covering an estimated
-      <strong style="color:var(--text)">80% of the national market</strong> — into a
+      Transforming raw Australian dealership DMS data covering an estimated
+      <strong style="color:var(--text)">80% of the national market</strong> into a
       production-grade Snowflake analytics platform with a layered AI enrichment pipeline.
     </p>
 
@@ -344,7 +344,7 @@
   <div class="wrap">
     <p class="label fi">01 — The Starting Point</p>
     <h2 class="sh fi">One flat table.<br/>No analytics layer.</h2>
-    <p class="sd fi">Pentana ERA Power is a dealership management system used by approximately 80% of Australian new-car franchise dealerships. The raw data export was a single flat table — 8.7M rows, 143 columns, no structure optimised for analytics. Of those rows, 4.9M represent unique new vehicle VINs, which is the working dataset for this project.</p>
+    <p class="sd fi">Pentana ERA Power is a dealership management system used by approximately 80% of Australian new-car franchise dealerships. The raw data export was a single flat table: 8.7M rows, 143 columns, no structure optimised for analytics. Of those rows, 4.9M represent unique new vehicle VINs, which is the working dataset for this project.</p>
 
     <div class="fi" style="margin-bottom:2.5rem">
       <a href="https://www.pentanasolutions.com" target="_blank" rel="noreferrer"
@@ -394,7 +394,7 @@
         <span style="font-size:0.75rem;font-weight:600;color:#29B5E8;font-family:'Cabinet Grotesk',sans-serif">Snowflake</span>
       </a>
     </div>
-    <p class="sd fi">A staged pipeline built in Snowflake SQL and Python. The key design decision was splitting the Silver layer into five focused analytical tables rather than cleaning one wide flat table — each purpose-built for a downstream use case.</p>
+    <p class="sd fi">A staged pipeline built in Snowflake SQL and Python. The key design decision was splitting the Silver layer into five focused analytical tables rather than cleaning one wide flat table, each purpose-built for a downstream use case.</p>
 
     <div class="arch-flow">
 
@@ -402,7 +402,7 @@
       <div class="arch-row fi">
         <div class="arch-badge bronze-b">BRONZE<span class="arch-badge-sub">Raw · Preserved</span></div>
         <div class="arch-body">
-          <p class="arch-note">The full Pentana ERA Power export preserved as-is. Source of truth — no transformations applied. The complete history of ~8.7M rows across all vehicle types is retained here.</p>
+          <p class="arch-note">The full Pentana ERA Power export preserved as-is. Source of truth, no transformations applied. The complete history of ~8.7M rows across all vehicle types is retained here.</p>
           <div class="arch-chips">
             <span class="chip">VW_VEHICLE_SALES</span>
             <span class="chip">~8.7M rows</span>
@@ -420,10 +420,10 @@
         <div class="arch-body">
           <p class="arch-note">Cleaned, standardised, and split into five purpose-built analytical tables focusing on the 4.9M unique new vehicle VINs. VIN-level enrichment applied for vehicle descriptors (make, body style, fuel type, seats, transmission).</p>
           <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:0.75rem">
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_SILVER_CORE_T</span></div><p class="arch-table-desc">Transaction-level measures — sale price, cost price, discounts, gross profit, deposit, trade-in amounts.</p></div>
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_DETAILS_SILVER_T</span></div><p class="arch-table-desc">Vehicle specification attributes — make, model, body style, fuel type, seats, transmission, drive type.</p></div>
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_PROCESS_SILVER_T</span></div><p class="arch-table-desc">All lifecycle dates — order, deal, invoice, delivery, scheduled delivery, estimated delivery — with chronology flags.</p></div>
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_GEOGRAPHY_SILVER_T</span></div><p class="arch-table-desc">Dealer postcode, delivery postcode, and delivery state — the spatial layer for all geographic analysis.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_SILVER_CORE_T</span></div><p class="arch-table-desc">Transaction-level measures: sale price, cost price, discounts, gross profit, deposit, trade-in amounts.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_DETAILS_SILVER_T</span></div><p class="arch-table-desc">Vehicle specification attributes: make, model, body style, fuel type, seats, transmission, drive type.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_PROCESS_SILVER_T</span></div><p class="arch-table-desc">All lifecycle dates: order, deal, invoice, delivery, scheduled delivery, estimated delivery, with chronology flags.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_GEOGRAPHY_SILVER_T</span></div><p class="arch-table-desc">Dealer postcode, delivery postcode, and delivery state. The spatial layer for all geographic analysis.</p></div>
             <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_FINANCE_SUPPORT_SILVER_T</span></div><p class="arch-table-desc">Finance contract ID, type, term, interest rate, commission, and residual amounts where populated.</p></div>
           </div>
           <div class="arch-chips">
@@ -442,9 +442,9 @@
         <div class="arch-body">
           <p class="arch-note">Star schema with a central fact table and dimension tables. Business-ready mart views for reporting and benchmarking. <span class="chip amber" style="display:inline;padding:0.2rem 0.5rem">In progress</span></p>
           <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.75rem">
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">FACT_VEHICLE_SALES</span></div><p class="arch-table-desc">Central fact table joining all Silver dimensions — the query entry point for all Gold analytics.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">FACT_VEHICLE_SALES</span></div><p class="arch-table-desc">Central fact table joining all Silver dimensions, the query entry point for all Gold analytics.</p></div>
             <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">DIM_VEHICLE · DIM_DEALER · DIM_DATE · DIM_STATE</span></div><p class="arch-table-desc">Conformed dimensions enabling slicing by vehicle, dealer, time, and geography.</p></div>
-            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">MART_DEALER_BENCHMARK_V</span></div><p class="arch-table-desc">Aggregated dealer-level benchmarking view — 15 metrics live including OTD, EV share, fleet mix, within-brand rankings.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">MART_DEALER_BENCHMARK_V</span></div><p class="arch-table-desc">Aggregated dealer-level benchmarking view with 15 metrics live including OTD, EV share, fleet mix, and within-brand rankings.</p></div>
           </div>
           <div class="arch-chips">
             <span class="chip">MART_MARGIN_ANALYSIS_V</span>
@@ -479,13 +479,13 @@
   <div class="wrap">
     <p class="label fi">03 — AI Enrichment Layer</p>
     <h2 class="sh fi">Filling the gaps the DMS can't answer.</h2>
-    <p class="sd fi">With the analytics foundation in place, the project moved into an AI-assisted enrichment layer — combining web scraping, API decoding, and external datasets to unlock dealer intelligence that isn't captured in the raw sales data.</p>
+    <p class="sd fi">With the analytics foundation in place, the project moved into an AI-assisted enrichment layer, combining web scraping, API decoding, and external datasets to unlock dealer intelligence that isn't captured in the raw sales data.</p>
 
     <div class="enrich-grid">
 
       <div class="enrich-card fi">
         <div class="enrich-title">VIN Decoding & Vehicle Enrichment</div>
-        <div class="enrich-body">The source data has inconsistent vehicle descriptors — make, body style, fuel type, and seats are partially missing or incorrectly labelled. A two-phase VIN decoding pipeline (WMI-based + WMI+VDS) enriched 4.9M VINs using the NHTSA vPIC API and a curated internal WMI dictionary.</div>
+        <div class="enrich-body">The source data has inconsistent vehicle descriptors: make, body style, fuel type, and seats are partially missing or incorrectly labelled. A two-phase VIN decoding pipeline (WMI-based + WMI+VDS) enriched 4.9M VINs using the NHTSA vPIC API and a curated internal WMI dictionary.</div>
         <div class="enrich-footer">
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
             <span class="tag tag-done">Complete</span>
@@ -496,7 +496,7 @@
 
       <div class="enrich-card fi fi-d1">
         <div class="enrich-title">Dealer Name & Identity</div>
-        <div class="enrich-body">The raw data identifies dealers only by postcode + brand — no names or addresses. A web research pipeline using Tavily API and Google Custom Search resolved verified trading names, street addresses, and match confidence for 2,034 dealer proxy keys (63.4% verified).</div>
+        <div class="enrich-body">The raw data identifies dealers only by postcode and brand, with no names or addresses. A web research pipeline using Tavily API and Google Custom Search resolved verified trading names, street addresses, and match confidence for 2,034 dealer proxy keys (63.4% verified).</div>
         <div class="enrich-footer">
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
             <span class="tag tag-done">Complete</span>
@@ -507,7 +507,7 @@
 
       <div class="enrich-card fi fi-d2">
         <div class="enrich-title">Dealer Group Taxonomy</div>
-        <div class="enrich-body">Automotive dealers operate within ownership groups (e.g. Eagers Automotive, Servco, Peter Warren). A multi-tier resolution pipeline — web-verified lookups, name-prefix clustering, algorithmic multi-site grouping — mapped 329 named groups across 2,034 dealers, covering 74.1% of 4.9M VINs.</div>
+        <div class="enrich-body">Automotive dealers operate within ownership groups (e.g. Eagers Automotive, Servco, Peter Warren). A multi-tier resolution pipeline using web-verified lookups, name-prefix clustering, and algorithmic multi-site grouping mapped 329 named groups across 2,034 dealers, covering 74.1% of 4.9M VINs.</div>
         <div class="enrich-footer">
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
             <span class="tag tag-done">Complete</span>
@@ -529,7 +529,7 @@
 
       <div class="enrich-card fi fi-d1">
         <div class="enrich-title">RRP Reference Data</div>
-        <div class="enrich-body">Recommended retail prices (RRP) per make, model, year, and variant enable revenue potential estimates, discount rate benchmarking, and premium variant mix analysis — covering 100% of vehicles without relying on the partially-populated sale price field (~33% coverage). Being built by the wider team.</div>
+        <div class="enrich-body">Recommended retail prices (RRP) per make, model, year, and variant enable revenue potential estimates, discount rate benchmarking, and premium variant mix analysis, covering 100% of vehicles without relying on the partially-populated sale price field (~33% coverage). Being built by the wider team.</div>
         <div class="enrich-footer">
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
             <span class="tag tag-team">Team workstream</span>
@@ -540,7 +540,7 @@
 
       <div class="enrich-card fi fi-d2">
         <div class="enrich-title">VFACTS Market Data</div>
-        <div class="enrich-body">VFACTS is the FCAI's monthly new vehicle registration dataset — the industry standard for market share in Australia. The first step is column standardisation — aligning VFACTS make/model naming to Pentana's conventions. Once mapped, it unlocks true market share calculations, white space analysis, and growth-vs-market comparisons by brand and geography.</div>
+        <div class="enrich-body">VFACTS is the FCAI's monthly new vehicle registration dataset, the industry standard for market share in Australia. The first step is column standardisation: aligning VFACTS make/model naming to Pentana's conventions. Once mapped, it unlocks true market share calculations, white space analysis, and growth-vs-market comparisons by brand and geography.</div>
         <div class="enrich-footer">
           <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
             <span class="tag tag-pending">Pending data share</span>
@@ -557,7 +557,7 @@
   <div class="wrap">
     <p class="label fi">04 — Benchmarking Framework</p>
     <h2 class="sh fi">Defining the dealer<br/>benchmarking framework.</h2>
-    <p class="sd fi">With the data platform established, the next stage is defining a comprehensive benchmarking framework — analysing which dealer performance variables are computable from the current pipeline, which require external enrichment, and which need new data sources entirely.</p>
+    <p class="sd fi">With the data platform established, the next stage is defining a comprehensive benchmarking framework, analysing which dealer performance variables are computable from the current pipeline, which require external enrichment, and which need new data sources entirely.</p>
 
     <div class="card-grid" style="margin-bottom:2rem">
       <div class="card fi"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Volume &amp; Growth</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Year-on-year growth, rolling 12M units, peak-month concentration (end-of-quarter sales culture signal), volume rank within brand.</div></div>
@@ -731,29 +731,29 @@
   <div class="wrap">
     <p class="label fi">08 — The Goal</p>
     <h2 class="sh fi">Turning raw DMS data into<br/>dealer intelligence.</h2>
-    <p class="sd fi">The platform is a means to an end. The objective is to give Synogize — and ultimately the dealerships — a clear, data-driven picture of how each dealer is performing, why, and what to do about it.</p>
+    <p class="sd fi">The platform is a means to an end. The objective is to give Synogize, and ultimately the dealerships, a clear data-driven picture of how each dealer is performing, why, and what to do about it.</p>
 
     <div class="card-grid" style="margin-bottom:2rem">
       <div class="card fi">
         <div style="font-size:1.3rem;margin-bottom:0.75rem">📍</div>
         <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Know where you stand</div>
-        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Every dealer gets a benchmarked view of their own performance — order-to-delivery speed, EV mix, discount rate, volume growth — ranked within their brand and region, not in isolation.</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Every dealer gets a benchmarked view of their own performance: order-to-delivery speed, EV mix, discount rate, and volume growth, ranked within their brand and region.</div>
       </div>
       <div class="card fi fi-d1">
         <div style="font-size:1.3rem;margin-bottom:0.75rem">🔍</div>
         <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Spot the white space</div>
-        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Combining Pentana sales with VFACTS registration data reveals where a brand is under-represented relative to the market — surfacing geographic opportunities that aren't visible from internal data alone.</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Combining Pentana sales with VFACTS registration data reveals where a brand is under-represented relative to the market, surfacing geographic opportunities that aren't visible from internal data alone.</div>
       </div>
       <div class="card fi fi-d2">
         <div style="font-size:1.3rem;margin-bottom:0.75rem">📈</div>
         <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Drive better decisions</div>
-        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">From OEM strategy to dealer operations — the benchmarking framework is designed to answer the questions that matter: who is outperforming, what's driving it, and which levers can be pulled to close the gap.</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">From OEM strategy to dealer operations, the benchmarking framework is designed to answer the questions that matter: who is outperforming, what's driving it, and which levers can be pulled to close the gap.</div>
       </div>
     </div>
 
     <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--syn2);border-radius:0.75rem;padding:1.4rem 1.6rem" class="fi">
       <p style="font-size:0.9rem;color:var(--sub);line-height:1.8;margin:0">
-        The foundation is now in place — a clean, enriched, production-grade dataset covering an estimated 80% of the Australian new-car market.
+        The foundation is now in place: a clean, enriched, production-grade dataset covering an estimated 80% of the Australian new-car market.
         The next step is translating it into dashboards, reports, and alerts that a dealer principal can act on Monday morning.
       </p>
     </div>
