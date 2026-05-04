@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pentana Dealership Analytics — Synogize · Camilo Guerra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0a0a0a;
+      --card:     #111111;
+      --border:   rgba(255,255,255,0.07);
+      --syn:      #005293;
+      --syn2:     #1a7fd4;
+      --syn-dim:  rgba(0,82,147,0.12);
+      --syn-glow: rgba(26,127,212,0.4);
+      --text:     #f0f0f0;
+      --muted:    #6b7280;
+      --sub:      #9ca3af;
+      --radius:   1.2rem;
+      --wrap:     1100px;
+      --px:       clamp(1.25rem, 4vw, 3rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.65; }
+    .display { font-family: 'Cabinet Grotesk', sans-serif; }
+    ::selection { background: var(--syn); color: #fff; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--syn); border-radius: 2px; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px); }
+    section { padding: 6rem 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--wrap); margin: 0 auto; padding: 1.1rem var(--px);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .syn-logo {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800;
+      font-size: 1rem; letter-spacing: -0.01em;
+    }
+    .syn-logo .syn-mark {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--syn) 0%, var(--syn2) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; color: #fff; font-weight: 900;
+    }
+    .syn-logo .syn-name { color: var(--text); }
+    .syn-logo .syn-sep { color: var(--muted); font-weight: 400; margin: 0 0.1rem; }
+    .syn-logo .syn-sub { color: var(--muted); font-weight: 500; font-size: 0.9rem; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover { color: var(--syn2); }
+    .nav-btn {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--syn2); border: 1px solid rgba(26,127,212,0.35);
+      padding: 0.45rem 1rem; border-radius: 0.4rem; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover { background: var(--syn-dim); border-color: var(--syn2); }
+
+    /* ── LABEL / EYEBROW ── */
+    .label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--syn2); margin-bottom: 1rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 7rem; padding-bottom: 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,82,147,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,82,147,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 90% 80% at 20% 30%, black 30%, transparent 80%);
+    }
+    .hero-glow {
+      position: absolute; width: 700px; height: 500px; top: -80px; left: -100px;
+      background: radial-gradient(ellipse, rgba(0,82,147,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.68rem; padding: 0.45rem 1.1rem; border-radius: 999px;
+      border: 1px solid rgba(26,127,212,0.4); color: var(--syn2);
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;
+    }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--syn2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+    h1.hero-title {
+      font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800;
+      font-size: clamp(3rem, 6.5vw, 5.8rem); color: #fff;
+      line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 1.5rem;
+    }
+    h1.hero-title .accent { color: var(--syn2); }
+    .hero-desc {
+      color: var(--sub); font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 4rem; }
+    .btn-primary {
+      font-size: 0.82rem; font-weight: 500; padding: 0.7rem 1.5rem; border-radius: 0.5rem;
+      background: var(--syn); color: #fff; text-decoration: none;
+      border: 1px solid var(--syn); transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--syn2); border-color: var(--syn2); }
+    .btn-ghost {
+      font-size: 0.82rem; font-weight: 500; padding: 0.7rem 1.5rem; border-radius: 0.5rem;
+      background: transparent; color: var(--sub); text-decoration: none;
+      border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    /* ── STAT BAR ── */
+    .stat-bar {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--card); overflow: hidden;
+    }
+    .stat-item {
+      padding: 1.4rem 1.2rem; border-right: 1px solid var(--border);
+      text-align: left;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--syn2); display: block; line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; display: block; line-height: 1.4; }
+
+    /* ── SECTION HEADERS ── */
+    h2.sh { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: clamp(1.9rem, 3.5vw, 2.9rem); color: #fff; line-height: 1.15; margin-bottom: 0.75rem; }
+    p.sd { color: var(--sub); font-size: 1rem; max-width: 600px; line-height: 1.8; margin-bottom: 2.5rem; }
+
+    /* ── CARDS ── */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: var(--syn-glow); transform: translateY(-2px); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+
+    /* ── ARCHITECTURE ── */
+    .arch-flow { display: flex; flex-direction: column; gap: 0; }
+    .arch-connector { display: flex; align-items: center; height: 2.5rem; padding-left: 5rem; }
+    .arch-connector-line { width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, var(--syn2), transparent); margin: 0 auto 0 0; flex-shrink: 0; width: 1px; }
+
+    .arch-row { display: grid; grid-template-columns: 9rem 1fr; gap: 1.5rem; align-items: start; }
+    .arch-badge {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 1.1rem 0.5rem; border-radius: 0.75rem; text-align: center;
+      font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem;
+      letter-spacing: 0.06em; min-height: 72px; border: 1.5px solid; gap: 0.25rem;
+    }
+    .arch-badge-sub { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.6rem; color: var(--muted); letter-spacing: 0; }
+    .bronze-b { background: rgba(180,80,10,0.07); border-color: rgba(217,119,6,0.3); color: #d97706; }
+    .silver-b { background: rgba(100,116,139,0.07); border-color: rgba(148,163,184,0.3); color: #94a3b8; }
+    .gold-b   { background: rgba(202,138,4,0.07); border-color: rgba(234,179,8,0.3); color: #eab308; }
+    .ai-b     { background: rgba(0,82,147,0.09); border-color: rgba(26,127,212,0.35); color: var(--syn2); }
+
+    .arch-body { padding-top: 0.2rem; }
+    .arch-note { font-size: 0.85rem; color: var(--sub); line-height: 1.7; margin-bottom: 0.9rem; }
+    .arch-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      font-size: 0.7rem; padding: 0.3rem 0.7rem; border-radius: 0.35rem;
+      background: #1a1a1a; color: #6b7280; border: 1px solid rgba(255,255,255,0.05);
+      font-family: 'Inter', monospace;
+    }
+    .chip.hi { background: rgba(0,82,147,0.1); color: var(--syn2); border-color: rgba(26,127,212,0.2); }
+    .chip.amber { background: rgba(180,100,10,0.1); color: #f59e0b; border-color: rgba(245,158,11,0.2); }
+
+    .arch-table-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; margin-bottom: 0.6rem; line-height: 1.5; }
+
+    /* ── ENRICHMENT ── */
+    .enrich-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.1rem; }
+    .enrich-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.6rem; position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .enrich-card:hover { border-color: var(--syn-glow); transform: translateY(-2px); }
+    .enrich-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--syn), var(--syn2)); }
+    .enrich-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.6rem; }
+    .enrich-body { font-size: 0.85rem; color: var(--sub); line-height: 1.75; }
+    .enrich-footer { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 0.3rem; font-weight: 500; }
+    .tag-done     { background: rgba(0,128,80,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.15); }
+    .tag-progress { background: rgba(190,140,0,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.15); }
+    .tag-pending  { background: rgba(100,60,160,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.15); }
+    .tag-team     { background: rgba(16,185,129,0.08); color: #34d399; border: 1px solid rgba(52,211,153,0.15); }
+    .report-link { font-size: 0.72rem; color: var(--syn2); text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s; }
+    .report-link:hover { opacity: 0.75; text-decoration: underline; }
+
+    /* ── PROGRESS SECTION ── */
+    .progress-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1rem; }
+    .prog-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
+    .prog-val { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 2rem; color: var(--syn2); line-height: 1; }
+    .prog-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4; }
+    .prog-sub { font-size: 0.72rem; color: #374151; margin-top: 0.3rem; }
+
+    /* ── REPORTS ── */
+    .reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 0.9rem; }
+    .report-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 0.9rem;
+      padding: 1.25rem 1.4rem; display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s;
+      gap: 1rem;
+    }
+    .report-card:hover { border-color: var(--syn-glow); background: #161616; }
+    .report-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .report-info { flex: 1; }
+    .report-title { font-size: 0.9rem; font-weight: 500; color: var(--text); line-height: 1.3; }
+    .report-meta  { font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; }
+    .report-arrow { color: var(--syn2); font-size: 0.85rem; flex-shrink: 0; }
+
+    /* ── TECH ── */
+    .tech-chips { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+    .tech-chip { font-size: 0.78rem; padding: 0.4rem 0.9rem; border-radius: 0.35rem; background: #161616; color: var(--sub); border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; }
+    .tech-chip:hover { border-color: var(--syn-glow); color: var(--syn2); }
+
+    /* ── LOGO ROW ── */
+    .logo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 2.5rem; }
+    .logo-item { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+    .logo-item:hover { opacity: 1; }
+    .logo-item img { height: 28px; width: auto; filter: brightness(0) invert(1); }
+    .logo-label { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── AGENT CARDS ── */
+    .agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .agent-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.6rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s; }
+    .agent-card:hover { border-color: rgba(255,255,255,0.12); }
+    .agent-icon { width: 36px; height: 36px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; }
+    .agent-name { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 0.35rem; }
+    .agent-desc { font-size: 0.82rem; color: var(--sub); line-height: 1.65; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-inner { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--syn2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── FADE IN ── */
+    .fi { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fi.vis { opacity: 1; transform: translateY(0); }
+    .fi-d1 { transition-delay: 0.1s; }
+    .fi-d2 { transition-delay: 0.2s; }
+    .fi-d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 700px) {
+      .arch-row { grid-template-columns: 7rem 1fr; }
+      .stat-bar { grid-template-columns: repeat(3,1fr); }
+      .stat-item:nth-child(3) { border-right: none; }
+    }
+    @media (max-width: 480px) {
+      .stat-bar { grid-template-columns: 1fr 1fr; }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/professional-porfolio/">
+      <div class="syn-logo">
+        <span class="syn-mark">S</span>
+        <span class="syn-name">Synogize</span>
+        <span class="syn-sep">/</span>
+        <span class="syn-sub">Pentana Analytics</span>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="#enrichment">Enrichment</a>
+      <a class="nav-link" href="#reports">Reports</a>
+      <a class="nav-link" href="#tech">Stack</a>
+      <a class="nav-btn" href="/professional-porfolio/#projects">← Portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap hero-content">
+
+    <div class="badge fi"><span class="badge-dot"></span>Data Engineering · AI Enrichment · UTS Internship · Autumn 2026</div>
+
+    <h1 class="hero-title fi fi-d1">
+      Pentana<br/><span class="accent">Dealership</span><br/>Analytics
+    </h1>
+
+    <p class="hero-desc fi fi-d2">
+      Transforming raw Australian dealership DMS data covering an estimated
+      <strong style="color:var(--text)">80% of the national market</strong> into a
+      production-grade Snowflake analytics platform with a layered AI enrichment pipeline.
+    </p>
+
+    <div class="hero-actions fi fi-d3">
+      <a class="btn-primary" href="#architecture">Explore the Architecture</a>
+      <a class="btn-ghost" href="/reports/internship_plan.pdf" target="_blank">Internship Plan ↗</a>
+      <a class="btn-ghost" href="https://github.com/camilouribeg" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="stat-bar fi">
+      <div class="stat-item">
+        <span class="stat-value">~8.7M</span>
+        <span class="stat-label">Raw Bronze rows (full history)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">4.9M</span>
+        <span class="stat-label">Unique VINs — new vehicles (Silver)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">2,034</span>
+        <span class="stat-label">Dealer proxy keys analysed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">329</span>
+        <span class="stat-label">Dealer groups identified</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">~80%</span>
+        <span class="stat-label">Est. Australian new-car market coverage</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTEXT ───────────────────────────────────────────────────────── -->
+<section id="context">
+  <div class="wrap">
+    <p class="label fi">01 — The Starting Point</p>
+    <h2 class="sh fi">One flat table.<br/>No analytics layer.</h2>
+    <p class="sd fi">Pentana ERA Power is a dealership management system used by approximately 80% of Australian new-car franchise dealerships. The raw data export was a single flat table: 8.7M rows, 143 columns, no structure optimised for analytics. Of those rows, 4.9M represent unique new vehicle VINs, which is the working dataset for this project.</p>
+
+    <div class="fi" style="margin-bottom:2.5rem">
+      <a href="https://www.pentanasolutions.com" target="_blank" rel="noreferrer"
+         style="display:inline-flex;align-items:center;gap:0.85rem;background:#111;border:1px solid var(--border);border-radius:0.65rem;padding:0.8rem 1.2rem;text-decoration:none;transition:border-color 0.2s"
+         onmouseover="this.style.borderColor='rgba(26,127,212,0.35)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="background:#1A3A5C;border-radius:0.4rem;padding:0.35rem 0.65rem;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.8rem;color:#5BA4D4;letter-spacing:0.04em">ERA POWER</div>
+        <div>
+          <div style="font-size:0.82rem;font-weight:500;color:var(--text)">Pentana Solutions</div>
+          <div style="font-size:0.72rem;color:var(--muted)">pentanasolutions.com · Data source</div>
+        </div>
+        <span style="color:var(--syn2);font-size:0.75rem;margin-left:0.25rem">↗</span>
+      </a>
+    </div>
+
+    <div class="card-grid">
+      <div class="card fi">
+        <div style="font-size:1.4rem;margin-bottom:0.75rem">🏗️</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">No medallion structure</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Raw data in a single Bronze table with no Silver cleaning or Gold business layer. Every query hit the full dataset without structure or optimisation.</div>
+      </div>
+      <div class="card fi fi-d1">
+        <div style="font-size:1.4rem;margin-bottom:0.75rem">🔍</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">No dealer identity</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Dealers identified only by postcode + brand proxy. No verified names, no group structure, no geographic or competitive context to anchor analysis.</div>
+      </div>
+      <div class="card fi fi-d2">
+        <div style="font-size:1.4rem;margin-bottom:0.75rem">📊</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">No benchmarking</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">No way to compare dealers on performance. A dealer had no peer context for their order-to-delivery speed, EV share, or sales growth relative to the brand.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHITECTURE ──────────────────────────────────────────────────── -->
+<section id="architecture">
+  <div class="wrap">
+    <p class="label fi">02 — Medallion Architecture</p>
+    <div class="fi" style="display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;flex-wrap:wrap">
+      <h2 class="sh" style="margin-bottom:0">Bronze → Silver → Gold<br/>on Snowflake</h2>
+      <a href="https://www.snowflake.com" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:0.55rem;background:rgba(41,181,232,0.07);border:1px solid rgba(41,181,232,0.2);border-radius:0.55rem;padding:0.45rem 0.9rem;text-decoration:none;transition:background 0.2s;flex-shrink:0"
+         onmouseover="this.style.background='rgba(41,181,232,0.12)'" onmouseout="this.style.background='rgba(41,181,232,0.07)'">
+        <!-- Snowflake logo mark (simplified) -->
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="#29B5E8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2a2 2 0 0 0-2 2v3.17l-2.29-2.3a2 2 0 0 0-2.83 2.83L12.17 11H4a2 2 0 0 0 0 4h8.17L8.88 18.3a2 2 0 1 0 2.83 2.83L14 18.83V22a2 2 0 0 0 4 0v-3.17l2.29 2.3a2 2 0 0 0 2.83-2.83L19.83 15H28a2 2 0 0 0 0-4h-8.17l3.29-3.3a2 2 0 0 0-2.83-2.83L18 7.17V4a2 2 0 0 0-2-2z"/>
+        </svg>
+        <span style="font-size:0.75rem;font-weight:600;color:#29B5E8;font-family:'Cabinet Grotesk',sans-serif">Snowflake</span>
+      </a>
+    </div>
+    <p class="sd fi">A staged pipeline built in Snowflake SQL and Python. The key design decision was splitting the Silver layer into five focused analytical tables rather than cleaning one wide flat table, each purpose-built for a downstream use case.</p>
+
+    <div class="arch-flow">
+
+      <!-- BRONZE -->
+      <div class="arch-row fi">
+        <div class="arch-badge bronze-b">BRONZE<span class="arch-badge-sub">Raw · Preserved</span></div>
+        <div class="arch-body">
+          <p class="arch-note">The full Pentana ERA Power export preserved as-is. Source of truth, no transformations applied. The complete history of ~8.7M rows across all vehicle types is retained here.</p>
+          <div class="arch-chips">
+            <span class="chip">VW_VEHICLE_SALES</span>
+            <span class="chip">~8.7M rows</span>
+            <span class="chip">143 columns</span>
+            <span class="chip">All vehicle types</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector"><div style="width:1px;height:100%;background:linear-gradient(to bottom,rgba(26,127,212,0.2),rgba(26,127,212,0.6),rgba(26,127,212,0.2));margin-left:4.4rem"></div></div>
+
+      <!-- SILVER -->
+      <div class="arch-row fi">
+        <div class="arch-badge silver-b">SILVER<span class="arch-badge-sub">Cleaned · Split</span></div>
+        <div class="arch-body">
+          <p class="arch-note">Cleaned, standardised, and split into five purpose-built analytical tables focusing on the 4.9M unique new vehicle VINs. VIN-level enrichment applied for vehicle descriptors (make, body style, fuel type, seats, transmission).</p>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:0.75rem">
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_SILVER_CORE_T</span></div><p class="arch-table-desc">Transaction-level measures: sale price, cost price, discounts, gross profit, deposit, trade-in amounts.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_DETAILS_SILVER_T</span></div><p class="arch-table-desc">Vehicle specification attributes: make, model, body style, fuel type, seats, transmission, drive type.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_SALES_PROCESS_SILVER_T</span></div><p class="arch-table-desc">All lifecycle dates: order, deal, invoice, delivery, scheduled delivery, estimated delivery, with chronology flags.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_GEOGRAPHY_SILVER_T</span></div><p class="arch-table-desc">Dealer postcode, delivery postcode, and delivery state. The spatial layer for all geographic analysis.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">VEHICLE_FINANCE_SUPPORT_SILVER_T</span></div><p class="arch-table-desc">Finance contract ID, type, term, interest rate, commission, and residual amounts where populated.</p></div>
+          </div>
+          <div class="arch-chips">
+            <span class="chip">VIN_WMI_DICTIONARY_T</span>
+            <span class="chip">VEHICLE_VIN_ENRICHMENT_SILVER_T</span>
+            <span class="chip">DEALER_REFERENCE_T</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector"><div style="width:1px;height:100%;background:linear-gradient(to bottom,rgba(26,127,212,0.2),rgba(26,127,212,0.6),rgba(26,127,212,0.2));margin-left:4.4rem"></div></div>
+
+      <!-- GOLD -->
+      <div class="arch-row fi">
+        <div class="arch-badge gold-b">GOLD<span class="arch-badge-sub">Star Schema · In progress</span></div>
+        <div class="arch-body">
+          <p class="arch-note">Star schema with a central fact table and dimension tables. Business-ready mart views for reporting and benchmarking. <span class="chip amber" style="display:inline;padding:0.2rem 0.5rem">In progress</span></p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.75rem">
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">FACT_VEHICLE_SALES</span></div><p class="arch-table-desc">Central fact table joining all Silver dimensions, the query entry point for all Gold analytics.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">DIM_VEHICLE · DIM_DEALER · DIM_DATE · DIM_STATE</span></div><p class="arch-table-desc">Conformed dimensions enabling slicing by vehicle, dealer, time, and geography.</p></div>
+            <div><div class="arch-chips" style="margin-bottom:0.2rem"><span class="chip hi">MART_DEALER_BENCHMARK_V</span></div><p class="arch-table-desc">Aggregated dealer-level benchmarking view with 15 metrics live including OTD, EV share, fleet mix, and within-brand rankings.</p></div>
+          </div>
+          <div class="arch-chips">
+            <span class="chip">MART_MARGIN_ANALYSIS_V</span>
+            <span class="chip">MART_VEHICLE_SALES_OVERVIEW_V</span>
+            <span class="chip">MART_MAKE_STATE_SALES_V</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector"><div style="width:1px;height:100%;background:linear-gradient(to bottom,rgba(26,127,212,0.2),rgba(26,127,212,0.6),rgba(26,127,212,0.2));margin-left:4.4rem"></div></div>
+
+      <!-- AI -->
+      <div class="arch-row fi">
+        <div class="arch-badge ai-b">AI LAYER<span class="arch-badge-sub">Enrichment</span></div>
+        <div class="arch-body">
+          <p class="arch-note">External enrichment pipeline using web scraping, AI agents, VIN decoding APIs, and free external datasets to fill gaps the DMS cannot answer on its own.</p>
+          <div class="arch-chips">
+            <span class="chip hi">DEALER_GROUP_ENRICHED_T</span>
+            <span class="chip">DEALER_LAND_SIZE (pilot)</span>
+            <span class="chip">VIN enrichment (live)</span>
+            <span class="chip">VFACTS_REFERENCE_T (pending)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── AI ENRICHMENT ─────────────────────────────────────────────────── -->
+<section id="enrichment">
+  <div class="wrap">
+    <p class="label fi">03 — AI Enrichment Layer</p>
+    <h2 class="sh fi">Filling the gaps the DMS can't answer.</h2>
+    <p class="sd fi">With the analytics foundation in place, the project moved into an AI-assisted enrichment layer, combining web scraping, API decoding, and external datasets to unlock dealer intelligence that isn't captured in the raw sales data.</p>
+
+    <div class="enrich-grid">
+
+      <div class="enrich-card fi">
+        <div class="enrich-title">VIN Decoding & Vehicle Enrichment</div>
+        <div class="enrich-body">The source data has inconsistent vehicle descriptors: make, body style, fuel type, and seats are partially missing or incorrectly labelled. A two-phase VIN decoding pipeline (WMI-based + WMI+VDS) enriched 4.9M VINs using the NHTSA vPIC API and a curated internal WMI dictionary.</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-done">Complete</span>
+          </div>
+          <a class="report-link" href="/professional-porfolio/reports/vin_enrichment_report.pdf" target="_blank">VIN Enrichment Report ↗</a>
+        </div>
+      </div>
+
+      <div class="enrich-card fi fi-d1">
+        <div class="enrich-title">Dealer Name & Identity</div>
+        <div class="enrich-body">The raw data identifies dealers only by postcode and brand, with no names or addresses. A web research pipeline using Tavily API and Google Custom Search resolved verified trading names, street addresses, and match confidence for 2,034 dealer proxy keys (63.4% verified).</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-done">Complete</span>
+          </div>
+          <a class="report-link" href="/professional-porfolio/reports/dealer_report.pdf" target="_blank">Dealer Reference Report ↗</a>
+        </div>
+      </div>
+
+      <div class="enrich-card fi fi-d2">
+        <div class="enrich-title">Dealer Group Taxonomy</div>
+        <div class="enrich-body">Automotive dealers operate within ownership groups (e.g. Eagers Automotive, Servco, Peter Warren). A multi-tier resolution pipeline using web-verified lookups, name-prefix clustering, and algorithmic multi-site grouping mapped 329 named groups across 2,034 dealers, covering 74.1% of 4.9M VINs.</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-done">Complete</span>
+          </div>
+          <a class="report-link" href="/professional-porfolio/reports/dealer_group_report.pdf" target="_blank">Dealer Group Report ↗</a>
+        </div>
+      </div>
+
+      <div class="enrich-card fi">
+        <div class="enrich-title">Dealer Land Size</div>
+        <div class="enrich-body">Physical lot size (sqm) is a proxy for a dealer's stock capacity and operational scale. Cadastral parcel data was queried for each dealer address via land registry lookups. East-coast pilot covers NSW and Queensland.</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-progress">In progress — NSW &amp; QLD pilot complete</span>
+          </div>
+          <a class="report-link" href="/professional-porfolio/reports/dealer_land_size_report.pdf" target="_blank">Land Size Report ↗</a>
+        </div>
+      </div>
+
+      <div class="enrich-card fi fi-d1">
+        <div class="enrich-title">RRP Reference Data</div>
+        <div class="enrich-body">Recommended retail prices (RRP) per make, model, year, and variant enable revenue potential estimates, discount rate benchmarking, and premium variant mix analysis, covering 100% of vehicles without relying on the partially-populated sale price field (~33% coverage). Being built by the wider team.</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-team">Team workstream</span>
+            <span class="tag tag-progress">In progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="enrich-card fi fi-d2">
+        <div class="enrich-title">VFACTS Market Data</div>
+        <div class="enrich-body">VFACTS is the FCAI's monthly new vehicle registration dataset, the industry standard for market share in Australia. The first step is column standardisation: aligning VFACTS make/model naming to Pentana's conventions. Once mapped, it unlocks true market share calculations, white space analysis, and growth-vs-market comparisons by brand and geography.</div>
+        <div class="enrich-footer">
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            <span class="tag tag-pending">Pending data share</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── BENCHMARKING ──────────────────────────────────────────────────── -->
+<section id="benchmarking">
+  <div class="wrap">
+    <p class="label fi">04 — Benchmarking Framework</p>
+    <h2 class="sh fi">Defining the dealer<br/>benchmarking framework.</h2>
+    <p class="sd fi">With the data platform established, the next stage is defining a comprehensive benchmarking framework, analysing which dealer performance variables are computable from the current pipeline, which require external enrichment, and which need new data sources entirely.</p>
+
+    <div class="card-grid" style="margin-bottom:2rem">
+      <div class="card fi"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Volume &amp; Growth</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Year-on-year growth, rolling 12M units, peak-month concentration (end-of-quarter sales culture signal), volume rank within brand.</div></div>
+      <div class="card fi fi-d1"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Operational Speed</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Order-to-delivery median &amp; P75, OTD consistency score (stddev), on-time rate, estimated delivery accuracy, yard time velocity.</div></div>
+      <div class="card fi fi-d2"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Portfolio &amp; Electrification</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">SUV/ute/passenger share, aged stock rate, EV &amp; hybrid share, premium variant mix, segment diversity index.</div></div>
+      <div class="card fi"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Pricing &amp; Revenue</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Gross margin, discount rate, price realisation rate vs RRP, RRP revenue potential (100% coverage), discount vs brand average.</div></div>
+      <div class="card fi fi-d1"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Geographic &amp; Competitive</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Competitive density (same-brand dealers within 50km), nearest competitor distance, catchment SEIFA decile, metro/regional flag.</div></div>
+      <div class="card fi fi-d2"><div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--syn2);margin-bottom:0.5rem">Market Share (VFACTS)</div><div style="font-size:0.85rem;color:var(--sub);line-height:1.7">Market share in state, national brand share, growth vs total market, brand segment mix vs national average. Unlocked once VFACTS is available.</div></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <span class="tag tag-progress" style="font-size:0.75rem;padding:0.4rem 0.9rem">Proposal stage — pending stakeholder review</span>
+      <a class="report-link" href="/professional-porfolio/reports/benchmarking_variables_proposal.pdf" target="_blank" style="font-size:0.82rem">View full variable proposal ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROGRESS ──────────────────────────────────────────────────────── -->
+<section id="progress">
+  <div class="wrap">
+    <p class="label fi">05 — What's Been Delivered</p>
+    <h2 class="sh fi">Platform in production.</h2>
+    <p class="sd fi">Core pipeline and enrichment workstreams completed and loaded to Snowflake. Gold layer and benchmarking framework actively in progress.</p>
+
+    <div class="progress-grid">
+      <div class="prog-card fi">
+        <div class="prog-val">5</div>
+        <div class="prog-label">Silver analytical tables from one flat source</div>
+        <div class="prog-sub">CORE · DETAILS · PROCESS · GEOGRAPHY · FINANCE</div>
+      </div>
+      <div class="prog-card fi fi-d1">
+        <div class="prog-val">4.9M</div>
+        <div class="prog-label">VINs enriched with make, body style, fuel type</div>
+        <div class="prog-sub">WMI + WMI/VDS VIN decoding pipeline</div>
+      </div>
+      <div class="prog-card fi fi-d2">
+        <div class="prog-val">2,034</div>
+        <div class="prog-label">Dealers profiled — name, address, group, status</div>
+        <div class="prog-sub">63.4% verified trading names</div>
+      </div>
+      <div class="prog-card fi">
+        <div class="prog-val">329</div>
+        <div class="prog-label">Dealer groups identified and audited</div>
+        <div class="prog-sub">74.1% of VINs flow through a named group</div>
+      </div>
+      <div class="prog-card fi fi-d1">
+        <div class="prog-val">15</div>
+        <div class="prog-label">Live benchmarking variables in MART_DEALER_BENCHMARK_V</div>
+        <div class="prog-sub">OTD, EV share, fleet mix, within-brand ranks</div>
+      </div>
+      <div class="prog-card fi fi-d2">
+        <div class="prog-val">9</div>
+        <div class="prog-label">Benchmarking dimensions proposed across volume, pricing, geography &amp; more</div>
+        <div class="prog-sub">Pending stakeholder review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REPORTS ───────────────────────────────────────────────────────── -->
+<section id="reports">
+  <div class="wrap">
+    <p class="label fi">06 — Reports &amp; Documentation</p>
+    <h2 class="sh fi">Full audit trail.</h2>
+    <p class="sd fi">Every analysis stage has an accompanying report documenting methodology, data quality findings, and outputs.</p>
+
+    <div class="reports-grid">
+      <a class="report-card fi" href="/professional-porfolio/reports/internship_plan.pdf" target="_blank">
+        <span class="report-icon">📋</span>
+        <div class="report-info">
+          <div class="report-title">Internship Plan</div>
+          <div class="report-meta">UTS · Autumn 2026 · Project scope &amp; objectives</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi fi-d1" href="/professional-porfolio/reports/handoff_report.pdf" target="_blank">
+        <span class="report-icon">📦</span>
+        <div class="report-info">
+          <div class="report-title">Project Handoff Report</div>
+          <div class="report-meta">Architecture overview · Pipeline status · Next steps</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi fi-d2" href="/professional-porfolio/reports/vin_enrichment_report.pdf" target="_blank">
+        <span class="report-icon">🔢</span>
+        <div class="report-info">
+          <div class="report-title">VIN Enrichment Report</div>
+          <div class="report-meta">WMI decoding · 4.9M VINs · Coverage analysis</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi" href="/professional-porfolio/reports/dealer_report.pdf" target="_blank">
+        <span class="report-icon">🏬</span>
+        <div class="report-info">
+          <div class="report-title">Dealer Reference Report</div>
+          <div class="report-meta">2,034 dealers · Name matching · Coverage audit</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi fi-d1" href="/professional-porfolio/reports/dealer_group_report.pdf" target="_blank">
+        <span class="report-icon">🏢</span>
+        <div class="report-info">
+          <div class="report-title">Dealer Group Taxonomy Report</div>
+          <div class="report-meta">329 groups · 74.1% VIN coverage · Audit &amp; validation</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi fi-d2" href="/professional-porfolio/reports/dealer_land_size_report.pdf" target="_blank">
+        <span class="report-icon">📐</span>
+        <div class="report-info">
+          <div class="report-title">Dealer Land Size Report</div>
+          <div class="report-meta">Cadastral pilot · NSW + QLD · Parcel data</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-card fi" href="/professional-porfolio/reports/benchmarking_variables_proposal.pdf" target="_blank">
+        <span class="report-icon">📊</span>
+        <div class="report-info">
+          <div class="report-title">Benchmarking Variables Proposal</div>
+          <div class="report-meta">9 dimensions · Feasibility analysis · Stakeholder proposal</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TECH ──────────────────────────────────────────────────────────── -->
+<section id="tech">
+  <div class="wrap">
+    <p class="label fi">07 — Stack</p>
+    <h2 class="sh fi">Built with.</h2>
+    <div class="tech-chips" style="margin-top:1.5rem;margin-bottom:2rem">
+      <span class="tech-chip">Snowflake</span>
+      <span class="tech-chip">Python</span>
+      <span class="tech-chip">SQL</span>
+      <span class="tech-chip">Pandas</span>
+      <span class="tech-chip">Tavily API</span>
+      <span class="tech-chip">Google Custom Search</span>
+      <span class="tech-chip">NHTSA vPIC</span>
+      <span class="tech-chip">Haversine SQL</span>
+      <span class="tech-chip">ABS SEIFA</span>
+      <span class="tech-chip">LaTeX</span>
+      <span class="tech-chip">Jupyter</span>
+      <span class="tech-chip">openpyxl</span>
+      <span class="tech-chip">Medallion Architecture</span>
+      <span class="tech-chip">Star Schema</span>
+      <span class="tech-chip">GitHub</span>
+    </div>
+
+    <div class="fi" style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap">
+      <span style="font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">AI agents —</span>
+      <span class="tech-chip" style="display:inline-flex;align-items:center;gap:0.4rem">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M13.8 3h-3.6L4 21h3.6l1.44-4h5.92l1.44 4H20L13.8 3zm-3.76 11L12 7.8l1.96 6.2H10.04z" fill="#D4A574"/></svg>
+        Claude Code
+      </span>
+      <span class="tech-chip" style="display:inline-flex;align-items:center;gap:0.4rem">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M8 12a4 4 0 0 1 8 0" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Codex
+      </span>
+      <span class="tech-chip" style="display:inline-flex;align-items:center;gap:0.4rem">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 4l7.5 18 3-7 7-3L4 4z" stroke="#64B4FF" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Cursor
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ── END GOAL ───────────────────────────────────────────────────────── -->
+<section id="vision">
+  <div class="wrap">
+    <p class="label fi">08 — The Goal</p>
+    <h2 class="sh fi">Turning raw DMS data into<br/>dealer intelligence.</h2>
+    <p class="sd fi">The platform is a means to an end. The objective is to give Synogize, and ultimately the dealerships, a clear data-driven picture of how each dealer is performing, why, and what to do about it.</p>
+
+    <div class="card-grid" style="margin-bottom:2rem">
+      <div class="card fi">
+        <div style="font-size:1.3rem;margin-bottom:0.75rem">📍</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Know where you stand</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Every dealer gets a benchmarked view of their own performance: order-to-delivery speed, EV mix, discount rate, and volume growth, ranked within their brand and region.</div>
+      </div>
+      <div class="card fi fi-d1">
+        <div style="font-size:1.3rem;margin-bottom:0.75rem">🔍</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Spot the white space</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">Combining Pentana sales with VFACTS registration data reveals where a brand is under-represented relative to the market, surfacing geographic opportunities that aren't visible from internal data alone.</div>
+      </div>
+      <div class="card fi fi-d2">
+        <div style="font-size:1.3rem;margin-bottom:0.75rem">📈</div>
+        <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:0.5rem">Drive better decisions</div>
+        <div style="font-size:0.87rem;color:var(--sub);line-height:1.7">From OEM strategy to dealer operations, the benchmarking framework is designed to answer the questions that matter: who is outperforming, what's driving it, and which levers can be pulled to close the gap.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--syn2);border-radius:0.75rem;padding:1.4rem 1.6rem" class="fi">
+      <p style="font-size:0.9rem;color:var(--sub);line-height:1.8;margin:0">
+        The foundation is now in place: a clean, enriched, production-grade dataset covering an estimated 80% of the Australian new-car market.
+        The next step is translating it into dashboards, reports, and alerts that a dealer principal can act on Monday morning.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <span>Synogize · UTS Data Science Internship · Autumn 2026 · Camilo Guerra</span>
+    <a href="/professional-porfolio/#projects">← Back to Portfolio</a>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target) } })
+  }, { threshold: 0.08 })
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el))
+  // Make hero elements visible immediately
+  document.querySelectorAll('#hero .fi').forEach(el => el.classList.add('vis'))
+</script>
+
+</body>
+</html>
