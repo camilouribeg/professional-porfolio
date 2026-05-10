@@ -23,95 +23,104 @@
       --rose:   #F43F5E;
       --text:   #f0f0f0;
       --muted:  #6b7280;
-      --wrap:   1100px;
+      --wrap:   1000px;
       --px:     clamp(1.25rem, 5vw, 3rem);
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     .display { font-family: 'Cabinet Grotesk', sans-serif; }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.1rem var(--px); display: flex; align-items: center; justify-content: space-between;
-      background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.1rem var(--px); display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     nav a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color .2s; }
     nav a:hover { color: #fff; }
     .nav-logo { color: #fff; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 1.1rem; }
     .nav-logo span { color: var(--teal); }
 
     .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px); }
-    .section-divider { border: none; border-top: 1px solid var(--border); }
+    hr { border: none; border-top: 1px solid var(--border); }
 
-    /* ── HERO ── */
-    .hero { padding: 8rem var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; text-align: center; }
+    /* HERO */
+    .hero { padding: 8rem var(--px) 4rem; max-width: var(--wrap); margin: 0 auto; text-align: center; }
     .hero-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem; }
-    .hero-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
-    .hero-sub { color: var(--muted); font-size: 1rem; line-height: 1.8; max-width: 640px; margin: 0 auto 2rem; }
+    .hero-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
+    .hero-sub { color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 620px; margin: 0 auto 2rem; }
     .tag { display: inline-block; font-size: 0.72rem; padding: 0.3rem 0.85rem; border-radius: 999px; margin: 0.25rem; }
 
-    /* ── DIAGRAM SECTION ── */
-    .diag-section { padding: 4rem var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; }
+    /* DIAGRAM SECTION */
+    .diag-wrap { max-width: var(--wrap); margin: 0 auto; padding: 4rem var(--px) 5rem; }
     .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
-    .section-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 0.6rem; }
-    .section-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.75; max-width: 680px; margin-bottom: 3rem; }
+    .section-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 0.6rem; }
+    .section-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.75; max-width: 680px; margin-bottom: 2.5rem; }
 
-    /* ── ROW LABELS ── */
-    .flow-label-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
-    .flow-badge { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 999px; }
+    /* DIMENSIONS BAND */
+    .dim-band { background: #080808; border: 1px solid rgba(13,148,136,0.2); border-radius: 1rem; padding: 1rem 1.5rem; margin-bottom: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+    .dim-band-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #4b5563; flex-shrink: 0; }
+    .dim-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px; border: 1px solid; font-weight: 500; }
+    .dim-sep { color: #1f2937; font-size: 1rem; }
 
-    /* ── INPUT / OUTPUT 3-CARD ROWS ── */
-    .cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    @media (max-width: 700px) { .cards-row { grid-template-columns: 1fr; } }
+    /* MAIN FLOW */
+    .flow { display: flex; flex-direction: column; align-items: stretch; position: relative; }
 
-    .io-card {
-      background: var(--card2); border: 1px solid var(--border); border-radius: 1rem;
-      padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;
-      transition: border-color .2s;
-    }
-    .io-card:hover { border-color: rgba(255,255,255,0.15); }
-    .io-card-num { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
-    .io-card-title { color: #e5e7eb; font-weight: 600; font-size: 0.88rem; }
-    .io-card-detail { color: var(--muted); font-size: 0.77rem; line-height: 1.6; }
-    .io-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
-    .io-tag { font-size: 0.67rem; padding: 0.18rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+    /* NODE CARDS */
+    .node { border-radius: 1rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); background: var(--card2); }
+    .node-num { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .node-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 0.35rem; }
+    .node-desc { color: var(--muted); font-size: 0.79rem; line-height: 1.65; }
+    .node-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.6rem; }
+    .node-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+    .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .node-sub { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.45rem 0.75rem; }
+    .node-sub-label { font-size: 0.62rem; color: #4b5563; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.15rem; }
+    .node-sub-val { font-size: 0.75rem; color: #9ca3af; }
 
-    /* ── CONNECTOR ARROWS ── */
-    .connector { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.5rem 0; }
-    .arrow-down { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0.25rem 0; }
-    .arrow-line-v { width: 1px; height: 28px; background: linear-gradient(to bottom, rgba(13,148,136,0.15), rgba(13,148,136,0.5)); }
-    .arrow-tip { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid rgba(13,148,136,0.5); }
+    /* PARALLEL TOP ROW */
+    .parallel { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .parallel { grid-template-columns: 1fr; } }
 
-    /* ── ENGINE ── */
-    .engine-wrap {
-      background: #080808; border: 1px solid rgba(13,148,136,0.3); border-radius: 1.25rem;
-      overflow: hidden; box-shadow: 0 0 40px rgba(13,148,136,0.06);
-    }
-    .engine-header { padding: 1.5rem 1.75rem; border-bottom: 1px solid rgba(13,148,136,0.1); }
-    .engine-badge { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.25); padding: 0.3rem 0.8rem; border-radius: 999px; margin-bottom: 0.6rem; }
-    .engine-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: #fff; margin-bottom: 0.3rem; }
-    .engine-desc { color: var(--muted); font-size: 0.8rem; line-height: 1.6; max-width: 600px; }
+    /* SVG CONNECTORS */
+    .svg-connector { width: 100%; overflow: visible; display: block; }
 
-    .ef-bar { padding: 0.65rem 1.75rem; background: rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
-    .ef-label { font-size: 0.62rem; color: #4b5563; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; }
-    .ef-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.3rem; color: #374151; }
+    /* SIMPLE ARROW */
+    .arrow-simple { display: flex; flex-direction: column; align-items: center; padding: 2px 0; }
+    .arrow-v-line { width: 1.5px; height: 28px; background: linear-gradient(to bottom, rgba(13,148,136,0.25), rgba(13,148,136,0.55)); }
+    .arrow-v-tip { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid rgba(13,148,136,0.55); }
 
-    .modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.04); }
-    @media (max-width: 600px) { .modules-grid { grid-template-columns: 1fr 1fr; } }
-    .module-card { padding: 1rem 1.25rem; background: #0e0e0e; transition: background .15s; }
-    .module-card:hover { background: rgba(13,148,136,0.04); }
-    .mod-icon { font-size: 1.1rem; margin-bottom: 0.4rem; }
-    .mod-name { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .mod-detail { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
-
-    .gwp-bar { padding: 0.85rem 1.75rem; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.04); display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    /* ENGINE */
+    .engine-node { border: 1px solid rgba(13,148,136,0.35); background: #080808; border-radius: 1rem; overflow: hidden; box-shadow: 0 0 40px rgba(13,148,136,0.05); }
+    .engine-head { padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(13,148,136,0.1); }
+    .engine-badge { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.25); padding: 0.25rem 0.7rem; border-radius: 999px; margin-bottom: 0.5rem; }
+    .engine-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.3rem; }
+    .engine-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.6; }
+    .ef-row { padding: 0.6rem 1.5rem; background: rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    .ef-label { font-size: 0.62rem; color: #4b5563; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .ef-tag { font-size: 0.67rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.3rem; color: #374151; }
+    .mods-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.04); }
+    @media (max-width: 600px) { .mods-grid { grid-template-columns: 1fr 1fr; } }
+    .mod { padding: 0.9rem 1.1rem; background: #0e0e0e; transition: background .15s; }
+    .mod:hover { background: rgba(13,148,136,0.04); }
+    .mod-icon { font-size: 1rem; margin-bottom: 0.3rem; }
+    .mod-name { font-size: 0.78rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .mod-detail { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .gwp-row { padding: 0.75rem 1.5rem; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.04); display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
     .gwp-label { font-size: 0.62rem; color: #4b5563; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-    .gwp-formula { font-family: monospace; font-size: 0.8rem; color: #6b7280; }
+    .gwp-formula { font-family: monospace; font-size: 0.78rem; color: #6b7280; }
     .gwp-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    .gwp-tag { font-size: 0.68rem; padding: 0.2rem 0.55rem; border-radius: 0.3rem; border: 1px solid; }
+    .gwp-v { font-size: 0.67rem; padding: 0.18rem 0.5rem; border-radius: 0.3rem; border: 1px solid; }
 
-    /* ── SECTOR EXTENSION ── */
+    /* RESULTS + DQ STACK */
+    .results-stack { display: flex; flex-direction: column; gap: 0.5rem; }
+    .dq-node { border: 1px solid rgba(245,158,11,0.2); background: rgba(245,158,11,0.03); border-radius: 0.75rem; padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .dq-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); flex-shrink: 0; }
+    .dq-desc { font-size: 0.78rem; color: var(--muted); }
+    .dq-scores { display: flex; gap: 0.3rem; }
+    .dq-score { font-size: 0.67rem; padding: 0.18rem 0.45rem; border-radius: 0.3rem; border: 1px solid; }
+
+    /* OPTIONAL AGGREGATION */
+    .optional-wrap { position: relative; display: flex; align-items: flex-start; gap: 1rem; }
+    .optional-main { flex: 1; }
+    .optional-badge { position: absolute; top: -0.5rem; left: 1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); background: #0a0a0a; padding: 0.15rem 0.5rem; border: 1px solid rgba(139,92,246,0.3); border-radius: 999px; }
+
+    /* SECTOR EXTENSION */
     .ext-section { padding: 5rem var(--px); max-width: var(--wrap); margin: 0 auto; }
     .ext-inner { background: rgba(13,148,136,0.04); border: 1px solid rgba(13,148,136,0.18); border-radius: 1.5rem; padding: 3rem; }
     .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: rgba(13,148,136,0.1); border-radius: 0.75rem; overflow: hidden; margin-top: 2rem; }
@@ -120,16 +129,16 @@
     .step-title { color: #e5e7eb; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.35rem; }
     .step-detail { color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
 
-    /* ── INDUSTRIES ── */
+    /* INDUSTRIES */
     .ind-section { padding: 0 var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; }
-    .ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .ind-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
     .ind-card { background: var(--card2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color .2s; }
     .ind-card:hover { border-color: rgba(255,255,255,0.15); }
     .ind-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
     .ind-name { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; }
     .ind-detail { color: var(--muted); font-size: 0.76rem; line-height: 1.7; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     .page-footer { border-top: 1px solid var(--border); padding: 2rem var(--px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .page-footer a { color: var(--teal); text-decoration: none; font-size: 0.82rem; }
     .page-footer span { color: var(--muted); font-size: 0.8rem; }
@@ -137,7 +146,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="/professional-porfolio/" class="nav-logo">CUG<span>.</span></a>
   <a href="/professional-porfolio/">← Back to Portfolio</a>
@@ -157,248 +165,311 @@
   </div>
 </section>
 
-<hr class="section-divider" />
+<hr />
 
 <!-- DIAGRAM -->
-<section class="diag-section">
+<div class="diag-wrap">
   <p class="section-label">System Architecture</p>
-  <h2 class="section-title display">How the platform works</h2>
-  <p class="section-desc">Based on two years in production at Tachyus. Raw operational data flows in from the top, through a modular calculation engine at the centre, and out to aggregation, forecasting, and reporting below. The plugin architecture means adding a new industry sector requires one new module — the engine never changes.</p>
+  <h2 class="section-title display">How the pipeline works</h2>
+  <p class="section-desc">Data sources and hierarchy configuration are independent starting points — both feed into the automation layer, which maps everything before calculation. Results then fork into aggregation, forecasting, and reporting.</p>
 
-  <!-- ① INPUTS ROW -->
-  <div class="flow-label-row">
-    <span class="flow-badge" style="background:rgba(59,130,246,0.1);color:var(--blue);border:1px solid rgba(59,130,246,0.2)">① Inputs</span>
-    <span style="color:#374151;font-size:0.78rem">Raw client data — any format, any source</span>
+  <!-- DIMENSIONS BAND -->
+  <div class="dim-band">
+    <span class="dim-band-label">5 Dimensions</span>
+    <span class="dim-pill" style="color:var(--teal);border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.07)">🏭 Sector</span>
+    <span class="dim-sep">·</span>
+    <span class="dim-pill" style="color:var(--blue);border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.07)">⚙️ Scope 1 / 2 / 3</span>
+    <span class="dim-sep">·</span>
+    <span class="dim-pill" style="color:var(--rose);border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.07)">💨 Emission Source</span>
+    <span class="dim-sep">·</span>
+    <span class="dim-pill" style="color:var(--purple);border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.07)">🧪 Gas Type</span>
+    <span class="dim-sep">·</span>
+    <span class="dim-pill" style="color:var(--amber);border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.07)">🕐 Time Window</span>
+    <span style="color:#374151;font-size:0.73rem;margin-left:0.25rem">— every result is indexed across all five</span>
   </div>
 
-  <div class="cards-row">
-    <div class="io-card" style="border-color:rgba(59,130,246,0.15)">
-      <p class="io-card-num" style="color:var(--blue)">01 — Data Sources</p>
-      <p class="io-card-title">Raw Operational Data</p>
-      <p class="io-card-detail">Client systems in any format — meters, logs, invoices, sensors</p>
-      <div class="io-tags">
-        <span class="io-tag">Excel / CSV</span><span class="io-tag">SCADA / IoT</span>
-        <span class="io-tag">PDF / OCR</span><span class="io-tag">SQL / ERP</span>
+  <div class="flow">
+
+    <!-- ① PARALLEL: Data Sources + Hierarchy -->
+    <div class="parallel">
+
+      <div class="node" style="border-color:rgba(59,130,246,0.2)">
+        <p class="node-num" style="color:var(--blue)">01 — Data Sources</p>
+        <p class="node-title">Raw Operational Data</p>
+        <p class="node-desc">Connect to any system, any format. No vendor lock-in — the pipeline ingests whatever the client already has.</p>
+        <div class="node-tags">
+          <span class="node-tag">Excel / CSV</span>
+          <span class="node-tag">SCADA / IoT sensors</span>
+          <span class="node-tag">PDF / OCR</span>
+          <span class="node-tag">SQL databases</span>
+          <span class="node-tag">ERP systems</span>
+          <span class="node-tag">SFTP / API</span>
+        </div>
       </div>
-    </div>
-    <div class="io-card" style="border-color:rgba(13,148,136,0.15)">
-      <p class="io-card-num" style="color:var(--teal)">02 — Ingestion</p>
-      <p class="io-card-title">Automation Pipeline</p>
-      <p class="io-card-detail">Python scripts join, time-filter, and normalise data into typed, validated records</p>
-      <div class="io-tags">
-        <span class="io-tag">Entity resolution</span><span class="io-tag">Time window</span>
-        <span class="io-tag">Unit normalisation</span>
+
+      <div class="node" style="border-color:rgba(139,92,246,0.2)">
+        <p class="node-num" style="color:var(--purple)">02 — Hierarchy & Configuration</p>
+        <p class="node-title">Asset Tree + Time + Segment</p>
+        <p class="node-desc">Defined independently of the data. Locks every downstream calculation to a consistent structure.</p>
+        <div class="node-sub-row">
+          <div class="node-sub">
+            <p class="node-sub-label">Asset Hierarchy</p>
+            <p class="node-sub-val">Equipment → Facility → Region → Corporate</p>
+          </div>
+          <div class="node-sub">
+            <p class="node-sub-label">Time Window</p>
+            <p class="node-sub-val">start_date · end_date · batch frequency</p>
+          </div>
+          <div class="node-sub">
+            <p class="node-sub-label">Industry Segment</p>
+            <p class="node-sub-val">O&G · Mining · Manufacturing · Agriculture</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="io-card" style="border-color:rgba(139,92,246,0.15)">
-      <p class="io-card-num" style="color:var(--purple)">03 — Validation & Storage</p>
-      <p class="io-card-title">Schema Checks + Database</p>
-      <p class="io-card-detail">Type enforcement, null handling, per-client schemas — every input auditable</p>
-      <div class="io-tags">
-        <span class="io-tag">PyArrow schemas</span><span class="io-tag">Consistency keys</span>
-        <span class="io-tag">Per-client schemas</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- ↓ CONNECTORS -->
-  <div class="connector">
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-  </div>
-
-  <!-- ② ENGINE -->
-  <div class="flow-label-row">
-    <span class="flow-badge" style="background:rgba(13,148,136,0.12);color:var(--teal);border:1px solid rgba(13,148,136,0.3)">② Calculation Engine</span>
-    <span style="color:#374151;font-size:0.78rem">Plugin architecture — one module per sector</span>
-  </div>
-
-  <div class="engine-wrap">
-
-    <div class="engine-header">
-      <span class="engine-badge">04 — Calculation Engine</span>
-      <p class="engine-title display">Plugin Architecture</p>
-      <p class="engine-desc">Each emission source category is an independent, swappable module with an identical interface. The dispatcher routes by algorithm name — adding a new sector means writing one new module, nothing else changes.</p>
     </div>
 
-    <div class="ef-bar">
-      <span class="ef-label">Emission Factor Registry</span>
-      <span class="ef-tag">NGER Measurement Determination</span>
-      <span class="ef-tag">EPA 40 CFR Part 98</span>
-      <span class="ef-tag">IPCC AR6 defaults</span>
-      <span class="ef-tag">Custom EF overlay</span>
-      <span class="ef-tag">Version-tagged (annual updates)</span>
-    </div>
+    <!-- SVG: converge two boxes into one -->
+    <svg class="svg-connector" height="36" viewBox="0 0 800 36" preserveAspectRatio="none">
+      <path d="M 200 0 L 200 18 L 400 18" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <path d="M 600 0 L 600 18 L 400 18" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <line x1="400" y1="18" x2="400" y2="30" stroke="rgba(13,148,136,0.5)" stroke-width="1.5"/>
+      <polygon points="394,27 400,36 406,27" fill="rgba(13,148,136,0.5)"/>
+    </svg>
 
-    <div class="modules-grid">
-      <div class="module-card">
-        <div class="mod-icon">🔥</div>
-        <div class="mod-name" style="color:var(--teal)">Stationary Combustion</div>
-        <div class="mod-detail">Engines · Heaters · Boilers<br>Tier 1 / 2 / 3</div>
-      </div>
-      <div class="module-card">
-        <div class="mod-icon">💨</div>
-        <div class="mod-name" style="color:var(--rose)">Fugitive & Process</div>
-        <div class="mod-detail">Equipment leaks · Venting<br>25+ source categories</div>
-      </div>
-      <div class="module-card">
-        <div class="mod-icon">⚡</div>
-        <div class="mod-name" style="color:var(--blue)">Purchased Energy</div>
-        <div class="mod-detail">Scope 2 electricity<br>State-based grid EFs</div>
-      </div>
-      <div class="module-card">
-        <div class="mod-icon">🚛</div>
-        <div class="mod-name" style="color:var(--amber)">Mobile Sources</div>
-        <div class="mod-detail">Fleet vehicles<br>Distance × EF</div>
-      </div>
-      <div class="module-card">
-        <div class="mod-icon">❄️</div>
-        <div class="mod-name" style="color:var(--purple)">Refrigerants</div>
-        <div class="mod-detail">HFC losses<br>Purchase reconciliation</div>
-      </div>
-      <div class="module-card">
-        <div class="mod-icon">⚙️</div>
-        <div class="mod-name" style="color:var(--amber)">Custom Model</div>
-        <div class="mod-detail">Any EF × activity data<br>User-defined methodology</div>
+    <!-- ③ AUTOMATION LAYER -->
+    <div class="node" style="border-color:rgba(13,148,136,0.2)">
+      <p class="node-num" style="color:var(--teal)">03 — Client Automation Layer</p>
+      <p class="node-title">Bespoke ETL per Client</p>
+      <p class="node-desc">Each client gets a dedicated Python pipeline that knows its data structure, naming conventions, and quirks. Pulls from all connected sources, joins records using shared identifiers (e.g. API well numbers), filters by the configured time window, normalises units, and outputs clean typed CSVs ready for the calculation engine.</p>
+      <div class="node-tags">
+        <span class="node-tag">Pandas transforms</span>
+        <span class="node-tag">Entity resolution</span>
+        <span class="node-tag">Time window filter</span>
+        <span class="node-tag">Unit normalisation</span>
+        <span class="node-tag">Throughput calculation</span>
+        <span class="node-tag">Per-client config</span>
       </div>
     </div>
 
-    <div class="gwp-bar">
-      <span class="gwp-label">05 — GWP Conversion</span>
-      <span class="gwp-formula">CO₂e = CO₂ × 1 + CH₄ × GWP + N₂O × GWP</span>
-      <div class="gwp-tags">
-        <span class="gwp-tag" style="color:#374151;border-color:#1f2937">AR4  CH₄=25</span>
-        <span class="gwp-tag" style="color:#374151;border-color:#1f2937">AR5  CH₄=28</span>
-        <span class="gwp-tag" style="color:var(--teal);border-color:rgba(13,148,136,0.35)">AR6  CH₄=29.8 ✓</span>
+    <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
+
+    <!-- ④ INPUT MAPPING & SYNC -->
+    <div class="node" style="border-color:rgba(59,130,246,0.2)">
+      <p class="node-num" style="color:var(--blue)">04 — Input Mapping & Synchronisation</p>
+      <p class="node-title">Map Everything to the Grid</p>
+      <p class="node-desc">Every data point is mapped to a specific position in the 5D grid before calculation begins. This is where the hierarchy, time window, and industry segment from step 02 are applied — locking every record to a facility level, a scope assignment, and a reporting period.</p>
+      <div class="node-sub-row">
+        <div class="node-sub">
+          <p class="node-sub-label">→ Facility Level</p>
+          <p class="node-sub-val">Assigned from hierarchy config</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">→ Scope Assignment</p>
+          <p class="node-sub-val">1 (direct) · 2 (energy) · 3 (value chain)</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">→ Time Slot</p>
+          <p class="node-sub-val">Binned to reporting period</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">→ Industry Segment</p>
+          <p class="node-sub-val">Routes to correct calculation module</p>
+        </div>
       </div>
     </div>
 
-  </div>
+    <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
 
-  <!-- ↓ CONNECTORS -->
-  <div class="connector">
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-    <div class="arrow-down"><div class="arrow-line-v"></div><div class="arrow-tip"></div></div>
-  </div>
-
-  <!-- ③ OUTPUTS ROW -->
-  <div class="flow-label-row">
-    <span class="flow-badge" style="background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2)">③ Outputs</span>
-    <span style="color:#374151;font-size:0.78rem">Audit-ready inventories, forecasts, and regulatory disclosures</span>
-  </div>
-
-  <div class="cards-row">
-    <div class="io-card" style="border-color:rgba(245,158,11,0.15)">
-      <p class="io-card-num" style="color:var(--amber)">06 — Aggregation</p>
-      <p class="io-card-title">Org-Level Rollups</p>
-      <p class="io-card-detail">Sum results up a parent-child org tree — from equipment level to corporate total</p>
-      <div class="io-tags">
-        <span class="io-tag">Input aggregation</span><span class="io-tag">Output aggregation</span>
-        <span class="io-tag">Unlimited depth</span>
+    <!-- ⑤ INPUT AGGREGATION (optional) -->
+    <div style="position:relative;">
+      <span class="optional-badge">Optional Step</span>
+      <div class="node" style="border: 1px dashed rgba(139,92,246,0.35); background: rgba(139,92,246,0.03);">
+        <p class="node-num" style="color:var(--purple)">05 — Input Aggregation</p>
+        <p class="node-title">Combine Facilities Before Calculation</p>
+        <p class="node-desc">When a client wants a single combined inventory across multiple facilities, inputs are merged here before the engine runs. The hierarchy defined in step 02 controls which facilities are combined and at what level. If not needed, this step is bypassed and each facility runs independently.</p>
+        <div class="node-tags">
+          <span class="node-tag">Merge facility inputs</span>
+          <span class="node-tag">Weight-average EFs</span>
+          <span class="node-tag">Sum activity data</span>
+          <span class="node-tag">Respects hierarchy config</span>
+        </div>
       </div>
     </div>
-    <div class="io-card" style="border-color:rgba(16,185,129,0.15)">
-      <p class="io-card-num" style="color:var(--green)">07 — Forecasting</p>
-      <p class="io-card-title">Emissions Time Series</p>
-      <p class="io-card-detail">Scale activity inputs forward in time, replay the calculator — deterministic and fully auditable</p>
-      <div class="io-tags">
-        <span class="io-tag">Activity scaling</span><span class="io-tag">EF evolution</span>
-        <span class="io-tag">Scenario events</span>
+
+    <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
+
+    <!-- ⑥ CALCULATION ENGINE -->
+    <div class="engine-node">
+      <div class="engine-head">
+        <span class="engine-badge">06 — Calculation Engine</span>
+        <p class="engine-title display">Plugin Architecture — One Module Per Sector</p>
+        <p class="engine-desc">The dispatcher reads the industry segment and routes to the correct module. Every module has an identical interface — add a new sector by writing one new module. The engine, EF registry, and GWP conversion never change.</p>
+      </div>
+      <div class="ef-row">
+        <span class="ef-label">Emission Factor Registry</span>
+        <span class="ef-tag">NGER Measurement Determination</span>
+        <span class="ef-tag">EPA 40 CFR Part 98</span>
+        <span class="ef-tag">IPCC AR6 defaults</span>
+        <span class="ef-tag">Custom EF overlay</span>
+        <span class="ef-tag">Version-tagged (annual updates)</span>
+      </div>
+      <div class="mods-grid">
+        <div class="mod"><div class="mod-icon">🔥</div><div class="mod-name" style="color:var(--teal)">Stationary Combustion</div><div class="mod-detail">Engines · Heaters · Boilers · Tier 1/2/3</div></div>
+        <div class="mod"><div class="mod-icon">💨</div><div class="mod-name" style="color:var(--rose)">Fugitive & Process</div><div class="mod-detail">Equipment leaks · Venting · 25+ sources</div></div>
+        <div class="mod"><div class="mod-icon">⚡</div><div class="mod-name" style="color:var(--blue)">Purchased Energy</div><div class="mod-detail">Scope 2 electricity · State grid EFs</div></div>
+        <div class="mod"><div class="mod-icon">🚛</div><div class="mod-name" style="color:var(--amber)">Mobile Sources</div><div class="mod-detail">Fleet vehicles · Distance × EF</div></div>
+        <div class="mod"><div class="mod-icon">❄️</div><div class="mod-name" style="color:var(--purple)">Refrigerants</div><div class="mod-detail">HFC losses · Purchase reconciliation</div></div>
+        <div class="mod"><div class="mod-icon">⚙️</div><div class="mod-name" style="color:var(--amber)">Custom Model</div><div class="mod-detail">Any EF × activity · User-defined methodology</div></div>
+      </div>
+      <div class="gwp-row">
+        <span class="gwp-label">GWP Conversion</span>
+        <span class="gwp-formula">CO₂e = CO₂ × 1 + CH₄ × GWP + N₂O × GWP</span>
+        <div class="gwp-tags">
+          <span class="gwp-v" style="color:#374151;border-color:#1f2937">AR4 CH₄=25</span>
+          <span class="gwp-v" style="color:#374151;border-color:#1f2937">AR5 CH₄=28</span>
+          <span class="gwp-v" style="color:var(--teal);border-color:rgba(13,148,136,0.35)">AR6 CH₄=29.8 ✓</span>
+        </div>
       </div>
     </div>
-    <div class="io-card" style="border-color:rgba(244,63,94,0.15)">
-      <p class="io-card-num" style="color:var(--rose)">08 — Reporting & Analytics</p>
-      <p class="io-card-title">Regulatory & Financial Output</p>
-      <p class="io-card-detail">Audit-ready outputs for regulators, financial disclosure frameworks, and client dashboards</p>
-      <div class="io-tags">
-        <span class="io-tag">NGER / EPA</span><span class="io-tag">AASB S2 / TCFD</span>
-        <span class="io-tag">Dashboard</span><span class="io-tag">Audit trail</span>
+
+    <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
+
+    <!-- ⑦ RESULTS + DQ -->
+    <div class="results-stack">
+      <div class="node" style="border-color:rgba(16,185,129,0.2)">
+        <p class="node-num" style="color:var(--green)">07 — Results</p>
+        <p class="node-title">Emissions Across All Dimensions</p>
+        <p class="node-desc">Every result is stored with its full dimensional context — which facility, which scope, which source, which gas, which time period. This is what makes it auditable: any output number can be traced back to its exact inputs and calculation method.</p>
+        <div class="node-tags">
+          <span class="node-tag">CO₂ · CH₄ · N₂O by source</span>
+          <span class="node-tag">CO₂e totals</span>
+          <span class="node-tag">Scope 1 / 2 / 3 breakdown</span>
+          <span class="node-tag">Facility × time × gas</span>
+          <span class="node-tag">CSV + Parquet output</span>
+        </div>
+      </div>
+      <div class="dq-node">
+        <span class="dq-label">Data Quality</span>
+        <span class="dq-desc">Each result is assigned a quality score — critical for PCAF financed emissions and AASB S2 disclosure</span>
+        <div class="dq-scores">
+          <span class="dq-score" style="color:var(--green);border-color:rgba(16,185,129,0.3)">1 Verified</span>
+          <span class="dq-score" style="color:#9ca3af;border-color:#374151">2 Modelled</span>
+          <span class="dq-score" style="color:#9ca3af;border-color:#374151">3 Estimated</span>
+          <span class="dq-score" style="color:#9ca3af;border-color:#374151">4 Proxy</span>
+          <span class="dq-score" style="color:var(--rose);border-color:rgba(244,63,94,0.3)">5 Sector avg</span>
+        </div>
       </div>
     </div>
-  </div>
 
-</section>
+    <!-- SVG: fork results into two parallel outputs -->
+    <svg class="svg-connector" height="36" viewBox="0 0 800 36" preserveAspectRatio="none">
+      <line x1="400" y1="0" x2="400" y2="18" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <path d="M 400 18 L 200 18 L 200 30" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <path d="M 400 18 L 600 18 L 600 30" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <polygon points="194,27 200,36 206,27" fill="rgba(13,148,136,0.5)"/>
+      <polygon points="594,27 600,36 606,27" fill="rgba(13,148,136,0.5)"/>
+    </svg>
 
-<hr class="section-divider" />
+    <!-- ⑧ PARALLEL: Output Aggregation + Forecasting -->
+    <div class="parallel">
+
+      <div class="node" style="border-color:rgba(245,158,11,0.2)">
+        <p class="node-num" style="color:var(--amber)">08a — Output Aggregation</p>
+        <p class="node-title">Roll Up the Hierarchy</p>
+        <p class="node-desc">Sums facility results up the asset tree defined in step 02. Each facility result is preserved — the aggregation adds, never replaces.</p>
+        <div class="node-sub-row">
+          <div class="node-sub"><p class="node-sub-label">Level 1</p><p class="node-sub-val">Equipment</p></div>
+          <div class="node-sub"><p class="node-sub-label">Level 2</p><p class="node-sub-val">Facility</p></div>
+          <div class="node-sub"><p class="node-sub-label">Level 3</p><p class="node-sub-val">Region</p></div>
+          <div class="node-sub"><p class="node-sub-label">Level 4</p><p class="node-sub-val">Corporate</p></div>
+        </div>
+      </div>
+
+      <div class="node" style="border-color:rgba(16,185,129,0.2)">
+        <p class="node-num" style="color:var(--green)">08b — Forecasting</p>
+        <p class="node-title">Project Results Forward in Time</p>
+        <p class="node-desc">Scales activity inputs by a forecast CSV and replays the exact same calculator for each future period. Deterministic and auditable — no ML model drift.</p>
+        <div class="node-tags">
+          <span class="node-tag">Activity data scaling</span>
+          <span class="node-tag">EF evolution over time</span>
+          <span class="node-tag">Event-based baselines</span>
+          <span class="node-tag">Scenario comparison</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SVG: converge two outputs into reporting -->
+    <svg class="svg-connector" height="36" viewBox="0 0 800 36" preserveAspectRatio="none">
+      <path d="M 200 0 L 200 18 L 400 18" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <path d="M 600 0 L 600 18 L 400 18" fill="none" stroke="rgba(13,148,136,0.4)" stroke-width="1.5"/>
+      <line x1="400" y1="18" x2="400" y2="30" stroke="rgba(13,148,136,0.5)" stroke-width="1.5"/>
+      <polygon points="394,27 400,36 406,27" fill="rgba(13,148,136,0.5)"/>
+    </svg>
+
+    <!-- ⑨ REPORTING + ANALYTICS -->
+    <div class="node" style="border-color:rgba(244,63,94,0.2)">
+      <p class="node-num" style="color:var(--rose)">09 — Reporting & Analytics</p>
+      <p class="node-title">Regulatory Submission · Financial Disclosure · Dashboard</p>
+      <p class="node-desc">Final outputs aligned with regulatory and financial frameworks. Every number traceable to its source — facility, period, scope, module version, and EF version used.</p>
+      <div class="node-sub-row">
+        <div class="node-sub">
+          <p class="node-sub-label">Regulatory</p>
+          <p class="node-sub-val">NGER → CER portal · EPA GHGRP XML</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">Financial Disclosure</p>
+          <p class="node-sub-val">AASB S2 · ISSB IFRS S2 · TCFD · CDP · GRI</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">Analytics Dashboard</p>
+          <p class="node-sub-val">Baseline · EDA · Forecast scenarios · Drilldowns</p>
+        </div>
+        <div class="node-sub">
+          <p class="node-sub-label">Audit Trail</p>
+          <p class="node-sub-val">Input version · EF version · Method · Timestamp</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end flow -->
+</div>
+
+<hr />
 
 <!-- SECTOR EXTENSION -->
 <section class="ext-section">
   <div class="ext-inner">
     <p class="section-label">Extensibility</p>
     <h2 class="section-title display">One framework, any industry</h2>
-    <p class="section-desc" style="margin-bottom:0">The plugin architecture makes this platform sector-agnostic. Extending to mining, manufacturing, agriculture, or any other industry follows the same five steps — every time. The core engine never changes.</p>
+    <p class="section-desc" style="margin-bottom:0">Extending to mining, manufacturing, agriculture, or any other sector follows the same five steps — every time. The core engine never changes.</p>
     <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <p class="step-title">Regulatory Mapping</p>
-        <p class="step-detail">Identify applicable standards, IPCC source categories, and available emission factors. Gap analysis before writing a line of code.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <p class="step-title">Data Ingestion</p>
-        <p class="step-detail">Map sector-specific data sources — mine records, blast logs, SCADA — and build ingestion connectors.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <p class="step-title">EF Registry Extension</p>
-        <p class="step-detail">Add sector emission factors with version tags. Annual regulatory updates flow through without touching calculation code.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <p class="step-title">Calculation Module</p>
-        <p class="step-detail">Write one new plugin module with the same interface as all existing modules. Sector logic stays fully isolated.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">5</div>
-        <p class="step-title">Validation & Output</p>
-        <p class="step-detail">Sector-specific QA rules. Every output traceable to input version, EF version, and calculation method used.</p>
-      </div>
+      <div class="step-card"><div class="step-num">1</div><p class="step-title">Regulatory Mapping</p><p class="step-detail">Identify applicable standards, IPCC source categories, and available emission factors before writing any code.</p></div>
+      <div class="step-card"><div class="step-num">2</div><p class="step-title">Data Ingestion</p><p class="step-detail">Map sector-specific data sources — mine records, blast logs, SCADA — and build ingestion connectors.</p></div>
+      <div class="step-card"><div class="step-num">3</div><p class="step-title">EF Registry Extension</p><p class="step-detail">Add sector emission factors with version tags so annual regulatory updates flow through without touching calculation code.</p></div>
+      <div class="step-card"><div class="step-num">4</div><p class="step-title">Calculation Module</p><p class="step-detail">Write one new plugin module with the same interface as all existing modules. Sector logic stays fully isolated.</p></div>
+      <div class="step-card"><div class="step-num">5</div><p class="step-title">Validation & Output</p><p class="step-detail">Sector-specific QA rules. Every output traceable to input version, EF version, and calculation method used.</p></div>
     </div>
   </div>
 </section>
 
-<hr class="section-divider" />
+<hr />
 
 <!-- INDUSTRIES -->
 <section class="ind-section" style="padding-top:4rem;">
   <div style="text-align:center;margin-bottom:2.5rem;">
-    <p class="section-label" style="justify-content:center;display:flex">Applications</p>
+    <p class="section-label" style="display:flex;justify-content:center">Applications</p>
     <h2 class="section-title display" style="text-align:center">Applicable across sectors</h2>
     <p class="section-desc" style="margin:0.5rem auto 0;text-align:center">Same engine, different emission sources, different regulatory standards.</p>
   </div>
   <div class="ind-grid">
-    <div class="ind-card">
-      <div class="ind-icon">🛢️</div>
-      <p class="ind-name">Oil & Gas</p>
-      <p class="ind-detail">Combustion · Fugitive leaks · Pneumatic devices · Flares · Compressor seals · Equipment venting</p>
-    </div>
-    <div class="ind-card">
-      <div class="ind-icon">⛏️</div>
-      <p class="ind-name">Mining</p>
-      <p class="ind-detail">Diesel fleet · Explosives (ANFO) · Coal seam CH₄ · Smelting process · Safeguard Mechanism</p>
-    </div>
-    <div class="ind-card">
-      <div class="ind-icon">🏭</div>
-      <p class="ind-name">Manufacturing</p>
-      <p class="ind-detail">Industrial combustion · Cement calcination · Refrigerant HFCs · Wastewater · Scope 3 supply chain</p>
-    </div>
-    <div class="ind-card">
-      <div class="ind-icon">🌾</div>
-      <p class="ind-name">Agriculture</p>
-      <p class="ind-detail">Enteric fermentation · Manure management · Fertiliser N₂O · Land clearing · Soil carbon sequestration</p>
-    </div>
-    <div class="ind-card">
-      <div class="ind-icon">🚢</div>
-      <p class="ind-name">Transport & Logistics</p>
-      <p class="ind-detail">Fleet emissions · Aviation · Shipping · Rail · Distance-based or fuel-based calculation tiers</p>
-    </div>
-    <div class="ind-card">
-      <div class="ind-icon">🏦</div>
-      <p class="ind-name">Financial Services</p>
-      <p class="ind-detail">Financed emissions (PCAF) · Loan portfolio attribution · AASB S2 disclosure · Data quality scoring</p>
-    </div>
+    <div class="ind-card"><div class="ind-icon">🛢️</div><p class="ind-name">Oil & Gas</p><p class="ind-detail">Combustion · Fugitive leaks · Pneumatic devices · Flares · Compressor seals · Equipment venting</p></div>
+    <div class="ind-card"><div class="ind-icon">⛏️</div><p class="ind-name">Mining</p><p class="ind-detail">Diesel fleet · Explosives (ANFO) · Coal seam CH₄ · Smelting process · Safeguard Mechanism</p></div>
+    <div class="ind-card"><div class="ind-icon">🏭</div><p class="ind-name">Manufacturing</p><p class="ind-detail">Industrial combustion · Cement calcination · Refrigerant HFCs · Wastewater · Scope 3 supply chain</p></div>
+    <div class="ind-card"><div class="ind-icon">🌾</div><p class="ind-name">Agriculture</p><p class="ind-detail">Enteric fermentation · Manure management · Fertiliser N₂O · Land clearing · Soil carbon sequestration</p></div>
+    <div class="ind-card"><div class="ind-icon">🚢</div><p class="ind-name">Transport</p><p class="ind-detail">Fleet emissions · Aviation · Shipping · Rail · Distance-based or fuel-based calculation tiers</p></div>
+    <div class="ind-card"><div class="ind-icon">🏦</div><p class="ind-name">Financial Services</p><p class="ind-detail">Financed emissions (PCAF) · Loan portfolio attribution · AASB S2 disclosure · DQ scoring</p></div>
   </div>
 </section>
 
