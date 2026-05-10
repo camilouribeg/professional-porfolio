@@ -35,7 +35,7 @@ export default function Contact() {
         </FadeIn>
 
         {/* Contact cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.875rem', marginBottom: '2rem' }}>
+        <div className="contact-grid">
           {contactLinks.map((link, i) => (
             <FadeIn key={link.label} delay={0.25 + i * 0.07}>
               <motion.a
@@ -53,7 +53,7 @@ export default function Contact() {
                 </div>
                 <div style={{ minWidth: 0 }}>
                   <p style={{ color: '#4b5563', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{link.label}</p>
-                  <p style={{ color: '#e5e7eb', fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{link.value}</p>
+                  <p className="contact-link-value">{link.value}</p>
                 </div>
               </motion.a>
             </FadeIn>
@@ -62,7 +62,7 @@ export default function Contact() {
 
         {/* CV banner */}
         <FadeIn delay={0.5}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', padding: '1.75rem 2rem', borderRadius: '1rem', background: 'rgba(13,148,136,0.07)', border: '1px solid rgba(13,148,136,0.2)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', padding: '1.75rem 2rem', borderRadius: '1rem', background: 'rgba(13,148,136,0.07)', border: '1px solid rgba(13,148,136,0.2)', flexWrap: 'wrap' }}>
             <div>
               <p className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem' }}>Full Curriculum Vitae</p>
               <p style={{ color: '#6b7280', fontSize: '0.82rem' }}>Data Science & AI Engineering · Sydney, AU</p>
@@ -78,7 +78,7 @@ export default function Contact() {
       </div>
 
       {/* Footer */}
-      <div style={{ maxWidth: '860px', margin: '4rem auto 0', padding: '1.5rem clamp(24px, 5vw, 80px) 0', borderTop: '1px solid rgba(255,255,255,0.04)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="contact-footer">
         <p className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem' }}>CUG<span style={{ color: '#0D9488' }}>.</span></p>
         <p style={{ color: '#374151', fontSize: '0.8rem' }}>© 2026 Camilo Uribe Guerra · Sydney 🇦🇺</p>
         <div style={{ display: 'flex', gap: '1.25rem' }}>

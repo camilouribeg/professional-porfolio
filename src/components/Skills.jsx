@@ -80,7 +80,7 @@ export default function Skills() {
 
       {/* Skill groups — back in wrap */}
       <div style={wrap}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+        <div className="skills-grid">
           {Object.entries(skills).map(([group, items], i) => {
             const color = groupColors[group] || '#0D9488'
             return (

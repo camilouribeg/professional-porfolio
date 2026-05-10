@@ -77,8 +77,8 @@ function Card({ role, company, location, period, bullets, tech, index, isOpen, o
         style={{ background: '#111111', border: `1px solid ${isOpen ? `${color}35` : 'rgba(255,255,255,0.06)'}`, borderRadius: '1.25rem', overflow: 'hidden', cursor: 'pointer', marginBottom: '0.875rem', transition: 'border-color 0.25s' }}
       >
         {/* Card header */}
-        <div style={{ padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', minWidth: 0 }}>
+        <div style={{ padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.25rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', minWidth: 0, flex: '1 1 320px' }}>
             <CompanyLogo name={company} size={44} />
             <div style={{ minWidth: 0 }}>
               <p className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', lineHeight: 1.25, marginBottom: '0.2rem' }}>{role}</p>
@@ -97,7 +97,7 @@ function Card({ role, company, location, period, bullets, tech, index, isOpen, o
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', flexShrink: 0, marginLeft: 'auto' }}>
             <span style={{ fontSize: '0.72rem', color: '#6b7280', background: 'rgba(255,255,255,0.05)', padding: '0.4rem 1rem', borderRadius: '999px', whiteSpace: 'nowrap' }}>{period}</span>
             <motion.div
               animate={{ rotate: isOpen ? 45 : 0 }}
@@ -119,7 +119,7 @@ function Card({ role, company, location, period, bullets, tech, index, isOpen, o
             >
               <div style={{ padding: '0 2rem 2rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                 {/* Two-column layout: bullets left, tech right */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '2rem', paddingTop: '1.5rem', alignItems: 'start' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', paddingTop: '1.5rem', alignItems: 'start' }}>
                   <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {bullets.map((b, i) => (
                       <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.85rem', color: '#9ca3af', fontSize: '0.9rem', lineHeight: 1.7 }}>
@@ -129,7 +129,7 @@ function Card({ role, company, location, period, bullets, tech, index, isOpen, o
                     ))}
                   </ul>
                   {/* Tech tags stacked vertically on the right */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '140px', maxWidth: '200px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: 0, maxWidth: '200px' }}>
                     {tech.map(t => <TechTag key={t} name={t} />)}
                   </div>
                 </div>

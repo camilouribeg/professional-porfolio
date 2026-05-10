@@ -20,10 +20,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', textAlign: 'center' }}
-    >
+    <section id="hero" className="hero-shell">
       {/* Background image */}
       <div
         style={{ position: 'absolute', inset: 0, backgroundImage: "url('/professional-porfolio/assets/hero-bg.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
@@ -34,7 +31,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div style={{ position: 'relative', width: '100%', maxWidth: '800px', margin: '0 auto', padding: '8rem clamp(32px, 6vw, 80px) 6rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className="hero-content">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -136,15 +133,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Stats bar */}
-          <motion.div
-            variants={fadeUp}
-            style={{
-              width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-              borderRadius: '1rem', overflow: 'hidden',
-              background: 'rgba(10,10,10,0.55)', border: '1px solid rgba(255,255,255,0.07)',
-              backdropFilter: 'blur(12px)',
-            }}
-          >
+          <motion.div variants={fadeUp} className="hero-stats">
             {stats.map((s, i) => (
               <div
                 key={s.label}

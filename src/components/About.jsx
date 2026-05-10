@@ -61,7 +61,7 @@ export default function About() {
         {/* Career arc — full width, 5 columns */}
         <div style={{ position: 'relative', marginBottom: '4.5rem' }}>
           <div className="hidden lg:block" style={{ position: 'absolute', top: '2.25rem', left: '5%', right: '5%', height: '1px', background: 'linear-gradient(to right, transparent, #0D9488 10%, #0D9488 90%, transparent)' }} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '1rem' }}>
+          <div className="about-journey-grid">
             {journey.map((step, i) => (
               <FadeIn key={step.year} delay={i * 0.09}>
                 <motion.div
@@ -84,7 +84,7 @@ export default function About() {
         <FadeIn delay={0.05}>
           <p style={{ color: '#4b5563', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', textAlign: 'center', marginBottom: '1.75rem' }}>Academic Path</p>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '1.25rem' }}>
+        <div className="about-education-grid">
           {education.map((edu, i) => (
             <FadeIn key={edu.degree} delay={i * 0.1}>
               <motion.div
@@ -136,12 +136,12 @@ export default function About() {
             <div>
               <p style={{ color: '#4b5563', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Contact</p>
               <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <span style={{ color: '#fff', fontWeight: 500, fontSize: '0.9rem' }}>{personal.email}</span>
+                <span style={{ color: '#fff', fontWeight: 500, fontSize: '0.9rem', overflowWrap: 'anywhere' }}>{personal.email}</span>
                 <span style={{ color: '#6b7280', fontSize: '0.9rem' }}>{personal.phone}</span>
                 <span style={{ color: '#4b5563', fontSize: '0.9rem' }}>{personal.location}</span>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               {[{ label: 'LinkedIn', href: personal.linkedin }, { label: 'GitHub', href: personal.github }].map(l => (
                 <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
                   style={{ padding: '0.55rem 1.5rem', textAlign: 'center', fontSize: '0.78rem', borderRadius: '999px', border: '1px solid rgba(255,255,255,0.1)', color: '#9ca3af', textDecoration: 'none', transition: 'all 0.2s' }}

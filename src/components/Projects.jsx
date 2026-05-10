@@ -20,7 +20,8 @@ function ProjectCard({ title, category, description, tech, image, accent, wide, 
       <motion.div
         whileHover={{ y: -5 }}
         transition={{ duration: 0.2 }}
-        style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '1.25rem', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', gridColumn: wide ? 'span 2' : 'span 1', transition: 'border-color 0.2s' }}
+        className={wide ? 'project-card-wide' : 'project-card-regular'}
+        style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '1.25rem', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', transition: 'border-color 0.2s' }}
         onMouseEnter={e => e.currentTarget.style.borderColor = `${accent}35`}
         onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'}
       >
@@ -36,7 +37,7 @@ function ProjectCard({ title, category, description, tech, image, accent, wide, 
           </div>
         )}
         <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
             <span style={{ fontSize: '0.72rem', padding: '0.3rem 0.85rem', borderRadius: '999px', background: `${accent}12`, color: accent, border: `1px solid ${accent}22` }}>{category}</span>
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
               {secondLink && (
@@ -76,7 +77,7 @@ export default function Projects() {
         <FadeIn delay={0.1}>
           <h2 className="font-display" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.8rem)', fontWeight: 800, color: '#fff', textAlign: 'center', marginBottom: '3.5rem' }}>Selected Work</h2>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
+        <div className="projects-grid">
           {projects.map(p => <ProjectCard key={p.title} {...p} />)}
         </div>
       </div>
