@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GHG Emissions Platform — Camilo Uribe Guerra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #0a0a0a;
+      --card:   #111111;
+      --card2:  #0e0e0e;
+      --border: rgba(255,255,255,0.07);
+      --teal:   #0D9488;
+      --blue:   #3B82F6;
+      --purple: #8B5CF6;
+      --amber:  #F59E0B;
+      --green:  #10B981;
+      --rose:   #F43F5E;
+      --text:   #f0f0f0;
+      --muted:  #6b7280;
+      --sub:    #9ca3af;
+      --wrap:   1200px;
+      --px:     clamp(1.25rem, 5vw, 3rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    .display { font-family: 'Cabinet Grotesk', sans-serif; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.1rem var(--px); display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color .2s; }
+    nav a:hover { color: #fff; }
+    .nav-logo { color: #fff; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 800; font-size: 1.1rem; }
+    .nav-logo span { color: var(--teal); }
+
+    /* LAYOUT */
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--px); }
+
+    /* HERO */
+    .hero { padding: 8rem var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; text-align: center; }
+    .hero-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem; }
+    .hero-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
+    .hero-sub { color: var(--muted); font-size: 1rem; line-height: 1.8; max-width: 680px; margin: 0 auto 2.5rem; }
+    .tag { display: inline-block; font-size: 0.72rem; padding: 0.3rem 0.85rem; border-radius: 999px; margin: 0.25rem; }
+
+    /* HUB DIAGRAM */
+    .diagram-section { padding: 4rem var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; }
+    .diagram-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+    .diagram-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; }
+    .diagram-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; max-width: 700px; margin-bottom: 3rem; }
+
+    /* Three-column hub layout */
+    .hub-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; }
+    @media (max-width: 900px) { .hub-grid { grid-template-columns: 1fr; } .arrow-col { display: none; } }
+
+    /* Input/Output columns */
+    .io-col { display: flex; flex-direction: column; gap: 1rem; }
+    .io-card { background: var(--card2); border-radius: 0.875rem; padding: 1.1rem 1.25rem; border: 1px solid var(--border); transition: border-color .2s; }
+    .io-card:hover { border-color: rgba(13,148,136,0.3); }
+    .io-card-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 600; }
+    .io-card-title { color: #e5e7eb; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.3rem; }
+    .io-card-detail { color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
+    .io-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+    .io-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+
+    /* Arrow connectors */
+    .arrow-col { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 1rem; gap: 1rem; }
+    .arrow-group { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; height: calc(33.33% - 0.67rem); justify-content: center; }
+    .arrow-line { height: 2px; width: 40px; background: linear-gradient(to right, rgba(13,148,136,0.2), rgba(13,148,136,0.6)); }
+    .arrow-line.reverse { background: linear-gradient(to left, rgba(13,148,136,0.2), rgba(13,148,136,0.6)); }
+    .arrow-head { font-size: 0.75rem; color: rgba(13,148,136,0.7); line-height: 1; }
+
+    /* ENGINE */
+    .engine-col { background: #0b0b0b; border: 1px solid rgba(13,148,136,0.25); border-radius: 1.25rem; overflow: hidden; min-width: 340px; }
+    @media (max-width: 900px) { .engine-col { min-width: unset; } }
+    .engine-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(13,148,136,0.12); }
+    .engine-badge { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.2); padding: 0.25rem 0.7rem; border-radius: 999px; display: inline-block; margin-bottom: 0.6rem; }
+    .engine-title { font-family: 'Cabinet Grotesk', sans-serif; color: #fff; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem; }
+    .engine-sub { color: var(--muted); font-size: 0.75rem; line-height: 1.6; }
+    .ef-bar { padding: 0.6rem 1.5rem; background: rgba(0,0,0,0.4); border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+    .ef-label { font-size: 0.62rem; color: #4b5563; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 0.25rem; }
+    .ef-tag { font-size: 0.66rem; padding: 0.18rem 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 0.25rem; color: #374151; }
+    .modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.03); }
+    .module-card { padding: 0.9rem 1.1rem; background: #0e0e0e; cursor: default; transition: background .15s; }
+    .module-card:hover { background: rgba(13,148,136,0.05); }
+    .module-icon { font-size: 1rem; margin-bottom: 0.3rem; }
+    .module-name { font-size: 0.78rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .module-detail { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .gwp-bar { padding: 0.75rem 1.5rem; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.04); }
+    .gwp-label { font-size: 0.62rem; color: #4b5563; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.35rem; }
+    .gwp-formula { font-family: monospace; font-size: 0.78rem; color: #6b7280; margin-bottom: 0.4rem; }
+    .gwp-versions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .gwp-v { font-size: 0.67rem; padding: 0.18rem 0.5rem; border-radius: 0.25rem; border: 1px solid; }
+
+    /* SECTOR EXTENSION */
+    .ext-section { padding: 5rem var(--px); max-width: var(--wrap); margin: 0 auto; }
+    .ext-inner { background: rgba(13,148,136,0.05); border: 1px solid rgba(13,148,136,0.18); border-radius: 1.5rem; padding: 3rem; }
+    .ext-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; }
+    .ext-title { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; }
+    .ext-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; max-width: 680px; margin-bottom: 2.5rem; }
+    .steps-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 1px; background: rgba(13,148,136,0.1); border-radius: 0.75rem; overflow: hidden; }
+    .step-card { background: #0e0e0e; padding: 1.5rem 1.25rem; position: relative; }
+    .step-num { width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--teal); background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.3); margin-bottom: 0.75rem; }
+    .step-title { color: #e5e7eb; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .step-detail { color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
+
+    /* INDUSTRIES */
+    .industry-section { padding: 0 var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; }
+    .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .industry-card { background: var(--card2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color .2s; }
+    .industry-card:hover { border-color: rgba(255,255,255,0.15); }
+    .industry-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .industry-name { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .industry-sources { color: var(--muted); font-size: 0.76rem; line-height: 1.7; }
+
+    /* FOOTER */
+    .page-footer { border-top: 1px solid var(--border); padding: 2rem var(--px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .page-footer a { color: var(--teal); text-decoration: none; font-size: 0.82rem; }
+    .page-footer span { color: var(--muted); font-size: 0.8rem; }
+
+    /* DIVIDER */
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0 var(--px); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/professional-porfolio/" class="nav-logo">CUG<span>.</span></a>
+  <a href="/professional-porfolio/">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Platform Architecture · GHG Emissions</p>
+  <h1 class="hero-title display">GHG Emissions<br>Intelligence Platform</h1>
+  <p class="hero-sub">A modular, auditable pipeline for calculating, aggregating, and forecasting greenhouse gas inventories — designed to extend across any industrial sector without changing the core engine.</p>
+  <div>
+    <span class="tag" style="background:rgba(13,148,136,0.1);color:var(--teal);border:1px solid rgba(13,148,136,0.25)">Python</span>
+    <span class="tag" style="background:rgba(59,130,246,0.1);color:var(--blue);border:1px solid rgba(59,130,246,0.25)">PostgreSQL</span>
+    <span class="tag" style="background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.25)">NGER · EPA 40 CFR Part 98</span>
+    <span class="tag" style="background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.25)">IPCC AR6</span>
+    <span class="tag" style="background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.25)">AASB S2 · TCFD</span>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- HUB DIAGRAM -->
+<section class="diagram-section">
+  <p class="diagram-label">System Architecture</p>
+  <h2 class="diagram-title display">How the platform works</h2>
+  <p class="diagram-desc">Raw operational data flows in from the left, through a modular calculation engine at the centre, and out to reporting, forecasting, and analytics on the right. The plugin architecture means every new sector is one new module — the engine never changes.</p>
+
+  <div class="hub-grid">
+
+    <!-- LEFT — INPUTS -->
+    <div class="io-col">
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--blue)">01 — Data Sources</p>
+        <p class="io-card-title">Raw Operational Data</p>
+        <p class="io-card-detail">Client systems in any format — meters, logs, invoices, sensors</p>
+        <div class="io-tags">
+          <span class="io-tag">Excel / CSV</span>
+          <span class="io-tag">SCADA / IoT</span>
+          <span class="io-tag">PDF / OCR</span>
+          <span class="io-tag">SQL / ERP</span>
+        </div>
+      </div>
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--teal)">02 — Ingestion</p>
+        <p class="io-card-title">Automation Pipeline</p>
+        <p class="io-card-detail">Python scripts join, time-filter, and normalise data into typed CSVs</p>
+        <div class="io-tags">
+          <span class="io-tag">Entity resolution</span>
+          <span class="io-tag">Time window</span>
+          <span class="io-tag">Unit normalisation</span>
+        </div>
+      </div>
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--purple)">03 — Validation & Storage</p>
+        <p class="io-card-title">Schema Checks + Database</p>
+        <p class="io-card-detail">Schema validation, null handling, typed storage — every input is auditable</p>
+        <div class="io-tags">
+          <span class="io-tag">PyArrow schemas</span>
+          <span class="io-tag">Consistency keys</span>
+          <span class="io-tag">Per-client schemas</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ARROWS IN -->
+    <div class="arrow-col">
+      <div class="arrow-group">
+        <div class="arrow-line"></div>
+        <div class="arrow-head">▶</div>
+      </div>
+      <div class="arrow-group">
+        <div class="arrow-line"></div>
+        <div class="arrow-head">▶</div>
+      </div>
+      <div class="arrow-group">
+        <div class="arrow-line"></div>
+        <div class="arrow-head">▶</div>
+      </div>
+    </div>
+
+    <!-- CENTRE — ENGINE -->
+    <div class="engine-col">
+      <div class="engine-header">
+        <span class="engine-badge">04 — Calculation Engine</span>
+        <p class="engine-title display">Plugin Architecture</p>
+        <p class="engine-sub">Each sector is an independent module with an identical interface. Add a new industry = write one new module.</p>
+      </div>
+
+      <div class="ef-bar">
+        <span class="ef-label">EF Registry</span>
+        <span class="ef-tag">NGER</span>
+        <span class="ef-tag">EPA 40 CFR</span>
+        <span class="ef-tag">IPCC AR6</span>
+        <span class="ef-tag">Custom overlay</span>
+        <span class="ef-tag">Versioned</span>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🔥</div>
+          <div class="module-name" style="color:var(--teal)">Stationary Combustion</div>
+          <div class="module-detail">Engines · Heaters · Boilers<br>Tier 1 / 2 / 3</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">💨</div>
+          <div class="module-name" style="color:var(--rose)">Fugitive & Process</div>
+          <div class="module-detail">Equipment leaks · Venting<br>25+ source categories</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">⚡</div>
+          <div class="module-name" style="color:var(--blue)">Purchased Energy</div>
+          <div class="module-detail">Scope 2 electricity<br>State-based grid EFs</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🚛</div>
+          <div class="module-name" style="color:var(--amber)">Mobile Sources</div>
+          <div class="module-detail">Fleet vehicles<br>Distance × EF</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">❄️</div>
+          <div class="module-name" style="color:var(--purple)">Refrigerants</div>
+          <div class="module-detail">HFC losses<br>Purchase reconciliation</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <div class="module-name" style="color:var(--amber)">Custom Model</div>
+          <div class="module-detail">Any EF × activity<br>User-defined</div>
+        </div>
+      </div>
+
+      <div class="gwp-bar">
+        <p class="gwp-label">05 — GWP Conversion</p>
+        <p class="gwp-formula">CO₂e = CO₂×1 + CH₄×GWP + N₂O×GWP</p>
+        <div class="gwp-versions">
+          <span class="gwp-v" style="color:#374151;border-color:#1f2937">AR4 CH₄=25</span>
+          <span class="gwp-v" style="color:#374151;border-color:#1f2937">AR5 CH₄=28</span>
+          <span class="gwp-v" style="color:var(--teal);border-color:rgba(13,148,136,0.35)">AR6 CH₄=29.8 ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROWS OUT -->
+    <div class="arrow-col">
+      <div class="arrow-group">
+        <div class="arrow-head">▶</div>
+        <div class="arrow-line reverse"></div>
+      </div>
+      <div class="arrow-group">
+        <div class="arrow-head">▶</div>
+        <div class="arrow-line reverse"></div>
+      </div>
+      <div class="arrow-group">
+        <div class="arrow-head">▶</div>
+        <div class="arrow-line reverse"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT — OUTPUTS -->
+    <div class="io-col">
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--amber)">06 — Aggregation</p>
+        <p class="io-card-title">Org-Level Rollups</p>
+        <p class="io-card-detail">Sum facility results up a parent-child org tree — from equipment to corporate</p>
+        <div class="io-tags">
+          <span class="io-tag">Input aggregation</span>
+          <span class="io-tag">Output aggregation</span>
+          <span class="io-tag">Unlimited depth</span>
+        </div>
+      </div>
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--green)">07 — Forecasting</p>
+        <p class="io-card-title">Emissions Time Series</p>
+        <p class="io-card-detail">Scale activity inputs forward in time, replay the calculator — deterministic and auditable</p>
+        <div class="io-tags">
+          <span class="io-tag">Activity scaling</span>
+          <span class="io-tag">EF evolution</span>
+          <span class="io-tag">Scenario events</span>
+        </div>
+      </div>
+
+      <div class="io-card">
+        <p class="io-card-label" style="color:var(--rose)">08 — Reporting & Analytics</p>
+        <p class="io-card-title">Regulatory & Financial Output</p>
+        <p class="io-card-detail">Audit-ready outputs for regulators, financial disclosures, and client dashboards</p>
+        <div class="io-tags">
+          <span class="io-tag">NGER / EPA</span>
+          <span class="io-tag">AASB S2 / TCFD</span>
+          <span class="io-tag">Dashboard</span>
+          <span class="io-tag">Audit trail</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- end hub-grid -->
+</section>
+
+<hr class="section-divider" />
+
+<!-- SECTOR EXTENSION -->
+<section class="ext-section">
+  <div class="ext-inner">
+    <p class="ext-label">Extensibility</p>
+    <h2 class="ext-title display">One framework, any industry</h2>
+    <p class="ext-desc">The plugin architecture makes this platform sector-agnostic. Extending to a new industry — mining, manufacturing, agriculture, transport — follows the same five steps every time. The core engine never changes.</p>
+
+    <div class="steps-flow">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <p class="step-title">Regulatory Mapping</p>
+        <p class="step-detail">Identify applicable standards, IPCC source categories, and available emission factors. Gap analysis before writing a line of code.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <p class="step-title">Data Ingestion</p>
+        <p class="step-detail">Map sector-specific data sources — mine management systems, blast records, SCADA — and build ingestion connectors.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <p class="step-title">EF Registry Extension</p>
+        <p class="step-detail">Add sector emission factors with version tags. Annual regulatory updates flow through without touching calculation code.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <p class="step-title">Calculation Module</p>
+        <p class="step-detail">Write one new plugin module with the same interface as all existing modules. Sector-specific logic stays isolated.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <p class="step-title">Validation & Output</p>
+        <p class="step-detail">Sector-specific data quality rules. Every output traceable to input version, EF version, and calculation method used.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- INDUSTRIES -->
+<section class="industry-section" style="padding-top:4rem;">
+  <div style="text-align:center;margin-bottom:2.5rem;">
+    <p class="diagram-label" style="text-align:center">Applications</p>
+    <h2 class="diagram-title display" style="text-align:center">Applicable across sectors</h2>
+    <p class="diagram-desc" style="margin:0 auto 0;text-align:center">The same five-step extension pattern applied to different industries — same engine, different emission sources, different regulatory standards.</p>
+  </div>
+  <div class="industry-grid">
+    <div class="industry-card">
+      <div class="industry-icon">🛢️</div>
+      <p class="industry-name">Oil & Gas</p>
+      <p class="industry-sources">Combustion · Fugitive leaks · Pneumatic devices · Flares · Compressor seals · Equipment venting</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon">⛏️</div>
+      <p class="industry-name">Mining</p>
+      <p class="industry-sources">Diesel fleet · Explosives (ANFO) · Coal seam CH₄ · Smelting process · Haul roads · Safeguard Mechanism</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon">🏭</div>
+      <p class="industry-name">Manufacturing</p>
+      <p class="industry-sources">Industrial combustion · Cement calcination · Refrigerant HFCs · Wastewater · Scope 3 supply chain</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon">🌾</div>
+      <p class="industry-name">Agriculture</p>
+      <p class="industry-sources">Enteric fermentation · Manure management · Fertiliser N₂O · Land clearing · Soil carbon sequestration</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon">🚢</div>
+      <p class="industry-name">Transport & Logistics</p>
+      <p class="industry-sources">Fleet emissions · Aviation · Shipping · Rail · Distance-based or fuel-based calculation tiers</p>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon">🏦</div>
+      <p class="industry-name">Financial Services</p>
+      <p class="industry-sources">Financed emissions (PCAF) · Loan portfolio attribution · AASB S2 disclosure · Data quality scoring</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <a href="/professional-porfolio/">← Back to Portfolio</a>
+  <span>Camilo Uribe Guerra · Data Scientist · Sydney</span>
+</footer>
+
+</body>
+</html>
