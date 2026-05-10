@@ -138,6 +138,19 @@
     .ind-name { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; }
     .ind-detail { color: var(--muted); font-size: 0.76rem; line-height: 1.7; }
 
+    /* INTELLIGENCE ENRICHMENT */
+    .intel-section { padding: 0 var(--px) 5rem; max-width: var(--wrap); margin: 0 auto; }
+    .intel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .intel-card { background: var(--card2); border: 1px solid var(--border); border-radius: 1.1rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; transition: border-color .2s; }
+    .intel-card:hover { border-color: rgba(255,255,255,0.14); }
+    .intel-icon-wrap { width: 2.4rem; height: 2.4rem; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .intel-card-title { color: #fff; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; }
+    .intel-card-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.65; }
+    .intel-items { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.25rem; }
+    .intel-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.76rem; color: #9ca3af; line-height: 1.5; }
+    .intel-item-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 0.45rem; }
+    .intel-phase-tag { display: inline-block; font-size: 0.62rem; padding: 0.18rem 0.55rem; border-radius: 999px; border: 1px solid; font-weight: 500; margin-top: auto; }
+
     /* FOOTER */
     .page-footer { border-top: 1px solid var(--border); padding: 2rem var(--px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .page-footer a { color: var(--teal); text-decoration: none; font-size: 0.82rem; }
@@ -497,6 +510,95 @@
     <div class="ind-card"><div class="ind-icon">🏦</div><p class="ind-name">Financial Services</p><p class="ind-detail">Financed emissions (PCAF) · Loan portfolio attribution · AASB S2 disclosure · DQ scoring</p></div>
   </div>
 </section>
+
+<hr />
+
+<!-- INTELLIGENCE ENRICHMENT -->
+<section class="intel-section" style="padding-top:4rem;">
+  <div style="text-align:center;margin-bottom:0.25rem;">
+    <p class="section-label" style="display:flex;justify-content:center">Intelligence Layer</p>
+    <h2 class="section-title display" style="text-align:center">AI, ML & Geospatial Enrichment</h2>
+    <p class="section-desc" style="margin:0.5rem auto 0;text-align:center;max-width:620px">The core pipeline is deterministic and auditable. On top of it, modern capabilities can enrich every phase — from smarter ingestion to predictive forecasting and satellite reconciliation.</p>
+  </div>
+
+  <div class="intel-grid">
+
+    <!-- AI / LLM -->
+    <div class="intel-card" style="border-color:rgba(139,92,246,0.2);">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="intel-icon-wrap" style="background:rgba(139,92,246,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <p class="intel-card-title">AI & LLM Enrichment</p>
+      </div>
+      <p class="intel-card-desc">Language models and agents augment every stage — from intelligent data extraction to automated regulatory narrative generation.</p>
+      <div class="intel-items">
+        <div class="intel-item"><div class="intel-item-dot" style="background:#8B5CF6;"></div><span><strong style="color:#c4b5fd">Ingestion:</strong> LLM parses unstructured PDFs, field tickets, and scanned reports — no manual template needed</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#8B5CF6;"></div><span><strong style="color:#c4b5fd">Input Mapping:</strong> RAG assistant answers "which EF applies here?" against regulatory corpus</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#8B5CF6;"></div><span><strong style="color:#c4b5fd">Reporting:</strong> LLM drafts the regulatory narrative and management commentary from calculated totals</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#8B5CF6;"></div><span><strong style="color:#c4b5fd">Q&A layer:</strong> Compliance chatbot answers auditor questions with retrieved context from the inventory</span></div>
+      </div>
+      <span class="intel-phase-tag" style="color:#8B5CF6;border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.07)">Applies to all phases</span>
+    </div>
+
+    <!-- ML PREDICTION -->
+    <div class="intel-card" style="border-color:rgba(16,185,129,0.2);">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="intel-icon-wrap" style="background:rgba(16,185,129,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <p class="intel-card-title">Predictive ML Models</p>
+      </div>
+      <p class="intel-card-desc">Statistical and ML models replace deterministic rules where uncertainty is high — forecasting future emissions and detecting anomalies before they become compliance issues.</p>
+      <div class="intel-items">
+        <div class="intel-item"><div class="intel-item-dot" style="background:#10B981;"></div><span><strong style="color:#6ee7b7">Emissions forecasting:</strong> Time-series models (Prophet, LSTM) predict next quarter's totals before actuals arrive — enables early compliance warnings</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#10B981;"></div><span><strong style="color:#6ee7b7">Anomaly detection:</strong> Flag sensor drift or reporting outliers — a facility 3× its CH₄ baseline is either a leak or bad data</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#10B981;"></div><span><strong style="color:#6ee7b7">Missing data imputation:</strong> When SCADA fails, ML fills gaps instead of zeroing out the record</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#10B981;"></div><span><strong style="color:#6ee7b7">Learned EFs:</strong> Fit facility-specific emission factors from measured vs reported data — more accurate than fixed regulatory defaults</span></div>
+      </div>
+      <span class="intel-phase-tag" style="color:#10B981;border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.07)">Forecasting · Anomaly · EF calibration</span>
+    </div>
+
+    <!-- GEOSPATIAL -->
+    <div class="intel-card" style="border-color:rgba(59,130,246,0.2);">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="intel-icon-wrap" style="background:rgba(59,130,246,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <p class="intel-card-title">Geospatial & Remote Sensing</p>
+      </div>
+      <p class="intel-card-desc">GPS coordinates, satellite imagery, and radar data transform the asset hierarchy from an organisational tree into a spatial one — and reconcile bottom-up reported emissions against top-down measured observations.</p>
+      <div class="intel-items">
+        <div class="intel-item"><div class="intel-item-dot" style="background:#3B82F6;"></div><span><strong style="color:#93c5fd">Satellite reconciliation:</strong> Cross-check reported CH₄ totals against GHGSat, Sentinel-5P, or Carbon Mapper measurements — expose underreporting</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#3B82F6;"></div><span><strong style="color:#93c5fd">Spatial hierarchy:</strong> Cluster assets by basin, watershed, or coordinate polygon — not just organisational chart</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#3B82F6;"></div><span><strong style="color:#93c5fd">IoT + antenna arrays:</strong> Radar and ground-sensor networks feed real-time methane plume detection directly into the ingestion layer</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#3B82F6;"></div><span><strong style="color:#93c5fd">Emissions intensity maps:</strong> Overlay calculated totals on a geographic grid — visualise hotspots across a basin or region</span></div>
+      </div>
+      <span class="intel-phase-tag" style="color:#3B82F6;border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.07)">Hierarchy · Ingestion · Reporting</span>
+    </div>
+
+    <!-- OTHER ENRICHMENTS -->
+    <div class="intel-card" style="border-color:rgba(245,158,11,0.2);">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="intel-icon-wrap" style="background:rgba(245,158,11,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <p class="intel-card-title">Further Enrichment</p>
+      </div>
+      <p class="intel-card-desc">Beyond AI and geospatial, several adjacent capabilities strengthen the pipeline's accuracy, traceability, and commercial relevance.</p>
+      <div class="intel-items">
+        <div class="intel-item"><div class="intel-item-dot" style="background:#F59E0B;"></div><span><strong style="color:#fcd34d">Uncertainty quantification:</strong> Monte Carlo over emission factor distributions — report confidence intervals, not just point estimates</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#F59E0B;"></div><span><strong style="color:#fcd34d">Carbon market integration:</strong> Link calculated tonnes to ACCU credits, ERF offsets, and TCFD/AASB S2 disclosure templates automatically</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#F59E0B;"></div><span><strong style="color:#fcd34d">Digital twins:</strong> Virtual asset mirrors feed live operational state into the pipeline — no manual data exports</span></div>
+        <div class="intel-item"><div class="intel-item-dot" style="background:#F59E0B;"></div><span><strong style="color:#fcd34d">Edge computing:</strong> Process SCADA data at the asset before cloud upload — cuts latency and cost on high-frequency sensor streams</span></div>
+      </div>
+      <span class="intel-phase-tag" style="color:#F59E0B;border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.07)">Accuracy · Compliance · Infrastructure</span>
+    </div>
+
+  </div>
+</section>
+
+<hr />
 
 <footer class="page-footer">
   <a href="/professional-porfolio/">← Back to Portfolio</a>
