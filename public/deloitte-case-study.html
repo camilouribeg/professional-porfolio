@@ -90,6 +90,17 @@
     .file-name { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
     .file-desc { color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
     .file-fmt { display: inline-block; margin-top: 0.5rem; font-size: 0.67rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: #9ca3af; padding: 0.18rem 0.55rem; border-radius: 0.3rem; }
+    .file-example { margin-top: 0.85rem; background: rgba(0,0,0,0.4); border-radius: 0.5rem; overflow: hidden; }
+    .file-example table { width: 100%; border-collapse: collapse; font-size: 0.67rem; font-family: monospace; }
+    .file-example th { text-align: left; padding: 0.3rem 0.5rem; color: #4b5563; font-weight: 600; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .file-example td { padding: 0.28rem 0.5rem; color: #9ca3af; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .file-example td.dr { color: #34d399; }
+    .file-example td.cr { color: #f87171; }
+    .file-example td.acc { color: #60a5fa; }
+    .file-example td.muted { color: #374151; }
+    .file-example .pdf-block { padding: 0.55rem 0.75rem; font-family: monospace; font-size: 0.67rem; color: #6b7280; line-height: 1.7; }
+    .file-example .pdf-block span.k { color: #a78bfa; }
+    .file-example .pdf-block span.v { color: #9ca3af; }
     .problems-card { background: var(--card2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; }
     .problems-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
     .problem-row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.82rem; color: #d1d5db; }
@@ -245,26 +256,55 @@
 <section class="challenge-section" style="padding-top:4rem;">
   <p class="section-label">The Problem</p>
   <h2 class="section-title display">1,500 clients. 3 files each. All different.</h2>
-  <p class="section-desc">Each audit client provides a General Ledger, Trial Balance, and PDF journal documents. They come from different ERP systems with inconsistent schemas, missing values, and reconciliation errors that have to be detected and resolved before the data can be used.</p>
+  <p class="section-desc">Every client sends three files. Same underlying information, different format every time. The pipeline has to normalise all of it before any analysis can begin.</p>
 
   <div class="file-grid">
     <div class="file-card" style="border-color:rgba(13,148,136,0.25)">
       <div class="file-icon">📊</div>
       <p class="file-name">General Ledger (GL)</p>
-      <p class="file-desc">Every individual transaction for the financial year. Each entry has a debit and a credit side; they must always balance. This is the source of truth.</p>
+      <p class="file-desc">Every transaction for the year. Each entry has a debit and a credit side that must always balance. Source of truth.</p>
       <span class="file-fmt">CSV / Excel</span>
+      <div class="file-example">
+        <table>
+          <thead><tr><th>Date</th><th>Acct</th><th>Description</th><th>DR</th><th>CR</th></tr></thead>
+          <tbody>
+            <tr><td>2024-01-15</td><td class="acc">5001</td><td>Office supplies</td><td class="dr">500.00</td><td class="muted">—</td></tr>
+            <tr><td>2024-01-15</td><td class="acc">1001</td><td>Office supplies</td><td class="muted">—</td><td class="cr">500.00</td></tr>
+            <tr><td>2024-01-20</td><td class="acc">4001</td><td>Revenue consulting</td><td class="muted">—</td><td class="cr">8,200.00</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="file-card" style="border-color:rgba(59,130,246,0.25)">
       <div class="file-icon">📋</div>
       <p class="file-name">Trial Balance (TB)</p>
-      <p class="file-desc">A summary: total debits and credits per account for the period. GL rolled up by account must equal TB exactly. If not, there is a variance that requires investigation.</p>
+      <p class="file-desc">A summary by account. GL rolled up must equal TB exactly. If not, there is a variance that needs explaining.</p>
       <span class="file-fmt">CSV / Excel</span>
+      <div class="file-example">
+        <table>
+          <thead><tr><th>Acct</th><th>Name</th><th>Total DR</th><th>Total CR</th></tr></thead>
+          <tbody>
+            <tr><td class="acc">1001</td><td>Cash</td><td class="dr">142,300</td><td class="muted">—</td></tr>
+            <tr><td class="acc">4001</td><td>Revenue</td><td class="muted">—</td><td class="cr">98,400</td></tr>
+            <tr><td class="acc">5001</td><td>Expenses</td><td class="dr">34,100</td><td class="muted">—</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="file-card" style="border-color:rgba(249,115,22,0.25)">
       <div class="file-icon">📄</div>
       <p class="file-name">Journal PDFs</p>
-      <p class="file-desc">Supporting documentation, scanned or digital. Unstructured. Requires OCR and LLM extraction to recover structured transaction data.</p>
+      <p class="file-desc">Supporting documentation, scanned or digital. Unstructured — needs OCR and LLM extraction to recover usable data.</p>
       <span class="file-fmt">PDF</span>
+      <div class="file-example">
+        <div class="pdf-block">
+          <span class="k">Journal Entry</span> <span class="v">#JE-2024-0042</span><br>
+          <span class="k">Date:</span> <span class="v">15 Jan 2024</span><br>
+          <span class="k">Narration:</span> <span class="v">Purchase of supplies</span><br>
+          Dr &nbsp;5001 &nbsp;Office Exp &nbsp;&nbsp;<span class="v">500.00</span><br>
+          Cr &nbsp;1001 &nbsp;Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="v">500.00</span>
+        </div>
+      </div>
     </div>
   </div>
 
