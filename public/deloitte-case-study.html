@@ -223,17 +223,17 @@
     <div class="phil-two">
       <div class="phil-box" style="border-color:rgba(59,130,246,0.2)">
         <p class="phil-box-title" style="color:var(--blue)">&#129302; AI handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Column names that could mean several things ("Acc_Ref", "txn_ref", "posting_acct")</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Pulling structured fields out of unstructured PDFs and scanned documents</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Recognising which ERP produced a file when the format is unfamiliar</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Drafting a plain-language explanation of why a variance exists (advisory, not binding)</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Column names that could mean several things ("Acc_Ref", "txn_ref")</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Extracting structured fields from unstructured PDFs and scans</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Identifying which ERP produced a file with an unfamiliar format</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Explaining in plain language why a variance exists (advisory only)</span></div>
       </div>
       <div class="phil-box" style="border-color:rgba(13,148,136,0.2)">
         <p class="phil-box-title" style="color:var(--teal)">&#9881;&#65039; Deterministic handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Debits equal credits per transaction. This is accounting law, not a judgment call.</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field checks: missing account codes, dates out of range, null amounts</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs Trial Balance reconciliation. Pure arithmetic. Any non-zero variance is flagged.</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection by hashing each row. Either it matches or it does not.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Debits equal credits per transaction. Accounting law, not a judgment call.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field checks: null amounts, missing account codes, dates out of range</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs Trial Balance reconciliation. Pure arithmetic. Non-zero variance gets flagged.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection by row hash. It either matches or it does not.</span></div>
       </div>
     </div>
   </div>
@@ -245,36 +245,36 @@
 <section class="challenge-section" style="padding-top:4rem;">
   <p class="section-label">The Problem</p>
   <h2 class="section-title display">1,500 clients. 3 files each. All different.</h2>
-  <p class="section-desc">Each audit client provides a General Ledger, Trial Balance, and PDF journal documents — sourced from different ERP systems, with inconsistent schemas, missing values, and reconciliation errors that must be detected and resolved before the data can be used.</p>
+  <p class="section-desc">Each audit client provides a General Ledger, Trial Balance, and PDF journal documents. They come from different ERP systems with inconsistent schemas, missing values, and reconciliation errors that have to be detected and resolved before the data can be used.</p>
 
   <div class="file-grid">
     <div class="file-card" style="border-color:rgba(13,148,136,0.25)">
       <div class="file-icon">📊</div>
       <p class="file-name">General Ledger (GL)</p>
-      <p class="file-desc">Every individual transaction for the financial year. Each entry has a debit and credit side — they must always balance. This is the source of truth.</p>
+      <p class="file-desc">Every individual transaction for the financial year. Each entry has a debit and a credit side; they must always balance. This is the source of truth.</p>
       <span class="file-fmt">CSV / Excel</span>
     </div>
     <div class="file-card" style="border-color:rgba(59,130,246,0.25)">
       <div class="file-icon">📋</div>
       <p class="file-name">Trial Balance (TB)</p>
-      <p class="file-desc">A summary: total debits and credits per account for the period. GL rolled up by account must equal TB exactly — if not, there is a variance that requires investigation.</p>
+      <p class="file-desc">A summary: total debits and credits per account for the period. GL rolled up by account must equal TB exactly. If not, there is a variance that requires investigation.</p>
       <span class="file-fmt">CSV / Excel</span>
     </div>
     <div class="file-card" style="border-color:rgba(249,115,22,0.25)">
       <div class="file-icon">📄</div>
       <p class="file-name">Journal PDFs</p>
-      <p class="file-desc">Supporting documentation — scanned or digital. Unstructured. Requires OCR and LLM extraction to recover structured transaction data.</p>
+      <p class="file-desc">Supporting documentation, scanned or digital. Unstructured. Requires OCR and LLM extraction to recover structured transaction data.</p>
       <span class="file-fmt">PDF</span>
     </div>
   </div>
 
   <div class="problems-card">
     <p class="problems-label">5 problems in the data</p>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Column name variance</strong> — "AccountCode" in SAP, "Acc_Ref" in MYOB, "acct_no" in Xero. Same field, hundreds of names across 1,500 clients.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Missing critical values</strong> — nulls in account codes, amounts, or dates. A transaction with no account code cannot be posted or reconciled.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Duplicate transactions</strong> — same entry posted twice. Exact duplicates caught by hash; near-duplicates (same amount ±3 days) flagged by AI for human review.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">GL ≠ Trial Balance</strong> — rolled-up GL totals per account don't match the TB balance. Every non-zero variance is a reconciliation failure requiring explanation.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Format variance</strong> — different delimiters, encodings (UTF-8 vs Latin-1), date formats (2024-01-15 vs 15/01/24), and multi-sheet Excel structures.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Column name variance.</strong> "AccountCode" in SAP, "Acc_Ref" in MYOB, "acct_no" in Xero. Same field, hundreds of names across 1,500 clients.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Missing critical values.</strong> Nulls in account codes, amounts, or dates. A transaction with no account code cannot be posted or reconciled.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Duplicate transactions.</strong> The same entry posted twice. Exact duplicates are caught by hash comparison; near-duplicates (same amount within 3 days) are flagged by AI for human review.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">GL does not match Trial Balance.</strong> Rolled-up GL totals per account don't match the TB balance. Every non-zero variance is a reconciliation failure requiring explanation.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Format variance.</strong> Different delimiters, encodings (UTF-8 vs Latin-1), date formats (2024-01-15 vs 15/01/24), and multi-sheet Excel structures.</span></div>
   </div>
 </section>
 
@@ -283,16 +283,16 @@
 <!-- PIPELINE -->
 <div class="diag-wrap">
   <p class="section-label">System Architecture</p>
-  <h2 class="section-title display">7-layer pipeline — how the data flows</h2>
+  <h2 class="section-title display">7-layer pipeline: how the data flows</h2>
   <p class="section-desc">Each layer has a single, clear responsibility. AI nodes are used exactly where ambiguity exists and nowhere else. Every decision is logged with a rule ID for auditability.</p>
 
   <div class="flow">
 
     <!-- 01 INGEST -->
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
-      <p class="node-num" style="color:var(--teal)">01 — Ingest &amp; Land</p>
+      <p class="node-num" style="color:var(--teal)">01 · Ingest &amp; Land</p>
       <p class="node-title">Chain of Custody Starts Here</p>
-      <p class="node-desc">Files arrive via SFTP or Azure Blob. Before anything else, each file receives a SHA-256 hash — this proves the file that was analysed is exactly the file the client sent. Files are written write-once to Azure WORM storage and never modified.</p>
+      <p class="node-desc">Files arrive via SFTP or Azure Blob. Before anything else, each file receives a SHA-256 hash. This proves the file analysed is exactly the file the client sent. Files are written write-once to Azure WORM storage and never modified.</p>
       <div class="code-block">
         <span class="c"># Chain of custody</span><br>
         hash = sha256(<span class="o">file_bytes</span>)  <span class="c"># tamper-evident fingerprint</span><br>
@@ -311,9 +311,9 @@
 
     <!-- 02 CLASSIFY -->
     <div class="node" style="border-color:rgba(59,130,246,0.2)">
-      <p class="node-num" style="color:var(--blue)">02 — Classify &amp; Profile</p>
+      <p class="node-num" style="color:var(--blue)">02 · Classify &amp; Profile</p>
       <p class="node-title">ERP Detection + File Type Routing</p>
-      <p class="node-desc">Is this a GL, TB, or PDF journal? Which ERP produced it — SAP, Oracle, Xero, MYOB, NetSuite? Deterministic first: filename patterns and known header signatures cover ~80% of files. AI fallback for unknown shapes, with a confidence score on every output.</p>
+      <p class="node-desc">Is this a GL, TB, or PDF journal? Which ERP produced it: SAP, Oracle, Xero, MYOB, NetSuite? Deterministic first: filename patterns and known header signatures cover ~80% of files. AI fallback for unknown shapes, with a confidence score on every output.</p>
       <div class="node-sub-row">
         <div class="node-sub">
           <p class="node-sub-label">Known ERP → skip LLM</p>
@@ -338,9 +338,9 @@
     <div class="parallel">
 
       <div class="node" style="border-color:rgba(13,148,136,0.2)">
-        <p class="node-num" style="color:var(--teal)">03a — CSV / Excel Extract</p>
+        <p class="node-num" style="color:var(--teal)">03a · CSV / Excel Extract</p>
         <p class="node-title">Deterministic Parsing</p>
-        <p class="node-desc">Tabular data with defined structure. No AI needed — just correct parsing. Handle encoding variance (UTF-8, Latin-1, CP1252), dtype coercion (amounts to float, dates to datetime), and multi-sheet Excel workbooks.</p>
+        <p class="node-desc">Tabular data with a defined structure. No AI needed, just correct parsing. Handle encoding variance (UTF-8, Latin-1, CP1252), type coercion, and multi-sheet Excel workbooks.</p>
         <div class="code-block">
           df = pd.read_csv(<span class="o">file</span>,<br>
           &nbsp;&nbsp;<span class="t">encoding</span>=<span class="s">'utf-8-sig'</span>,<br>
@@ -355,7 +355,7 @@
       </div>
 
       <div class="node" style="border-color:rgba(249,115,22,0.2)">
-        <p class="node-num" style="color:var(--orange)">03b — PDF Journal Extract</p>
+        <p class="node-num" style="color:var(--orange)">03b · PDF Journal Extract</p>
         <p class="node-title">OCR + LLM + Pydantic</p>
         <p class="node-desc">Unstructured. This is where AI earns its place. Digital PDFs go through pdfplumber; scanned documents through Azure Document Intelligence OCR. The LLM then extracts structured fields, validated immediately by Pydantic schema enforcement.</p>
         <div class="node-tags">
@@ -377,9 +377,9 @@
 
     <!-- 04 SCHEMA MAP -->
     <div class="node" style="border-color:rgba(139,92,246,0.2)">
-      <p class="node-num" style="color:var(--purple)">04 — Schema Mapping → Common Data Model</p>
+      <p class="node-num" style="color:var(--purple)">04 · Schema Mapping → Common Data Model</p>
       <p class="node-title">AI proposes once · Human approves once · Cache decides forever</p>
-      <p class="node-desc">Every ERP exports the same fields with different column names. The pipeline maps everything to a single CDM. Known ERP templates are cached and deterministic — zero LLM cost. Novel columns go to the LLM for a mapping proposal, then to a human analyst for one-time approval. The approved mapping becomes versioned config: deterministic forever.</p>
+      <p class="node-desc">Every ERP exports the same fields with different column names. The pipeline maps everything to a single CDM. Known ERP templates are cached and require zero LLM calls. Novel columns go to the LLM for a mapping proposal, then to a human analyst for one-time approval. That approved mapping becomes versioned config forever.</p>
       <div class="node-sub-row">
         <div class="node-sub">
           <p class="node-sub-label">1. Known ERP template</p>
@@ -406,9 +406,9 @@
 
     <!-- 05 QUALITY + RECON -->
     <div class="node" style="border-color:rgba(13,148,136,0.3); box-shadow: 0 0 30px rgba(13,148,136,0.06)">
-      <p class="node-num" style="color:var(--teal)">05 — Quality Validation &amp; GL ↔ TB Reconciliation</p>
+      <p class="node-num" style="color:var(--teal)">05 · Quality Validation &amp; GL ↔ TB Reconciliation</p>
       <p class="node-title">The most critical layer — zero AI in the decision path</p>
-      <p class="node-desc">Every rule is deterministic and logged with a rule ID. The GL vs TB reconciliation is pure arithmetic — AI never computes a financial figure. Variances go to human review; AI can generate a candidate explanation, annotated as advisory only.</p>
+      <p class="node-desc">Every rule is deterministic and logged with a rule ID. The GL vs TB reconciliation is pure arithmetic. AI never computes a financial figure. Variances go to human review. AI can suggest a candidate explanation, but it is annotated as advisory only.</p>
       <div class="parallel" style="margin-top:0.85rem">
         <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(13,148,136,0.15);border-radius:0.6rem;padding:0.85rem">
           <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem">Pandera Validation Rules</p>
@@ -444,9 +444,9 @@
     <!-- 06 LANGGRAPH ORCHESTRATION -->
     <div class="engine-node">
       <div class="engine-head">
-        <span class="engine-badge">06 — LangGraph Orchestration</span>
-        <p class="engine-title display">Stateful Graph — Every Client Through the Same Auditable Pipeline</p>
-        <p class="engine-desc">LangGraph wraps the entire pipeline as a stateful directed graph. Each node above is a graph node. Conditional edges route based on confidence scores and validation results. The graph can pause, persist state, and resume — enabling human-in-the-loop review without restarting from scratch.</p>
+        <span class="engine-badge">06 · LangGraph Orchestration</span>
+        <p class="engine-title display">Stateful Graph: Every Client Through the Same Auditable Pipeline</p>
+        <p class="engine-desc">LangGraph wraps the entire pipeline as a stateful directed graph. Each node above is a graph node. Conditional edges route based on confidence scores and validation results. The graph can pause, persist state, and resume, enabling human-in-the-loop review without restarting from scratch.</p>
       </div>
 
       <!-- Graph nodes -->
@@ -477,17 +477,17 @@
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--teal)">validate</span>
-        <span class="nr-desc">Pandera rules — all deterministic, logged by rule ID</span>
+        <span class="nr-desc">Pandera rules, all deterministic, logged by rule ID</span>
         <span class="nr-badge" style="color:var(--teal);border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.07)">Deterministic</span>
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--teal)">reconcile</span>
-        <span class="nr-desc">GL vs TB arithmetic — variance calculation</span>
+        <span class="nr-desc">GL vs TB arithmetic, variance calculation</span>
         <span class="nr-badge" style="color:var(--teal);border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.07)">Deterministic</span>
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--orange)">human_review</span>
-        <span class="nr-desc">interrupt() — pause, persist state, await analyst input</span>
+        <span class="nr-desc">interrupt(). Pause, persist state, await analyst input</span>
         <span class="nr-badge" style="color:var(--orange);border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.07)">Human-in-loop</span>
       </div>
       <div class="node-row" style="border-bottom:none">
@@ -513,10 +513,10 @@
 
       <!-- Why LangGraph -->
       <div class="why-row">
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Stateful</strong> — knows where each of the 1,500 clients is in the pipeline; crash-safe checkpointing</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Loops</strong> — retry failed PDF extractions with the previous error as context</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Human interrupt</strong> — pause, persist full state, resume on analyst sign-off</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Parallel fan-out</strong> — stream 1,500 clients concurrently, isolated per thread_id</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Stateful.</strong> Knows where each of the 1,500 clients is in the pipeline. Crash-safe checkpointing.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Loops.</strong> Retry failed PDF extractions with the previous error fed back as context.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Human interrupt.</strong> Pause, persist full state, resume once the analyst signs off.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Parallel fan-out.</strong> Stream 1,500 clients concurrently, each isolated by thread_id.</span></div>
       </div>
     </div>
 
@@ -524,11 +524,11 @@
 
     <!-- 07 AUDIT STORE -->
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
-      <p class="node-num" style="color:var(--teal)">07 — Audit Store &amp; Output</p>
+      <p class="node-num" style="color:var(--teal)">07 · Audit Store &amp; Output</p>
       <p class="node-title">Defensibility by Construction</p>
-      <p class="node-desc">Every decision that touches the data is logged append-only. The audit trail links the final output hash back through every transformation to the original file SHA-256 — complete end-to-end lineage. A regulator can ask "why is this number what it is?" and receive an exact replay.</p>
+      <p class="node-desc">Every decision that touches the data is logged append-only. The audit trail links the final output hash back through every transformation to the original file SHA-256, giving complete end-to-end lineage. A regulator can ask "why is this number what it is?" and receive an exact replay.</p>
       <div class="node-sub-row">
-        <div class="node-sub"><p class="node-sub-label">Source file hash</p><p class="node-sub-val">SHA-256 on ingest — chain of custody</p></div>
+        <div class="node-sub"><p class="node-sub-label">Source file hash</p><p class="node-sub-val">SHA-256 on ingest, chain of custody</p></div>
         <div class="node-sub"><p class="node-sub-label">Every AI call</p><p class="node-sub-val">Prompt + model version + response + confidence</p></div>
         <div class="node-sub"><p class="node-sub-label">Every validation</p><p class="node-sub-val">Rule ID + pass/fail + affected rows</p></div>
         <div class="node-sub"><p class="node-sub-label">Every human decision</p><p class="node-sub-val">Who, what changed, before/after, rationale</p></div>
