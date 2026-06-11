@@ -197,7 +197,7 @@
   <p class="hero-label">Case Study · Deloitte Australia · Agentic Data Engineer</p>
   <h1 class="hero-title display">Agentic Audit<br><em>Data Pipeline</em></h1>
   <p class="hero-sub">
-    Design an AI-enabled pipeline to ingest General Ledger, Trial Balance, and PDF journal files from 1,500 audit clients — clean, reconcile, validate, and deliver audit-ready output at scale.
+    Design an AI-enabled pipeline to ingest General Ledger, Trial Balance, and PDF journal files from 1,500 audit clients. Clean, reconcile, validate, and deliver audit-ready output at scale.
   </p>
   <div>
     <span class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange);border:1px solid rgba(249,115,22,0.2)">LangGraph</span>
@@ -219,21 +219,21 @@
 <section class="phil-section">
   <div class="phil-card">
     <p class="phil-quote display">"AI handles <em class="ai">ambiguity</em>.<br>Deterministic logic handles <em class="det">truth</em>."</p>
-    <p class="phil-sub">The LLM is a co-pilot for interpretation — never the pilot for financial conclusions. Anything a regulator could challenge is computed by deterministic code with a logged rule ID.</p>
+    <p class="phil-sub">Use AI where the answer requires interpretation. Use rules and arithmetic where it simply has to be right. Every financial conclusion in this pipeline can be traced, replayed and defended.</p>
     <div class="phil-two">
       <div class="phil-box" style="border-color:rgba(59,130,246,0.2)">
         <p class="phil-box-title" style="color:var(--blue)">&#129302; AI handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Novel column name mapping ("Acc_Ref" — account or reference?)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Extracting structured data from unstructured PDFs and scanned docs</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Classifying which ERP produced an unfamiliar file format</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Explaining variance root-causes in plain language (advisory only)</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Column names that could mean several things ("Acc_Ref", "txn_ref", "posting_acct")</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Pulling structured fields out of unstructured PDFs and scanned documents</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Recognising which ERP produced a file when the format is unfamiliar</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Drafting a plain-language explanation of why a variance exists (advisory, not binding)</span></div>
       </div>
       <div class="phil-box" style="border-color:rgba(13,148,136,0.2)">
         <p class="phil-box-title" style="color:var(--teal)">&#9881;&#65039; Deterministic handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>DR = CR per transaction (double-entry bookkeeping — non-negotiable)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field validation (nulls, date ranges, type coercion)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs TB reconciliation — exact arithmetic, flagged if variance &ne; 0</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection via row hash — binary decision</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Debits equal credits per transaction. This is accounting law, not a judgment call.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field checks: missing account codes, dates out of range, null amounts</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs Trial Balance reconciliation. Pure arithmetic. Any non-zero variance is flagged.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection by hashing each row. Either it matches or it does not.</span></div>
       </div>
     </div>
   </div>
