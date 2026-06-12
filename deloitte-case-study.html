@@ -90,6 +90,17 @@
     .file-name { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
     .file-desc { color: var(--muted); font-size: 0.76rem; line-height: 1.6; }
     .file-fmt { display: inline-block; margin-top: 0.5rem; font-size: 0.67rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: #9ca3af; padding: 0.18rem 0.55rem; border-radius: 0.3rem; }
+    .file-example { margin-top: 0.85rem; background: rgba(0,0,0,0.4); border-radius: 0.5rem; overflow: hidden; }
+    .file-example table { width: 100%; border-collapse: collapse; font-size: 0.67rem; font-family: monospace; }
+    .file-example th { text-align: left; padding: 0.3rem 0.5rem; color: #4b5563; font-weight: 600; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .file-example td { padding: 0.28rem 0.5rem; color: #9ca3af; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .file-example td.dr { color: #34d399; }
+    .file-example td.cr { color: #f87171; }
+    .file-example td.acc { color: #60a5fa; }
+    .file-example td.muted { color: #374151; }
+    .file-example .pdf-block { padding: 0.55rem 0.75rem; font-family: monospace; font-size: 0.67rem; color: #6b7280; line-height: 1.7; }
+    .file-example .pdf-block span.k { color: #a78bfa; }
+    .file-example .pdf-block span.v { color: #9ca3af; }
     .problems-card { background: var(--card2); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; }
     .problems-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
     .problem-row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.82rem; color: #d1d5db; }
@@ -113,6 +124,27 @@
     .node-desc { color: var(--muted); font-size: 0.79rem; line-height: 1.65; }
     .node-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.65rem; }
     .node-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+    .node-bullets { list-style: none; margin-top: 0.65rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .node-bullets li { font-size: 0.79rem; color: #9ca3af; line-height: 1.5; padding-left: 1rem; position: relative; }
+    .node-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 0.65rem; top: 0.18rem; }
+    .node-note { display: flex; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.74rem; color: #9ca3af; line-height: 1.55; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.15); border-radius: 0.5rem; padding: 0.6rem 0.8rem; font-style: italic; }
+    .node-note span { flex-shrink: 0; font-style: normal; }
+    .route-label { text-align: center; font-size: 0.74rem; color: var(--muted); margin: 1rem auto 0; max-width: 480px; }
+    .route-label strong { color: var(--blue); }
+    .map-diagram { display: flex; align-items: center; gap: 1.1rem; margin-top: 0.85rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(139,92,246,0.15); border-radius: 0.6rem; padding: 1rem 1.2rem; flex-wrap: wrap; }
+    .map-left { display: flex; flex-direction: column; gap: 0.4rem; }
+    .map-src { font-family: monospace; font-size: 0.74rem; color: #9ca3af; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 0.4rem; padding: 0.3rem 0.6rem; }
+    .map-src em { color: #4b5563; font-style: normal; font-size: 0.66rem; }
+    .map-arrow { color: var(--purple); font-size: 1.4rem; font-weight: 700; }
+    .map-right { display: flex; flex-direction: column; gap: 0.3rem; }
+    .map-cdm { font-family: monospace; font-size: 0.82rem; color: #fff; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.4rem; padding: 0.4rem 0.7rem; font-weight: 600; }
+    .map-cdm-label { font-size: 0.6rem; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
+    .graph-card { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 0.8rem; padding: 1.25rem; margin: 1.1rem 0; overflow-x: auto; }
+    .graph-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; text-align: center; }
+    .graph-card .mermaid { display: flex; justify-content: center; min-height: 40px; }
+    .graph-card .mermaid svg { max-width: 100%; height: auto; }
+    .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-sub { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.45rem 0.75rem; }
     .node-sub-label { font-size: 0.62rem; color: #4b5563; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.15rem; }
@@ -197,7 +229,7 @@
   <p class="hero-label">Case Study · Deloitte Australia · Agentic Data Engineer</p>
   <h1 class="hero-title display">Agentic Audit<br><em>Data Pipeline</em></h1>
   <p class="hero-sub">
-    Design an AI-enabled pipeline to ingest General Ledger, Trial Balance, and PDF journal files from 1,500 audit clients — clean, reconcile, validate, and deliver audit-ready output at scale.
+    Design an AI-enabled pipeline to ingest General Ledger, Trial Balance, and PDF journal files from 1,500 audit clients. Clean, reconcile, validate, and deliver audit-ready output at scale.
   </p>
   <div>
     <span class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange);border:1px solid rgba(249,115,22,0.2)">LangGraph</span>
@@ -219,21 +251,21 @@
 <section class="phil-section">
   <div class="phil-card">
     <p class="phil-quote display">"AI handles <em class="ai">ambiguity</em>.<br>Deterministic logic handles <em class="det">truth</em>."</p>
-    <p class="phil-sub">The LLM is a co-pilot for interpretation — never the pilot for financial conclusions. Anything a regulator could challenge is computed by deterministic code with a logged rule ID.</p>
+    <p class="phil-sub">Use AI where the answer requires interpretation. Use rules and arithmetic where it simply has to be right. Every financial conclusion in this pipeline can be traced, replayed and defended.</p>
     <div class="phil-two">
       <div class="phil-box" style="border-color:rgba(59,130,246,0.2)">
         <p class="phil-box-title" style="color:var(--blue)">&#129302; AI handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Novel column name mapping ("Acc_Ref" — account or reference?)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Extracting structured data from unstructured PDFs and scanned docs</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Classifying which ERP produced an unfamiliar file format</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Explaining variance root-causes in plain language (advisory only)</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Column names that could mean several things</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Extracting fields from unstructured PDFs and scans</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Identifying which ERP produced an unfamiliar file</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--blue)">▸</span><span>Explaining why a variance exists, in plain language (advisory)</span></div>
       </div>
       <div class="phil-box" style="border-color:rgba(13,148,136,0.2)">
         <p class="phil-box-title" style="color:var(--teal)">&#9881;&#65039; Deterministic handles</p>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>DR = CR per transaction (double-entry bookkeeping — non-negotiable)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field validation (nulls, date ranges, type coercion)</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs TB reconciliation — exact arithmetic, flagged if variance &ne; 0</span></div>
-        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection via row hash — binary decision</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Debits equal credits. Accounting law, not a judgment call.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Required field checks: nulls, missing codes, dates out of range</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>GL vs Trial Balance. Pure arithmetic, non-zero variance flagged.</span></div>
+        <div class="phil-item"><span class="phil-dot" style="color:var(--teal)">▸</span><span>Exact duplicate detection by row hash. Matches or it doesn't.</span></div>
       </div>
     </div>
   </div>
@@ -245,36 +277,65 @@
 <section class="challenge-section" style="padding-top:4rem;">
   <p class="section-label">The Problem</p>
   <h2 class="section-title display">1,500 clients. 3 files each. All different.</h2>
-  <p class="section-desc">Each audit client provides a General Ledger, Trial Balance, and PDF journal documents — sourced from different ERP systems, with inconsistent schemas, missing values, and reconciliation errors that must be detected and resolved before the data can be used.</p>
+  <p class="section-desc">Every client sends three files. Same underlying information, different format every time. The pipeline has to normalise all of it before any analysis can begin.</p>
 
   <div class="file-grid">
     <div class="file-card" style="border-color:rgba(13,148,136,0.25)">
       <div class="file-icon">📊</div>
       <p class="file-name">General Ledger (GL)</p>
-      <p class="file-desc">Every individual transaction for the financial year. Each entry has a debit and credit side — they must always balance. This is the source of truth.</p>
+      <p class="file-desc">Every transaction for the year. Each entry has a debit and a credit side that must always balance. Source of truth.</p>
       <span class="file-fmt">CSV / Excel</span>
+      <div class="file-example">
+        <table>
+          <thead><tr><th>Date</th><th>Acct</th><th>Description</th><th>DR</th><th>CR</th></tr></thead>
+          <tbody>
+            <tr><td>2024-01-15</td><td class="acc">5001</td><td>Office supplies</td><td class="dr">500.00</td><td class="muted">—</td></tr>
+            <tr><td>2024-01-15</td><td class="acc">1001</td><td>Office supplies</td><td class="muted">—</td><td class="cr">500.00</td></tr>
+            <tr><td>2024-01-20</td><td class="acc">4001</td><td>Revenue consulting</td><td class="muted">—</td><td class="cr">8,200.00</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="file-card" style="border-color:rgba(59,130,246,0.25)">
       <div class="file-icon">📋</div>
       <p class="file-name">Trial Balance (TB)</p>
-      <p class="file-desc">A summary: total debits and credits per account for the period. GL rolled up by account must equal TB exactly — if not, there is a variance that requires investigation.</p>
+      <p class="file-desc">A summary by account. GL rolled up must equal TB exactly. If not, there is a variance that needs explaining.</p>
       <span class="file-fmt">CSV / Excel</span>
+      <div class="file-example">
+        <table>
+          <thead><tr><th>Acct</th><th>Name</th><th>Total DR</th><th>Total CR</th></tr></thead>
+          <tbody>
+            <tr><td class="acc">1001</td><td>Cash</td><td class="dr">142,300</td><td class="muted">—</td></tr>
+            <tr><td class="acc">4001</td><td>Revenue</td><td class="muted">—</td><td class="cr">98,400</td></tr>
+            <tr><td class="acc">5001</td><td>Expenses</td><td class="dr">34,100</td><td class="muted">—</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="file-card" style="border-color:rgba(249,115,22,0.25)">
       <div class="file-icon">📄</div>
       <p class="file-name">Journal PDFs</p>
-      <p class="file-desc">Supporting documentation — scanned or digital. Unstructured. Requires OCR and LLM extraction to recover structured transaction data.</p>
+      <p class="file-desc">Supporting documentation, scanned or digital. Unstructured — needs OCR and LLM extraction to recover usable data.</p>
       <span class="file-fmt">PDF</span>
+      <div class="file-example">
+        <div class="pdf-block">
+          <span class="k">Journal Entry</span> <span class="v">#JE-2024-0042</span><br>
+          <span class="k">Date:</span> <span class="v">15 Jan 2024</span><br>
+          <span class="k">Narration:</span> <span class="v">Purchase of supplies</span><br>
+          Dr &nbsp;5001 &nbsp;Office Exp &nbsp;&nbsp;<span class="v">500.00</span><br>
+          Cr &nbsp;1001 &nbsp;Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="v">500.00</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="problems-card">
     <p class="problems-label">5 problems in the data</p>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Column name variance</strong> — "AccountCode" in SAP, "Acc_Ref" in MYOB, "acct_no" in Xero. Same field, hundreds of names across 1,500 clients.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Missing critical values</strong> — nulls in account codes, amounts, or dates. A transaction with no account code cannot be posted or reconciled.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Duplicate transactions</strong> — same entry posted twice. Exact duplicates caught by hash; near-duplicates (same amount ±3 days) flagged by AI for human review.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">GL ≠ Trial Balance</strong> — rolled-up GL totals per account don't match the TB balance. Every non-zero variance is a reconciliation failure requiring explanation.</span></div>
-    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Format variance</strong> — different delimiters, encodings (UTF-8 vs Latin-1), date formats (2024-01-15 vs 15/01/24), and multi-sheet Excel structures.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Column name variance.</strong> "AccountCode" in SAP, "Acc_Ref" in MYOB, "acct_no" in Xero. Same field, hundreds of names across 1,500 clients.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Missing critical values.</strong> Nulls in account codes, amounts, or dates. A transaction with no account code cannot be posted or reconciled.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Duplicate transactions.</strong> The same entry posted twice. Exact duplicates are caught by hash comparison; near-duplicates (same amount within 3 days) are flagged by AI for human review.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">GL does not match Trial Balance.</strong> Rolled-up GL totals per account don't match the TB balance. Every non-zero variance is a reconciliation failure requiring explanation.</span></div>
+    <div class="problem-row"><span class="problem-x">✗</span><span><strong style="color:#e5e7eb">Format variance.</strong> Different delimiters, encodings (UTF-8 vs Latin-1), date formats (2024-01-15 vs 15/01/24), and multi-sheet Excel structures.</span></div>
   </div>
 </section>
 
@@ -283,20 +344,25 @@
 <!-- PIPELINE -->
 <div class="diag-wrap">
   <p class="section-label">System Architecture</p>
-  <h2 class="section-title display">7-layer pipeline — how the data flows</h2>
+  <h2 class="section-title display">7-layer pipeline: how the data flows</h2>
   <p class="section-desc">Each layer has a single, clear responsibility. AI nodes are used exactly where ambiguity exists and nowhere else. Every decision is logged with a rule ID for auditability.</p>
 
   <div class="flow">
 
     <!-- 01 INGEST -->
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
-      <p class="node-num" style="color:var(--teal)">01 — Ingest &amp; Land</p>
+      <p class="node-num" style="color:var(--teal)">01 · Ingest &amp; Land</p>
       <p class="node-title">Chain of Custody Starts Here</p>
-      <p class="node-desc">Files arrive via SFTP or Azure Blob. Before anything else, each file receives a SHA-256 hash — this proves the file that was analysed is exactly the file the client sent. Files are written write-once to Azure WORM storage and never modified.</p>
-      <div class="code-block">
-        <span class="c"># Chain of custody</span><br>
-        hash = sha256(<span class="o">file_bytes</span>)  <span class="c"># tamper-evident fingerprint</span><br>
-        raw_zone.write_once(<span class="o">file</span>, metadata={<span class="s">"hash"</span>: hash, <span class="s">"client_id"</span>: id})
+      <ul class="node-bullets">
+        <li>Files arrive from any source (e.g. SFTP, Azure Blob)</li>
+        <li>Three file types accepted: GL, Trial Balance (CSV/Excel) and Journals (PDF)</li>
+        <li>SHA-256 hash computed immediately — tamper-evident fingerprint</li>
+        <li>Files stored write-once, never modified</li>
+      </ul>
+      <div class="node-files">
+        <span class="node-file">📄 GL.csv / GL.xlsx</span>
+        <span class="node-file">📄 TB.csv / TB.xlsx</span>
+        <span class="node-file">📋 journals.pdf</span>
       </div>
       <div class="node-tags">
         <span class="node-tag">SHA-256 per file</span>
@@ -311,36 +377,36 @@
 
     <!-- 02 CLASSIFY -->
     <div class="node" style="border-color:rgba(59,130,246,0.2)">
-      <p class="node-num" style="color:var(--blue)">02 — Classify &amp; Profile</p>
-      <p class="node-title">ERP Detection + File Type Routing</p>
-      <p class="node-desc">Is this a GL, TB, or PDF journal? Which ERP produced it — SAP, Oracle, Xero, MYOB, NetSuite? Deterministic first: filename patterns and known header signatures cover ~80% of files. AI fallback for unknown shapes, with a confidence score on every output.</p>
-      <div class="node-sub-row">
-        <div class="node-sub">
-          <p class="node-sub-label">Known ERP → skip LLM</p>
-          <p class="node-sub-val">SAP / Oracle / Xero / MYOB / NetSuite headers matched deterministically</p>
-        </div>
-        <div class="node-sub">
-          <p class="node-sub-label">Unknown → LLM classify</p>
-          <p class="node-sub-val">confidence &ge; 0.95 → auto-route · below threshold → human review queue</p>
-        </div>
-      </div>
+      <p class="node-num" style="color:var(--blue)">02 · Classify &amp; Profile</p>
+      <p class="node-title">The First Agent: What Am I Looking At?</p>
+      <ul class="node-bullets">
+        <li>Identifies each file (GL, TB, or PDF) and finds the right sheet in multi-sheet Excel</li>
+        <li>Deterministic checks first (filename, headers); AI only for ambiguous files</li>
+        <li>Confident → routes it · unsure → analyst confirms first</li>
+      </ul>
+      <p class="node-note"><span>💡</span> If a client's ERP is known and consistent, its columns are predictable: map deterministically, no AI. The agent only works hard for new clients.</p>
       <div class="node-tags">
         <span class="node-tag" style="color:var(--teal);border-color:rgba(13,148,136,0.3)">Det. first</span>
         <span class="node-tag" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">AI fallback</span>
-        <span class="node-tag">confidence_score on every output</span>
-        <span class="node-tag">Saves LLM cost on 80% of files</span>
+        <span class="node-tag">low confidence → human review</span>
       </div>
     </div>
 
+    <div class="route-label">Once confirmed, the file is <strong>routed by type</strong> to its specialised handler</div>
     <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
 
     <!-- 03 PARALLEL: EXTRACT -->
     <div class="parallel">
 
       <div class="node" style="border-color:rgba(13,148,136,0.2)">
-        <p class="node-num" style="color:var(--teal)">03a — CSV / Excel Extract</p>
+        <p class="node-num" style="color:var(--teal)">03a · CSV / Excel Extract</p>
         <p class="node-title">Deterministic Parsing</p>
-        <p class="node-desc">Tabular data with defined structure. No AI needed — just correct parsing. Handle encoding variance (UTF-8, Latin-1, CP1252), dtype coercion (amounts to float, dates to datetime), and multi-sheet Excel workbooks.</p>
+        <ul class="node-bullets">
+          <li>Already a table: no AI, just correct parsing</li>
+          <li>Handles encoding (UTF-8, Latin-1, CP1252)</li>
+          <li>Type coercion: "1,000.00" → number, text → real dates</li>
+          <li>Reads the right sheet in multi-sheet workbooks</li>
+        </ul>
         <div class="code-block">
           df = pd.read_csv(<span class="o">file</span>,<br>
           &nbsp;&nbsp;<span class="t">encoding</span>=<span class="s">'utf-8-sig'</span>,<br>
@@ -355,10 +421,16 @@
       </div>
 
       <div class="node" style="border-color:rgba(249,115,22,0.2)">
-        <p class="node-num" style="color:var(--orange)">03b — PDF Journal Extract</p>
+        <p class="node-num" style="color:var(--orange)">03b · PDF Journal Extract</p>
         <p class="node-title">OCR + LLM + Pydantic</p>
-        <p class="node-desc">Unstructured. This is where AI earns its place. Digital PDFs go through pdfplumber; scanned documents through Azure Document Intelligence OCR. The LLM then extracts structured fields, validated immediately by Pydantic schema enforcement.</p>
+        <ul class="node-bullets">
+          <li>Unstructured: this is where AI earns its place</li>
+          <li><strong>pdfplumber</strong> for digital PDFs · <strong>Azure OCR</strong> for scanned ones</li>
+          <li>LLM extracts the fields: date, accounts, amounts, narration</li>
+          <li>Pydantic validates instantly · fail → retry → human queue</li>
+        </ul>
         <div class="node-tags">
+          <span class="node-tag" style="color:var(--orange);border-color:rgba(249,115,22,0.3)">AI agent</span>
           <span class="node-tag">pdfplumber (digital)</span>
           <span class="node-tag">Azure Document Intelligence (OCR)</span>
           <span class="node-tag" style="color:var(--purple);border-color:rgba(139,92,246,0.3)">Pydantic validated</span>
@@ -377,9 +449,25 @@
 
     <!-- 04 SCHEMA MAP -->
     <div class="node" style="border-color:rgba(139,92,246,0.2)">
-      <p class="node-num" style="color:var(--purple)">04 — Schema Mapping → Common Data Model</p>
+      <p class="node-num" style="color:var(--purple)">04 · Schema Mapping → Common Data Model</p>
       <p class="node-title">AI proposes once · Human approves once · Cache decides forever</p>
-      <p class="node-desc">Every ERP exports the same fields with different column names. The pipeline maps everything to a single CDM. Known ERP templates are cached and deterministic — zero LLM cost. Novel columns go to the LLM for a mapping proposal, then to a human analyst for one-time approval. The approved mapping becomes versioned config: deterministic forever.</p>
+      <ul class="node-bullets">
+        <li>An <strong>ERP</strong> is the accounting system a client runs (SAP, Xero, MYOB…). Each one exports the same fields under different column names</li>
+        <li>This layer maps every client onto one <strong>Common Data Model</strong>, so all 1,500 clients look identical downstream</li>
+        <li>The AI cost is paid once per layout, not per file: propose → approve → cache forever</li>
+      </ul>
+      <div class="map-diagram">
+        <div class="map-left">
+          <span class="map-src">AccountCode <em>· SAP</em></span>
+          <span class="map-src">Acc_Ref <em>· Xero</em></span>
+          <span class="map-src">acct_no <em>· MYOB</em></span>
+        </div>
+        <div class="map-arrow">→</div>
+        <div class="map-right">
+          <span class="map-cdm">account_code</span>
+          <span class="map-cdm-label">Common Data Model</span>
+        </div>
+      </div>
       <div class="node-sub-row">
         <div class="node-sub">
           <p class="node-sub-label">1. Known ERP template</p>
@@ -406,9 +494,13 @@
 
     <!-- 05 QUALITY + RECON -->
     <div class="node" style="border-color:rgba(13,148,136,0.3); box-shadow: 0 0 30px rgba(13,148,136,0.06)">
-      <p class="node-num" style="color:var(--teal)">05 — Quality Validation &amp; GL ↔ TB Reconciliation</p>
+      <p class="node-num" style="color:var(--teal)">05 · Quality Validation &amp; GL ↔ TB Reconciliation</p>
       <p class="node-title">The most critical layer — zero AI in the decision path</p>
-      <p class="node-desc">Every rule is deterministic and logged with a rule ID. The GL vs TB reconciliation is pure arithmetic — AI never computes a financial figure. Variances go to human review; AI can generate a candidate explanation, annotated as advisory only.</p>
+      <ul class="node-bullets">
+        <li>Every rule is deterministic and logged with a <strong>rule ID</strong> — fully traceable</li>
+        <li>GL ↔ TB reconciliation is pure arithmetic; AI never computes a financial figure</li>
+        <li>Variance ≠ 0 → human review. An AI agent reads the <strong>journals</strong> to suggest <em>why</em> (advisory only)</li>
+      </ul>
       <div class="parallel" style="margin-top:0.85rem">
         <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(13,148,136,0.15);border-radius:0.6rem;padding:0.85rem">
           <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem">Pandera Validation Rules</p>
@@ -444,9 +536,34 @@
     <!-- 06 LANGGRAPH ORCHESTRATION -->
     <div class="engine-node">
       <div class="engine-head">
-        <span class="engine-badge">06 — LangGraph Orchestration</span>
-        <p class="engine-title display">Stateful Graph — Every Client Through the Same Auditable Pipeline</p>
-        <p class="engine-desc">LangGraph wraps the entire pipeline as a stateful directed graph. Each node above is a graph node. Conditional edges route based on confidence scores and validation results. The graph can pause, persist state, and resume — enabling human-in-the-loop review without restarting from scratch.</p>
+        <span class="engine-badge">06 · LangGraph Orchestration</span>
+        <p class="engine-title display">Stateful Graph: Every Client Through the Same Auditable Pipeline</p>
+        <p class="engine-desc">LangGraph wraps the entire pipeline as a stateful directed graph. Each node above is a graph node. Conditional edges route based on confidence scores and validation results. The graph can pause, persist state, and resume, enabling human-in-the-loop review without restarting from scratch.</p>
+      </div>
+
+      <!-- Mermaid graph -->
+      <div class="graph-card">
+        <p class="graph-title">The Agent Graph · conditional edges, retry loop, human-in-the-loop</p>
+        <pre class="mermaid">
+flowchart TD
+    ingest([ingest]):::det --> classify[classify]:::ai
+    classify -->|conf &ge; 0.95| route{route_by_type}:::det
+    classify -->|conf &lt; 0.95| human[human_review]:::human
+    route -->|CSV / Excel| parse[parse_tabular]:::det
+    route -->|PDF| extract[extract_pdf]:::ai
+    extract -->|pydantic OK| map[map_schema]:::ai
+    extract -->|fail &middot; retries &lt; 3| extract
+    extract -->|fail &middot; retries &ge; 3| human
+    parse --> map
+    map --> validate[validate]:::det
+    validate --> reconcile[reconcile]:::det
+    reconcile -->|variance &le; tol| persist([persist]):::det
+    reconcile -->|variance &gt; tol| human
+    human --> persist
+    classDef det fill:#0e1a18,stroke:#0D9488,stroke-width:1.5px,color:#5eead4;
+    classDef ai fill:#0e1622,stroke:#3B82F6,stroke-width:1.5px,color:#93c5fd;
+    classDef human fill:#1c1206,stroke:#F97316,stroke-width:1.5px,color:#fdba74;
+        </pre>
       </div>
 
       <!-- Graph nodes -->
@@ -477,17 +594,17 @@
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--teal)">validate</span>
-        <span class="nr-desc">Pandera rules — all deterministic, logged by rule ID</span>
+        <span class="nr-desc">Pandera rules, all deterministic, logged by rule ID</span>
         <span class="nr-badge" style="color:var(--teal);border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.07)">Deterministic</span>
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--teal)">reconcile</span>
-        <span class="nr-desc">GL vs TB arithmetic — variance calculation</span>
+        <span class="nr-desc">GL vs TB arithmetic, variance calculation</span>
         <span class="nr-badge" style="color:var(--teal);border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.07)">Deterministic</span>
       </div>
       <div class="node-row">
         <span class="nr-code" style="color:var(--orange)">human_review</span>
-        <span class="nr-desc">interrupt() — pause, persist state, await analyst input</span>
+        <span class="nr-desc">interrupt(). Pause, persist state, await analyst input</span>
         <span class="nr-badge" style="color:var(--orange);border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.07)">Human-in-loop</span>
       </div>
       <div class="node-row" style="border-bottom:none">
@@ -513,10 +630,10 @@
 
       <!-- Why LangGraph -->
       <div class="why-row">
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Stateful</strong> — knows where each of the 1,500 clients is in the pipeline; crash-safe checkpointing</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Loops</strong> — retry failed PDF extractions with the previous error as context</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Human interrupt</strong> — pause, persist full state, resume on analyst sign-off</span></div>
-        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Parallel fan-out</strong> — stream 1,500 clients concurrently, isolated per thread_id</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Stateful.</strong> Knows where each of the 1,500 clients is in the pipeline. Crash-safe checkpointing.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Loops.</strong> Retry failed PDF extractions with the previous error fed back as context.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Human interrupt.</strong> Pause, persist full state, resume once the analyst signs off.</span></div>
+        <div class="why-item"><span class="why-dot">▸</span><span><strong style="color:#fff">Parallel fan-out.</strong> Stream 1,500 clients concurrently, each isolated by thread_id.</span></div>
       </div>
     </div>
 
@@ -524,11 +641,11 @@
 
     <!-- 07 AUDIT STORE -->
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
-      <p class="node-num" style="color:var(--teal)">07 — Audit Store &amp; Output</p>
+      <p class="node-num" style="color:var(--teal)">07 · Audit Store &amp; Output</p>
       <p class="node-title">Defensibility by Construction</p>
-      <p class="node-desc">Every decision that touches the data is logged append-only. The audit trail links the final output hash back through every transformation to the original file SHA-256 — complete end-to-end lineage. A regulator can ask "why is this number what it is?" and receive an exact replay.</p>
+      <p class="node-desc">Every decision that touches the data is logged append-only. The audit trail links the final output hash back through every transformation to the original file SHA-256, giving complete end-to-end lineage. A regulator can ask "why is this number what it is?" and receive an exact replay.</p>
       <div class="node-sub-row">
-        <div class="node-sub"><p class="node-sub-label">Source file hash</p><p class="node-sub-val">SHA-256 on ingest — chain of custody</p></div>
+        <div class="node-sub"><p class="node-sub-label">Source file hash</p><p class="node-sub-val">SHA-256 on ingest, chain of custody</p></div>
         <div class="node-sub"><p class="node-sub-label">Every AI call</p><p class="node-sub-val">Prompt + model version + response + confidence</p></div>
         <div class="node-sub"><p class="node-sub-label">Every validation</p><p class="node-sub-val">Rule ID + pass/fail + affected rows</p></div>
         <div class="node-sub"><p class="node-sub-label">Every human decision</p><p class="node-sub-val">Who, what changed, before/after, rationale</p></div>
@@ -579,70 +696,6 @@
 
 <hr />
 
-<!-- EXPERIENCE -->
-<section class="exp-section" style="padding-top:4rem;">
-  <p class="section-label">Relevant Experience</p>
-  <h2 class="section-title display">Why I'm built for this problem</h2>
-  <p class="section-desc">Three anchor points from my background that map directly to this architecture.</p>
-  <div class="exp-grid">
-
-    <div class="exp-card" style="border-color:rgba(13,148,136,0.3);background:rgba(13,148,136,0.04)">
-      <div class="exp-header">
-        <div>
-          <p class="exp-company" style="color:var(--teal)">Tachyus</p>
-          <p class="exp-role">Data Engineer — Customer Success · Mar 2023 – Jan 2025</p>
-        </div>
-        <span class="exp-badge" style="color:var(--teal);border-color:rgba(13,148,136,0.3)">Multi-client messy data</span>
-      </div>
-      <ul class="exp-points">
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--teal)">▸</span><span>Production Python pipelines for ~10 enterprise clients ingesting CSV, Excel, PDF/OCR, SQL, and NoSQL — each with different schemas</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--teal)">▸</span><span>Built reconciliation logic and automated data-quality checks for messy, high-variance operational datasets</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--teal)">▸</span><span>Multi-client delivery model: per-client config + shared validation rules — the exact pattern Layers 1–5 use here</span></li>
-      </ul>
-      <p class="exp-link">This is the case study problem at smaller scale, without the audit context — I've solved the hard part before.</p>
-    </div>
-
-    <div class="exp-card" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.04)">
-      <div class="exp-header">
-        <div>
-          <p class="exp-company" style="color:var(--blue)">Triber Tech</p>
-          <p class="exp-role">Lead AI Intern · Nov 2024 – Jan 2025</p>
-        </div>
-        <span class="exp-badge" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">RAG + Pydantic + auditability</span>
-      </div>
-      <ul class="exp-points">
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--blue)">▸</span><span>RAG pipeline on AWS Bedrock + MongoDB with Pydantic-validated structured outputs on every LLM call — the LLM cannot emit a malformed record</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--blue)">▸</span><span>Confidence thresholds: anything below threshold routes to human review rather than being auto-accepted</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--blue)">▸</span><span>JSON schema enforcement at the tool-call layer — validation happens before data enters the pipeline</span></li>
-      </ul>
-      <p class="exp-link">Exactly the discipline Layer 3 (PDF extraction) and Layer 4 (schema mapping) require — and I've done it in production.</p>
-    </div>
-
-    <div class="exp-card" style="border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.04)">
-      <div class="exp-header">
-        <div>
-          <p class="exp-company" style="color:var(--purple)">GHG Compliance Pipeline + Airflow/dbt</p>
-          <p class="exp-role">Personal Projects · 2024–2025</p>
-        </div>
-        <span class="exp-badge" style="color:var(--purple);border-color:rgba(139,92,246,0.3)">Auditable AI + production orchestration</span>
-      </div>
-      <ul class="exp-points">
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--purple)">▸</span><span>GHG Compliance Assistant: auditable AI where outputs must stand up to regulatory scrutiny — same defensibility bar as financial audit</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--purple)">▸</span><span>Airflow + dbt Medallion Pipeline: bronze/silver/gold lineage backbone that directly parallels Layer 7's audit store design</span></li>
-        <li class="exp-point"><span class="exp-point-dot" style="color:var(--purple)">▸</span><span>Both projects built for accountability, not just functionality — traceable outputs, versioned configs, deterministic rules</span></li>
-      </ul>
-      <p class="exp-link">The auditable-AI mindset + the production data-engineering plumbing — both halves of this role, from my own work.</p>
-    </div>
-
-  </div>
-
-  <div style="background:rgba(13,148,136,0.05);border:1px solid rgba(13,148,136,0.2);border-radius:1rem;padding:1.5rem;margin-top:1.5rem;text-align:center">
-    <p style="color:#d1d5db;font-size:0.88rem;font-style:italic;line-height:1.75">"My background is data engineering with a compliance and reconciliation focus. Building defensible, auditable pipelines where AI assists but deterministic logic decides is genuinely where I'm strongest — and this case study is exactly that problem."</p>
-  </div>
-</section>
-
-<hr />
-
 <footer class="page-footer">
   <a href="/professional-porfolio/">← Back to Portfolio</a>
   <span>Camilo Uribe Guerra · Data Engineer · Sydney · Deloitte Case Study 2026</span>
@@ -687,6 +740,23 @@
     el.classList.add('will-animate');
     el.style.transform = 'none';
     observer.observe(el);
+  });
+</script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      background: '#0a0a0a',
+      lineColor: '#6b7280',
+      primaryTextColor: '#f0f0f0',
+      edgeLabelBackground: '#0a0a0a',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '14px'
+    },
+    flowchart: { curve: 'basis', nodeSpacing: 45, rankSpacing: 45 }
   });
 </script>
 </body>
