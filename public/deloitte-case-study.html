@@ -124,6 +124,9 @@
     .node-desc { color: var(--muted); font-size: 0.79rem; line-height: 1.65; }
     .node-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.65rem; }
     .node-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+    .node-bullets { list-style: none; margin-top: 0.65rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .node-bullets li { font-size: 0.79rem; color: #9ca3af; line-height: 1.5; padding-left: 1rem; position: relative; }
+    .node-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 0.65rem; top: 0.18rem; }
     .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
@@ -334,7 +337,12 @@
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
       <p class="node-num" style="color:var(--teal)">01 · Ingest &amp; Land</p>
       <p class="node-title">Chain of Custody Starts Here</p>
-      <p class="node-desc">Files arrive from clients via SFTP, Azure Blob, or any agreed channel. The pipeline accepts three file types: GL and Trial Balance as CSV or Excel, and journal entries as PDF. The first thing the system does is compute a SHA-256 hash for each file — a tamper-evident fingerprint that proves the data was never altered after receipt. Files are stored write-once and never modified.</p>
+      <ul class="node-bullets">
+        <li>Files arrive via <strong>SFTP</strong> or <strong>Azure Blob</strong></li>
+        <li>Three file types accepted: GL, Trial Balance (CSV/Excel) and Journals (PDF)</li>
+        <li>SHA-256 hash computed immediately — tamper-evident fingerprint</li>
+        <li>Files stored write-once, never modified</li>
+      </ul>
       <div class="node-files">
         <span class="node-file">📄 GL.csv / GL.xlsx</span>
         <span class="node-file">📄 TB.csv / TB.xlsx</span>
