@@ -368,27 +368,14 @@
       <p class="node-num" style="color:var(--blue)">02 · Classify &amp; Profile</p>
       <p class="node-title">The First Agent: What Am I Looking At?</p>
       <ul class="node-bullets">
-        <li>Identifies each file: GL, Trial Balance, or journal PDF</li>
-        <li>Finds the right sheet in multi-sheet Excel (skips cover pages, notes)</li>
-        <li>Detects the header row and inventories the raw columns</li>
-        <li>Deterministic checks first (filenames, sheet names, header patterns); AI agent resolves the ambiguous cases</li>
-        <li>Confident → routes to the matching handler · unsure → analyst confirms, then routes</li>
+        <li>Identifies each file (GL, TB, or PDF) and finds the right sheet in multi-sheet Excel</li>
+        <li>Deterministic checks first (filename, headers); AI only for ambiguous files</li>
+        <li>Confident → routes it · unsure → analyst confirms first</li>
       </ul>
-      <div class="node-sub-row">
-        <div class="node-sub">
-          <p class="node-sub-label">Deterministic first</p>
-          <p class="node-sub-val">Filename, sheet names and header patterns handle the clean files (source examples: SAP, Xero, MYOB)</p>
-        </div>
-        <div class="node-sub">
-          <p class="node-sub-label">AI agent → confidence</p>
-          <p class="node-sub-val">confidence &ge; 0.95 → auto-route · below threshold → human review queue</p>
-        </div>
-      </div>
-      <p class="node-note"><span>💡</span> If a client's ERP is known and consistent, its columns are predictable: map them deterministically, no AI needed. The agent only does the heavy lifting for new or unknown clients.</p>
+      <p class="node-note"><span>💡</span> If a client's ERP is known and consistent, its columns are predictable: map deterministically, no AI. The agent only works hard for new clients.</p>
       <div class="node-tags">
         <span class="node-tag" style="color:var(--teal);border-color:rgba(13,148,136,0.3)">Det. first</span>
         <span class="node-tag" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">AI fallback</span>
-        <span class="node-tag">confidence score on every decision</span>
         <span class="node-tag">low confidence → human review</span>
       </div>
     </div>
