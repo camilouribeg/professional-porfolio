@@ -131,6 +131,14 @@
     .node-note span { flex-shrink: 0; font-style: normal; }
     .route-label { text-align: center; font-size: 0.74rem; color: var(--muted); margin: 1rem auto 0; max-width: 480px; }
     .route-label strong { color: var(--blue); }
+    .map-diagram { display: flex; align-items: center; gap: 1.1rem; margin-top: 0.85rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(139,92,246,0.15); border-radius: 0.6rem; padding: 1rem 1.2rem; flex-wrap: wrap; }
+    .map-left { display: flex; flex-direction: column; gap: 0.4rem; }
+    .map-src { font-family: monospace; font-size: 0.74rem; color: #9ca3af; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 0.4rem; padding: 0.3rem 0.6rem; }
+    .map-src em { color: #4b5563; font-style: normal; font-size: 0.66rem; }
+    .map-arrow { color: var(--purple); font-size: 1.4rem; font-weight: 700; }
+    .map-right { display: flex; flex-direction: column; gap: 0.3rem; }
+    .map-cdm { font-family: monospace; font-size: 0.82rem; color: #fff; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.4rem; padding: 0.4rem 0.7rem; font-weight: 600; }
+    .map-cdm-label { font-size: 0.6rem; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
     .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
@@ -439,7 +447,23 @@
     <div class="node" style="border-color:rgba(139,92,246,0.2)">
       <p class="node-num" style="color:var(--purple)">04 · Schema Mapping → Common Data Model</p>
       <p class="node-title">AI proposes once · Human approves once · Cache decides forever</p>
-      <p class="node-desc">Every ERP exports the same fields with different column names. The pipeline maps everything to a single CDM. Known ERP templates are cached and require zero LLM calls. Novel columns go to the LLM for a mapping proposal, then to a human analyst for one-time approval. That approved mapping becomes versioned config forever.</p>
+      <ul class="node-bullets">
+        <li>An <strong>ERP</strong> is the accounting system a client runs (SAP, Xero, MYOB…). Each one exports the same fields under different column names</li>
+        <li>This layer maps every client onto one <strong>Common Data Model</strong>, so all 1,500 clients look identical downstream</li>
+        <li>The AI cost is paid once per layout, not per file: propose → approve → cache forever</li>
+      </ul>
+      <div class="map-diagram">
+        <div class="map-left">
+          <span class="map-src">AccountCode <em>· SAP</em></span>
+          <span class="map-src">Acc_Ref <em>· Xero</em></span>
+          <span class="map-src">acct_no <em>· MYOB</em></span>
+        </div>
+        <div class="map-arrow">→</div>
+        <div class="map-right">
+          <span class="map-cdm">account_code</span>
+          <span class="map-cdm-label">Common Data Model</span>
+        </div>
+      </div>
       <div class="node-sub-row">
         <div class="node-sub">
           <p class="node-sub-label">1. Known ERP template</p>
