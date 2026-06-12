@@ -389,7 +389,12 @@
       <div class="node" style="border-color:rgba(13,148,136,0.2)">
         <p class="node-num" style="color:var(--teal)">03a · CSV / Excel Extract</p>
         <p class="node-title">Deterministic Parsing</p>
-        <p class="node-desc">Tabular data with a defined structure. No AI needed, just correct parsing. Handle encoding variance (UTF-8, Latin-1, CP1252), type coercion, and multi-sheet Excel workbooks.</p>
+        <ul class="node-bullets">
+          <li>Already a table: no AI, just correct parsing</li>
+          <li>Handles encoding (UTF-8, Latin-1, CP1252)</li>
+          <li>Type coercion: "1,000.00" → number, text → real dates</li>
+          <li>Reads the right sheet in multi-sheet workbooks</li>
+        </ul>
         <div class="code-block">
           df = pd.read_csv(<span class="o">file</span>,<br>
           &nbsp;&nbsp;<span class="t">encoding</span>=<span class="s">'utf-8-sig'</span>,<br>
