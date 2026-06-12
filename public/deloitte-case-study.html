@@ -127,6 +127,8 @@
     .node-bullets { list-style: none; margin-top: 0.65rem; display: flex; flex-direction: column; gap: 0.35rem; }
     .node-bullets li { font-size: 0.79rem; color: #9ca3af; line-height: 1.5; padding-left: 1rem; position: relative; }
     .node-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 0.65rem; top: 0.18rem; }
+    .node-note { display: flex; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.74rem; color: #9ca3af; line-height: 1.55; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.15); border-radius: 0.5rem; padding: 0.6rem 0.8rem; font-style: italic; }
+    .node-note span { flex-shrink: 0; font-style: normal; }
     .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
@@ -379,6 +381,7 @@
           <p class="node-sub-val">confidence &ge; 0.95 → auto-route · below threshold → human review queue</p>
         </div>
       </div>
+      <p class="node-note"><span>💡</span> If a client's ERP is known and consistent, its columns are predictable: map them deterministically, no AI needed. The agent only does the heavy lifting for new or unknown clients.</p>
       <div class="node-tags">
         <span class="node-tag" style="color:var(--teal);border-color:rgba(13,148,136,0.3)">Det. first</span>
         <span class="node-tag" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">AI fallback</span>
