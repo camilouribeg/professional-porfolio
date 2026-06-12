@@ -139,6 +139,10 @@
     .map-right { display: flex; flex-direction: column; gap: 0.3rem; }
     .map-cdm { font-family: monospace; font-size: 0.82rem; color: #fff; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.4); border-radius: 0.4rem; padding: 0.4rem 0.7rem; font-weight: 600; }
     .map-cdm-label { font-size: 0.6rem; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
+    .graph-card { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 0.8rem; padding: 1.25rem; margin: 1.1rem 0; overflow-x: auto; }
+    .graph-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; text-align: center; }
+    .graph-card .mermaid { display: flex; justify-content: center; min-height: 40px; }
+    .graph-card .mermaid svg { max-width: 100%; height: auto; }
     .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
@@ -537,6 +541,31 @@
         <p class="engine-desc">LangGraph wraps the entire pipeline as a stateful directed graph. Each node above is a graph node. Conditional edges route based on confidence scores and validation results. The graph can pause, persist state, and resume, enabling human-in-the-loop review without restarting from scratch.</p>
       </div>
 
+      <!-- Mermaid graph -->
+      <div class="graph-card">
+        <p class="graph-title">The Agent Graph · conditional edges, retry loop, human-in-the-loop</p>
+        <pre class="mermaid">
+flowchart TD
+    ingest([ingest]):::det --> classify[classify]:::ai
+    classify -->|conf &ge; 0.95| route{route_by_type}:::det
+    classify -->|conf &lt; 0.95| human[human_review]:::human
+    route -->|CSV / Excel| parse[parse_tabular]:::det
+    route -->|PDF| extract[extract_pdf]:::ai
+    extract -->|pydantic OK| map[map_schema]:::ai
+    extract -->|fail &middot; retries &lt; 3| extract
+    extract -->|fail &middot; retries &ge; 3| human
+    parse --> map
+    map --> validate[validate]:::det
+    validate --> reconcile[reconcile]:::det
+    reconcile -->|variance &le; tol| persist([persist]):::det
+    reconcile -->|variance &gt; tol| human
+    human --> persist
+    classDef det fill:#0e1a18,stroke:#0D9488,stroke-width:1.5px,color:#5eead4;
+    classDef ai fill:#0e1622,stroke:#3B82F6,stroke-width:1.5px,color:#93c5fd;
+    classDef human fill:#1c1206,stroke:#F97316,stroke-width:1.5px,color:#fdba74;
+        </pre>
+      </div>
+
       <!-- Graph nodes -->
       <div class="node-row">
         <span class="nr-code" style="color:var(--teal)">ingest</span>
@@ -775,6 +804,23 @@
     el.classList.add('will-animate');
     el.style.transform = 'none';
     observer.observe(el);
+  });
+</script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      background: '#0a0a0a',
+      lineColor: '#6b7280',
+      primaryTextColor: '#f0f0f0',
+      edgeLabelBackground: '#0a0a0a',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '14px'
+    },
+    flowchart: { curve: 'basis', nodeSpacing: 45, rankSpacing: 45 }
   });
 </script>
 </body>
