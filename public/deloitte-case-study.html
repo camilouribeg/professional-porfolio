@@ -124,6 +124,8 @@
     .node-desc { color: var(--muted); font-size: 0.79rem; line-height: 1.65; }
     .node-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.65rem; }
     .node-tag { font-size: 0.67rem; padding: 0.2rem 0.55rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.3rem; color: #4b5563; }
+    .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-sub { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.45rem 0.75rem; }
     .node-sub-label { font-size: 0.62rem; color: #4b5563; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.15rem; }
@@ -332,11 +334,11 @@
     <div class="node" style="border-color:rgba(13,148,136,0.25)">
       <p class="node-num" style="color:var(--teal)">01 · Ingest &amp; Land</p>
       <p class="node-title">Chain of Custody Starts Here</p>
-      <p class="node-desc">Files arrive via SFTP or Azure Blob. Before anything else, each file receives a SHA-256 hash. This proves the file analysed is exactly the file the client sent. Files are written write-once to Azure WORM storage and never modified.</p>
-      <div class="code-block">
-        <span class="c"># Chain of custody</span><br>
-        hash = sha256(<span class="o">file_bytes</span>)  <span class="c"># tamper-evident fingerprint</span><br>
-        raw_zone.write_once(<span class="o">file</span>, metadata={<span class="s">"hash"</span>: hash, <span class="s">"client_id"</span>: id})
+      <p class="node-desc">Files arrive from clients via SFTP, Azure Blob, or any agreed channel. The pipeline accepts three file types: GL and Trial Balance as CSV or Excel, and journal entries as PDF. The first thing the system does is compute a SHA-256 hash for each file — a tamper-evident fingerprint that proves the data was never altered after receipt. Files are stored write-once and never modified.</p>
+      <div class="node-files">
+        <span class="node-file">📄 GL.csv / GL.xlsx</span>
+        <span class="node-file">📄 TB.csv / TB.xlsx</span>
+        <span class="node-file">📋 journals.pdf</span>
       </div>
       <div class="node-tags">
         <span class="node-tag">SHA-256 per file</span>
