@@ -406,7 +406,12 @@
       <div class="node" style="border-color:rgba(249,115,22,0.2)">
         <p class="node-num" style="color:var(--orange)">03b · PDF Journal Extract</p>
         <p class="node-title">OCR + LLM + Pydantic</p>
-        <p class="node-desc">Unstructured. This is where AI earns its place. Digital PDFs go through pdfplumber; scanned documents through Azure Document Intelligence OCR. The LLM then extracts structured fields, validated immediately by Pydantic schema enforcement.</p>
+        <ul class="node-bullets">
+          <li>Unstructured: this is where AI earns its place</li>
+          <li><strong>pdfplumber</strong> for digital PDFs · <strong>Azure OCR</strong> for scanned ones</li>
+          <li>LLM extracts the fields: date, accounts, amounts, narration</li>
+          <li>Pydantic validates instantly · fail → retry → human queue</li>
+        </ul>
         <div class="node-tags">
           <span class="node-tag" style="color:var(--orange);border-color:rgba(249,115,22,0.3)">AI agent</span>
           <span class="node-tag">pdfplumber (digital)</span>
