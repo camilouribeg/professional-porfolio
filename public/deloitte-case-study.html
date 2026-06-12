@@ -129,6 +129,8 @@
     .node-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 0.65rem; top: 0.18rem; }
     .node-note { display: flex; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.74rem; color: #9ca3af; line-height: 1.55; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.15); border-radius: 0.5rem; padding: 0.6rem 0.8rem; font-style: italic; }
     .node-note span { flex-shrink: 0; font-style: normal; }
+    .route-label { text-align: center; font-size: 0.74rem; color: var(--muted); margin: 1rem auto 0; max-width: 480px; }
+    .route-label strong { color: var(--blue); }
     .node-files { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
     .node-file { font-size: 0.76rem; padding: 0.3rem 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 0.4rem; color: #d1d5db; }
     .node-sub-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
@@ -370,6 +372,7 @@
         <li>Finds the right sheet in multi-sheet Excel (skips cover pages, notes)</li>
         <li>Detects the header row and inventories the raw columns</li>
         <li>Deterministic checks first (filenames, sheet names, header patterns); AI agent resolves the ambiguous cases</li>
+        <li>Confident → routes to the matching handler · unsure → analyst confirms, then routes</li>
       </ul>
       <div class="node-sub-row">
         <div class="node-sub">
@@ -390,6 +393,7 @@
       </div>
     </div>
 
+    <div class="route-label">Once confirmed, the file is <strong>routed by type</strong> to its specialised handler</div>
     <div class="arrow-simple"><div class="arrow-v-line"></div><div class="arrow-v-tip"></div></div>
 
     <!-- 03 PARALLEL: EXTRACT -->
@@ -417,6 +421,7 @@
         <p class="node-title">OCR + LLM + Pydantic</p>
         <p class="node-desc">Unstructured. This is where AI earns its place. Digital PDFs go through pdfplumber; scanned documents through Azure Document Intelligence OCR. The LLM then extracts structured fields, validated immediately by Pydantic schema enforcement.</p>
         <div class="node-tags">
+          <span class="node-tag" style="color:var(--orange);border-color:rgba(249,115,22,0.3)">AI agent</span>
           <span class="node-tag">pdfplumber (digital)</span>
           <span class="node-tag">Azure Document Intelligence (OCR)</span>
           <span class="node-tag" style="color:var(--purple);border-color:rgba(139,92,246,0.3)">Pydantic validated</span>
