@@ -492,7 +492,11 @@
     <div class="node" style="border-color:rgba(13,148,136,0.3); box-shadow: 0 0 30px rgba(13,148,136,0.06)">
       <p class="node-num" style="color:var(--teal)">05 · Quality Validation &amp; GL ↔ TB Reconciliation</p>
       <p class="node-title">The most critical layer — zero AI in the decision path</p>
-      <p class="node-desc">Every rule is deterministic and logged with a rule ID. The GL vs TB reconciliation is pure arithmetic. AI never computes a financial figure. Variances go to human review. AI can suggest a candidate explanation, but it is annotated as advisory only.</p>
+      <ul class="node-bullets">
+        <li>Every rule is deterministic and logged with a <strong>rule ID</strong> — fully traceable</li>
+        <li>GL ↔ TB reconciliation is pure arithmetic; AI never computes a financial figure</li>
+        <li>Variance ≠ 0 → human review. An AI agent reads the <strong>journals</strong> to suggest <em>why</em> (advisory only)</li>
+      </ul>
       <div class="parallel" style="margin-top:0.85rem">
         <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(13,148,136,0.15);border-radius:0.6rem;padding:0.85rem">
           <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem">Pandera Validation Rules</p>
