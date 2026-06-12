@@ -362,23 +362,28 @@
     <!-- 02 CLASSIFY -->
     <div class="node" style="border-color:rgba(59,130,246,0.2)">
       <p class="node-num" style="color:var(--blue)">02 · Classify &amp; Profile</p>
-      <p class="node-title">ERP Detection + File Type Routing</p>
-      <p class="node-desc">Is this a GL, TB, or PDF journal? Which ERP produced it: SAP, Oracle, Xero, MYOB, NetSuite? Deterministic first: filename patterns and known header signatures cover ~80% of files. AI fallback for unknown shapes, with a confidence score on every output.</p>
+      <p class="node-title">The First Agent: What Am I Looking At?</p>
+      <ul class="node-bullets">
+        <li>Identifies each file: GL, Trial Balance, or journal PDF</li>
+        <li>Finds the right sheet in multi-sheet Excel (skips cover pages, notes)</li>
+        <li>Detects the header row and inventories the raw columns</li>
+        <li>Deterministic checks first (filenames, sheet names, header patterns); AI agent resolves the ambiguous cases</li>
+      </ul>
       <div class="node-sub-row">
         <div class="node-sub">
-          <p class="node-sub-label">Known ERP → skip LLM</p>
-          <p class="node-sub-val">SAP / Oracle / Xero / MYOB / NetSuite headers matched deterministically</p>
+          <p class="node-sub-label">Deterministic first</p>
+          <p class="node-sub-val">Filename, sheet names and header patterns handle the clean files (source examples: SAP, Xero, MYOB)</p>
         </div>
         <div class="node-sub">
-          <p class="node-sub-label">Unknown → LLM classify</p>
+          <p class="node-sub-label">AI agent → confidence</p>
           <p class="node-sub-val">confidence &ge; 0.95 → auto-route · below threshold → human review queue</p>
         </div>
       </div>
       <div class="node-tags">
         <span class="node-tag" style="color:var(--teal);border-color:rgba(13,148,136,0.3)">Det. first</span>
         <span class="node-tag" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">AI fallback</span>
-        <span class="node-tag">confidence_score on every output</span>
-        <span class="node-tag">Saves LLM cost on 80% of files</span>
+        <span class="node-tag">confidence score on every decision</span>
+        <span class="node-tag">low confidence → human review</span>
       </div>
     </div>
 
